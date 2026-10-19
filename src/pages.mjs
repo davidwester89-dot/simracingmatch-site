@@ -61,7 +61,7 @@ export const home = {
 
 <ul class="trustbar">
 <li>${ICONS.source}<span>Manufacturer data only, with check dates</span></li>
-<li>${ICONS.shield}<span>Order never paid — partner links labelled</span></li>
+<li>${ICONS.shield}<span>Ranking never paid for · partner links labelled</span></li>
 <li>${ICONS.free}<span>Free, no account</span></li>
 </ul>
 
