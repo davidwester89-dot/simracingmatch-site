@@ -19,7 +19,7 @@ const img = (o) => ({ widths: [1200, 900, 600], width: 1200, height: 800, licenc
 export const POST_IMAGES = {
   'ps5-direct-drive-wheels-2026': {
     hero: img({
-      file: 'ps5-hero-logitech-g923-playstation',
+      file: 'ps5-hero-logitech-g923-playstation', height: 768,
       alt: 'Logitech G923 racing wheel and three-pedal set, PlayStation version, on a white table',
       caption: 'Logitech G923 wheel and pedals, PlayStation version. The G923 is a gear-driven wheel, not direct drive; it is shown as an example of PlayStation racing hardware.',
       author: 'FreeMediaKid!', licence: 'CC BY 4.0',
@@ -27,7 +27,7 @@ export const POST_IMAGES = {
     }),
     sections: {
       'Why PS5 sim racers had fewer direct drive options': img({
-        file: 'ps5-logitech-g923-wheel-playstation',
+        file: 'ps5-logitech-g923-wheel-playstation', height: 1067,
         alt: 'Logitech G923 steering wheel, PlayStation version, with PlayStation buttons on the hub',
         caption: 'The PlayStation version of the Logitech G923 has PlayStation buttons on the hub. It is a gear-driven wheel, not direct drive.',
         author: 'FreeMediaKid!', licence: 'CC BY 4.0',
