@@ -262,3 +262,4 @@ html[data-theme="B"] .hud{fill:#f5c518}
   html[data-theme="B"] .hero .btn.lg,html[data-theme="B"] .hero .btn.ghost{padding:12px 15px;font-size:.95rem}
 }
 .crumbs{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.soon{display:inline-block;vertical-align:middle;margin-left:8px;padding:3px 10px;border-radius:99px;border:1.5px solid var(--brand);color:var(--brand-txt);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-style:normal}

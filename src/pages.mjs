@@ -73,8 +73,8 @@ export const home = {
 </ol>
 
 <section id="setup-match" class="band">
-<h2>The setup match — 5 questions</h2>
-<p class="muted">Coming soon as an interactive tool. Preview of what we ask:</p>
+<h2>The setup match — 5 questions <span class="soon">Coming soon</span></h2>
+<p class="muted">The interactive match is coming soon. Here are the five questions it will ask. Until then, read the blog for the latest wheelbase and pedal news.</p>
 <div class="qgrid">
 <article class="qcard">${SVG.budget}<strong>1. Budget</strong><span>Under €300 · €300–700 · €700–1,500 · Over €1,500</span></article>
 <article class="qcard">${SVG.platform}<strong>2. Platform</strong><span>PC · PlayStation 5 · Xbox</span></article>
@@ -82,7 +82,7 @@ export const home = {
 <article class="qcard">${SVG.experience}<strong>4. Experience</strong><span>Beginner / casual · Serious upgrader</span></article>
 <article class="qcard">${SVG.style}<strong>5. Driving style</strong><span>Casual (GT, F1, Forza) · Competitive (iRacing, ACC)</span></article>
 </div>
-<p class="actions"><a class="btn" href="/#setup-match" data-cta="match_teaser" data-quiz="start">Find your setup</a></p>
+<p class="actions"><a class="btn" href="/blog/" data-cta="match_teaser_blog">Coming soon — read the blog</a></p>
 <p class="muted">Match logic never reads partner links. Commission cannot change the order.</p>
 </section>
 
