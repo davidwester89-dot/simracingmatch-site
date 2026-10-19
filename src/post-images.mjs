@@ -67,11 +67,11 @@ export const POST_IMAGES = {
     }),
     sections: {
       "Moza brings direct drive to PS5 (R5S Pro, R16S Ultra)": img({
-        file: 'expo-moza-cs-pro-racers-day',
-        alt: 'Driver in a sim racing cockpit with a Moza CS Pro steering wheel at a racing event',
-        caption: 'A Moza CS Pro wheel at Racers Day in Taiwan, 13 September 2026. Not one of the new PS5 products.',
-        author: 'Solomon203', licence: 'CC BY-SA 4.0',
-        source: 'https://commons.wikimedia.org/wiki/File:AOC_monitor,_Moza_CS_Pro_and_Noyaya_Wang_at_Racers_Day_20260913_170903.jpg',
+        file: 'ps5-moza-ks-wheel',
+        alt: 'Moza KS steering wheel with buttons, rotary knobs and a colour rev-light ring',
+        caption: 'A Moza KS steering wheel. This is an existing Moza wheel, not one of the new PS5 products, which Moza has not yet priced.',
+        author: 'TaurusEmerald', licence: 'CC BY-SA 4.0',
+        source: 'https://commons.wikimedia.org/wiki/File:MOZA_KS_Racing_Steering_Wheel_Controller.jpg',
       }),
       'Fanatec Project Obsidian and Trak Racer': img({
         file: 'expo-trak-racer-rig',
