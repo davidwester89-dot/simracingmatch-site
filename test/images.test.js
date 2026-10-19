@@ -19,8 +19,11 @@ test('blog photos: hero eager, inline lazy, dimensions, alt, credits, files <150
     assert.ok(s.indexOf('post-hero') < s.indexOf('<h2'), `${slug}: hero before first H2`);
     assert.match(s, /Photo credits/);
     for (const im of [set.hero, ...Object.values(set.sections)]) {
-      assert.match(im.source, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
-      assert.ok(im.author && im.licence && im.licenceUrl, `${im.file}: licence record`);
+      if (im.own) assert.equal(im.source, 'eigen beeld Goodfellas', `${im.file}: own-photo record`);
+      else {
+        assert.match(im.source, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+        assert.ok(im.author && im.licence && im.licenceUrl, `${im.file}: licence record`);
+      }
       for (const w of im.widths) {
         const f = `dist/img/blog/${im.file}${w === im.widths[0] ? '' : `-${w}`}.webp`;
         assert.ok(existsSync(f), f);

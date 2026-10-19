@@ -48,11 +48,10 @@ export const POST_IMAGES = {
         source: 'https://commons.wikimedia.org/wiki/File:Thrustmaster_TX_Racing_Wheel_Leather_edition_-_front.jpg',
       }),
       'How to choose: torque, platform, budget, space': img({
-        file: 'ps5-logitech-pedals',
-        alt: 'Logitech three-pedal set with clutch, brake and throttle on a carpet',
-        caption: 'Pedals are part of the budget: a Logitech three-pedal set (G29/G920 type).',
-        author: 'Wikiediter2029', licence: 'CC0',
-        source: 'https://commons.wikimedia.org/wiki/File:Logitech_G29_and_G920_Pedals.jpg',
+        file: 'ps5-rig-pedals-cockpit', height: 675,
+        alt: 'Sim racing cockpit with triple curved screens, steering wheel, pedals and a bucket seat',
+        caption: 'Budget for more than the wheel base: pedals, a cockpit, a seat and screens all add to the total.',
+        own: true, source: 'eigen beeld Goodfellas',
       }),
     },
     noPhoto: ['Fanatec: bundle prices changed on 1 October', 'Other PS5-compatible direct drive options today'],
@@ -93,12 +92,12 @@ export function figure(im, { hero = false } = {}) {
   const srcset = [...im.widths].reverse().map((w) => `${src(im, w)} ${w}w`).join(', ');
   const sizes = im.portrait ? '(max-width: 520px) 100vw, 420px' : '(max-width: 760px) 100vw, 704px';
   const load = hero ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"';
-  const credit = `Photo: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">Wikimedia Commons</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a>${im.licence === 'CC0' ? '' : ', cropped'}`;
+  const credit = im.own ? '' : `Photo: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">Wikimedia Commons</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a>${im.licence === 'CC0' ? '' : ', cropped'}`;
   return `<figure class="post-fig${hero ? ' post-hero' : ''}${im.portrait ? ' post-fig-portrait' : ''}"><img src="${src(im, im.widths[0])}" srcset="${srcset}" sizes="${sizes}" width="${im.width}" height="${im.height}" alt="${esc(im.alt)}" ${load}><figcaption>${esc(im.caption)} <span class="credit">${credit}</span></figcaption></figure>`;
 }
 
 /** Photo credits list for the bottom of a post. */
 export function creditsList(set) {
-  const all = [set.hero, ...Object.values(set.sections)].filter(Boolean);
+  const all = [set.hero, ...Object.values(set.sections)].filter((im) => im && !im.own);
   return `<h2 class="src-h">Photo credits</h2><ul class="credits">${all.map((im) => `<li>${esc(im.alt)}: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">Wikimedia Commons</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a></li>`).join('')}</ul>`;
 }
