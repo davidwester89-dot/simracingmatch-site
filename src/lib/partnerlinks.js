@@ -1,15 +1,14 @@
-// Goedgekeurde partnerlinks. LEEG tot Partnermanager een programma voor simracingmatch.com goedkeurt.
-// De match leest dit bestand NOOIT: partnerlinks hebben geen invloed op advies of volgorde.
+// Approved partner links. EMPTY until Partnermanager approves a programme for simracingmatch.com.
+// The match must NEVER import this file.
 export const PARTNERLINKS = {};
 
-/** Uitgaande link: partnerlink (rel sponsored nofollow, met label) als die er is, anders de officiële URL. */
-export function uitgaand(href, { partner = false, label = 'Naar de shop' } = {}) {
-  if (partner) return { href, rel: 'sponsored nofollow noopener', partner: true, label };
-  return { href, rel: 'noopener', partner: false, label };
+export function uitgaand(href, { partner = false, label = 'Visit shop', vendor = 'external' } = {}) {
+  if (partner) return { href, rel: 'sponsored nofollow noopener', partner: true, label, vendor };
+  return { href, rel: 'noopener', partner: false, label, vendor };
 }
 
-/** Knop. Een partnerlink krijgt altijd direct erna het zichtbare label "partnerlink". */
-export function knop(href, pos, { partner = false, label = 'Naar de shop', cls = 'btn' } = {}) {
-  const o = uitgaand(href, { partner, label });
-  return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="external" data-pos="${pos}" data-cta="outbound"${partner ? ' data-partner-slot="external"' : ''}>${o.label}</a>${o.partner ? '<span class="partner">partnerlink</span>' : ''}`;
+/** Outbound button. Partner links always get the visible "partnerlink" label + data-vendor/data-pos for vendor_click. */
+export function knop(href, pos, { partner = false, label = 'Visit shop', vendor = 'external', cls = 'btn' } = {}) {
+  const o = uitgaand(href, { partner, label, vendor });
+  return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${o.vendor}" data-pos="${pos}" data-cta="outbound"${partner ? ` data-partner-slot="${o.vendor}"` : ''}>${o.label}</a>${o.partner ? '<span class="partner">partnerlink</span>' : ''}`;
 }
