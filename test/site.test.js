@@ -37,7 +37,7 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   assert.match(home, /data-quiz="start"/);
   assert.match(home, /og:locale" content="en_US"/);
   assert.ok(!home.includes('noindex'));
-  assert.match(home, /Also from us/);
+  assert.doesNotMatch(home, /Also from us/);
   const verboden = [/Dave/i, /Wester/i, /batterijmatch/i, /reddit/i, /aggregateRating/, /reviewCount/, /ratingValue/, /★/, /content volgt/i, /Redactie /];
   for (const f of html) {
     const s = readFileSync(f, 'utf8');

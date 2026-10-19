@@ -126,7 +126,7 @@ ${reportError(url)}
 <div><p class="fh">Explore</p><ul><li><a href="/#setup-match" data-cta="footer_match" data-quiz="start">Find your setup</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul></div>
 <div><p class="fh">Legal</p><ul><li><a href="/privacy/">Privacy &amp; cookies</a></li>${GA_ID ? '<li><a href="/privacy/#cookies" data-consent-open>Cookie settings</a></li>' : ''}<li><a href="/disclaimer/">Disclaimer</a></li></ul></div>
 </div>
-${networkFooter()}
+
 <p class="fine">© 2026 ${SITE.name}. Partner links never affect rankings or the match.</p>
 </div></footer>
 ${[...(GA_ID ? ['/js/consent.js'] : []), ...(p.scripts || [])].map((s) => `<script type="module" src="${s}"></script>`).join('\n')}
