@@ -7,7 +7,7 @@ const faqHtml = (faq) => `<h2>FAQ</h2>${faq.map(([q, a]) => `<details><summary>$
 const homeFaq = [
   ['What is SimracingMatch?', 'An English-language site that helps you choose a sim racing setup. Soon: a match with five questions about budget, platform, space, experience and driving style. You get setups that fit your answers.'],
   ['Where do the specs and prices come from?', 'Only from the manufacturer or the official shop, with the date we checked them. No invented specs, prices or stars.'],
-  ['Do you earn from recommendations?', 'Sometimes, via a partner link. Those links always show the visible label "partnerlink" and never affect the match or the order.'],
+  ['Do you earn from recommendations?', 'Sometimes, via a partner link. Those links always show the visible label "Partner link" and never affect the match or the order.'],
   ['When does the match launch?', 'The five-question setup match is coming soon. Until then, this page explains how we work. Email <a href="mailto:info@simracingmatch.com">info@simracingmatch.com</a> with questions.'],
 ];
 
@@ -91,7 +91,7 @@ export const home = {
 <ol class="steps">
 <li><strong>Source only.</strong><span class="muted"> Specs and prices from the manufacturer or official shop, with a check date. If it is not public, we write “unknown”.</span></li>
 <li><strong>No stars.</strong><span class="muted"> We do not invent scores or show buyer star ratings. The match follows fixed rules on your answers.</span></li>
-<li><strong>Partner links change nothing.</strong><span class="muted"> When we earn a fee, the link shows the label “partnerlink” and <code>rel="sponsored nofollow"</code>.</span></li>
+<li><strong>Partner links change nothing.</strong><span class="muted"> When we earn a fee, the link is clearly labelled “Partner link”. It never changes the match or the order.</span></li>
 </ol>
 
 ${faqHtml(homeFaq)}
@@ -123,7 +123,7 @@ export const disclaimer = {
 <p>SimracingMatch summarises sim racing hardware from what manufacturers and official shops publish. We aim to keep pages accurate and current, and we show the last check date on each page.</p>
 <h2>Specs and prices</h2><p>All specs and prices come from the manufacturer or official shop on the date shown. Prices, stock and platform compatibility can change. The seller’s offer always wins.</p>
 <h2>The match</h2><p>The setup match (coming soon) is a helper based on fixed rules and your answers. It is a first shortlist, not personal advice. Always confirm compatibility with the manufacturer.</p>
-<h2>Partner links</h2><p>For some products we may earn a fee if you buy through us. Those links always show the label “partnerlink” and <code>rel="sponsored nofollow noopener"</code>. They never affect the match or on-page order.</p>
+<h2>Partner links</h2><p>For some products we may earn a fee if you buy through us. Those links are always clearly labelled “Partner link”. They never affect the match or on-page order.</p>
 <h2>No reviews or stars</h2><p>We do not show star scores or invented tests we have not done.</p>
 <h2>Brands</h2><p>Brand names belong to their owners. SimracingMatch is not affiliated with those brands.</p>
 <h2>Spotted an error?</h2><p>Email <a href="mailto:${SITE.email}">${SITE.email}</a> and we will fix it with a source.</p></article>`,

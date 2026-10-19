@@ -57,7 +57,7 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   const k = knop('https://example.com/', 'test_pos', { partner: true, vendor: 'moza', label: 'Moza' });
   assert.match(k, /data-vendor="moza"/);
   assert.match(k, /data-pos="test_pos"/);
-  assert.match(k, /partnerlink/);
+  assert.match(k, />Partner link</);
 });
 
 test('build theme B + preview', () => {
