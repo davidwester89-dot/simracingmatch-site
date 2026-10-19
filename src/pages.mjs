@@ -33,18 +33,17 @@ export const home = {
 <p class="cta-hint"><span class="soon">Coming soon</span> The interactive match launches soon. Until then, read the blog.</p>
 </div>
 <div class="hero-art">
-<div class="hero-a" aria-hidden="true"><svg class="track" viewBox="0 0 360 240" focusable="false">
-<path class="trk-edge" d="M70 196 C40 196 30 160 46 136 L96 66 C112 44 146 40 164 60 C178 76 174 100 192 108 C212 117 232 92 254 74 C278 54 318 56 328 88 C338 120 318 144 294 154 L216 186 C196 194 176 196 156 196 Z"/>
-<path class="trk-tar" d="M70 196 C40 196 30 160 46 136 L96 66 C112 44 146 40 164 60 C178 76 174 100 192 108 C212 117 232 92 254 74 C278 54 318 56 328 88 C338 120 318 144 294 154 L216 186 C196 194 176 196 156 196 Z"/>
-<path class="trk-kerb" d="M46 136 L96 66"/><path class="trk-kerb" d="M254 74 C278 54 318 56 328 88"/>
-<path class="race-glow" pathLength="1" d="M70 196 C40 196 30 160 46 136 L96 66 C112 44 146 40 164 60 C178 76 174 100 192 108 C212 117 232 92 254 74 C278 54 318 56 328 88 C338 120 318 144 294 154 L216 186 C196 194 176 196 156 196 Z"/>
-<path class="race-line" pathLength="1" d="M70 196 C40 196 30 160 46 136 L96 66 C112 44 146 40 164 60 C178 76 174 100 192 108 C212 117 232 92 254 74 C278 54 318 56 328 88 C338 120 318 144 294 154 L216 186 C196 194 176 196 156 196 Z"/>
-<g class="sf"><rect x="104" y="188" width="4" height="4" fill="#fff"/><rect x="108" y="192" width="4" height="4" fill="#fff"/><rect x="104" y="196" width="4" height="4" fill="#fff"/><rect x="108" y="188" width="4" height="4" fill="#222"/><rect x="104" y="192" width="4" height="4" fill="#222"/><rect x="108" y="196" width="4" height="4" fill="#222"/></g>
-<circle class="apex" cx="96" cy="66" r="4.5"/><circle class="apex" cx="192" cy="108" r="4.5"/><circle class="apex hot" cx="328" cy="88" r="4.5"/>
-<text class="hud" x="18" y="28">NIGHT RACE · BEST LINE</text>
-<text class="tag" x="72" y="56">T1</text><text class="tag" x="200" y="132">T2</text><text class="tag" x="336" y="72" text-anchor="end">T3</text>
-<text class="tag dim" x="122" y="224">START / FINISH</text>
-</svg></div>
+<div class="hero-a brands" data-block="hero-brands">
+<h2 class="brands-h">Brands we compare</h2>
+<ul class="brand-grid">
+<li><a href="/blog/ps5-direct-drive-wheels-2026/" data-cta="hero_brand" data-brand="moza"><img src="/brands/moza.svg" width="132" height="30" alt="Moza Racing" decoding="async" fetchpriority="low"></a></li>
+<li><a href="/blog/ps5-direct-drive-wheels-2026/" data-cta="hero_brand" data-brand="fanatec"><img src="/brands/fanatec.svg" width="200" height="18" alt="Fanatec" decoding="async" fetchpriority="low"></a></li>
+<li><a href="/blog/simracing-expo-2026-announcements/" data-cta="hero_brand" data-brand="asetek"><img src="/brands/asetek.webp" width="175" height="24" alt="Asetek SimSports" decoding="async" fetchpriority="low"></a></li>
+<li><a href="/blog/ps5-direct-drive-wheels-2026/" data-cta="hero_brand" data-brand="logitech-g"><img src="/brands/logitech-g.svg" width="116" height="28" alt="Logitech G" decoding="async" fetchpriority="low"></a></li>
+<li><a href="/#setup-match" data-cta="hero_brand" data-brand="sim-lab"><img src="/brands/sim-lab.webp" width="150" height="25" alt="Sim-Lab" decoding="async" fetchpriority="low"></a></li>
+<li><a href="/#setup-match" data-cta="hero_brand" data-brand="gt-omega"><img src="/brands/gt-omega.svg" width="179" height="28" alt="GT Omega" decoding="async" fetchpriority="low"></a></li>
+</ul>
+</div>
 <div class="hero-b" aria-hidden="true"><svg class="telem" viewBox="0 0 360 240" focusable="false">
 <defs><linearGradient id="tf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5c518" stop-opacity=".28"/><stop offset="1" stop-color="#f5c518" stop-opacity="0"/></linearGradient></defs>
 <g class="telem-grid"><line x1="0" y1="40" x2="360" y2="40"/><line x1="0" y1="80" x2="360" y2="80"/><line x1="0" y1="120" x2="360" y2="120"/><line x1="0" y1="160" x2="360" y2="160"/><line x1="0" y1="200" x2="360" y2="200"/><line x1="40" y1="0" x2="40" y2="240"/><line x1="80" y1="0" x2="80" y2="240"/><line x1="120" y1="0" x2="120" y2="240"/><line x1="160" y1="0" x2="160" y2="240"/><line x1="200" y1="0" x2="200" y2="240"/><line x1="240" y1="0" x2="240" y2="240"/><line x1="280" y1="0" x2="280" y2="240"/><line x1="320" y1="0" x2="320" y2="240"/></g>

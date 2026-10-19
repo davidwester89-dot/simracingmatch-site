@@ -157,7 +157,7 @@ body.has-consent{padding-bottom:84px}
 html[data-theme="A"]{--brand:#ff6b1a;--brand-d:#ff8a45;--brand-txt:#ff7a2e;--accent:#ff6b1a;--amber:#ff9a5c;--focus:#ffffff}
 html[data-theme="A"] .skip,html[data-theme="A"] .preview,html[data-theme="A"] nav.main a.nav-cta,html[data-theme="A"] .btn:not(.ghost),html[data-theme="A"] .btn:not(.ghost):hover,html[data-theme="A"] .steps li::before,html[data-theme="A"] .consent .consent-btn:not([data-c=no]){color:#0b0c0f!important}
 html[data-theme="A"] .logo-bg{fill:#ff6b1a}html[data-theme="A"] .logo-dot{fill:#fff}html[data-theme="A"] .wheel-rim{stroke:#ff6b1a}
-html[data-theme="A"] .track .trk-kerb,html[data-theme="A"] .race-glow{stroke:#ff6b1a}html[data-theme="A"] .apex{fill:#fff}html[data-theme="A"] .race-line{stroke:#ff7a2e}html[data-theme="A"] .apex.hot{fill:#ff6b1a}html[data-theme="A"] .hero-art{background:radial-gradient(90% 70% at 85% 0%,rgba(255,107,26,.22),transparent 65%),linear-gradient(180deg,#15181f,#101217)}
+html[data-theme="A"] .hero-art{background:radial-gradient(90% 70% at 85% 0%,rgba(255,107,26,.22),transparent 65%),linear-gradient(180deg,#15181f,#101217)}
 html[data-theme="A"] h1,html[data-theme="A"] h2,html[data-theme="A"] .logo{text-transform:uppercase;letter-spacing:-.025em}
 html[data-theme="A"] .article-head h1{text-transform:none;letter-spacing:-.015em}
 .article-head h1{font-size:clamp(1.75rem,6vw + .3rem,2.6rem);line-height:1.15}
@@ -195,17 +195,18 @@ html[data-theme="B"] .hero-b{display:block}
 .hero-art{position:relative;overflow:hidden}
 
 
-/* A: circuit + racing line. Final state is ALWAYS visible; animation only draws it on. */
-.track .trk-edge{fill:none;stroke:#2f3440;stroke-width:26;stroke-linejoin:round}
-.track .trk-tar{fill:none;stroke:#1c1f27;stroke-width:22;stroke-linejoin:round}
-.track .trk-kerb{fill:none;stroke:#e10600;stroke-width:4;stroke-dasharray:6 6;opacity:.9}
-.race-glow{fill:none;stroke:#e10600;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;opacity:.22}
-.race-line{fill:none;stroke:#ff3b30;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.apex{fill:#f5c518;stroke:#0b0c0f;stroke-width:2}
-.apex.hot{fill:#ff3b30}
+/* A: brand logo grid (white on dark, fixed img dimensions) */
+.brands{padding:14px 12px 10px}
+.hero-art .brands-h{font:700 .78rem/1 var(--head);letter-spacing:.14em;text-transform:uppercase!important;font-style:normal!important;color:#c9cdd6;margin:0 0 12px}
+.brand-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.brand-grid a{display:flex;align-items:center;justify-content:center;min-height:72px;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}
+.brand-grid a:hover,.brand-grid a:focus-visible{border-color:var(--brand);background:rgba(255,255,255,.06)}
+.brand-grid img{max-width:100%;height:auto;filter:brightness(0) invert(1);opacity:.88}
+.brand-grid a:hover img{opacity:1}
+@media(min-width:600px){.brand-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.brand-grid a{min-height:88px}}
+@media(min-width:900px){.brand-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .hud{fill:#c9cdd6;font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.12em}
 .tag{fill:#f2f3f5;font:800 11px/1 Inter,system-ui,sans-serif;letter-spacing:.06em}
-.tag.dim{fill:#8a8f9c;font-size:9px;letter-spacing:.14em}
 /* B: telemetry */
 .telem-grid line{stroke:#232b37;stroke-width:1}
 .sector line{stroke:#3a4656;stroke-width:1;stroke-dasharray:3 4}
@@ -217,10 +218,10 @@ html[data-theme="B"] .hud,html[data-theme="B"] .tag{font-family:ui-monospace,"Ca
 html[data-theme="B"] .hud{fill:#f5c518}
 
 @media(prefers-reduced-motion:no-preference){
-  .race-line,.race-glow,.telem-line,.telem-brake{stroke-dasharray:1;animation:drawOn 1.8s cubic-bezier(.6,0,.2,1) .15s both}
+  .telem-line,.telem-brake{stroke-dasharray:1;animation:drawOn 1.8s cubic-bezier(.6,0,.2,1) .15s both}
   .telem-brake{animation-delay:.35s}
   @keyframes drawOn{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-  .apex.hot,.telem-dot{animation:pulse 2.4s ease-in-out 2s infinite}
+  .telem-dot{animation:pulse 2.4s ease-in-out 2s infinite}
   @keyframes pulse{50%{opacity:.45}}
   .qcard,.steps li,.trustbar li,.blog-list a.card{transition:transform .2s ease,border-color .2s ease,background .2s ease}
   .qcard:hover,.steps li:hover,.blog-list a.card:hover{transform:translateY(-3px);border-color:var(--brand)}

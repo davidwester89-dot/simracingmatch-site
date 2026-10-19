@@ -21,6 +21,7 @@ cpSync('src/assets/js', join(OUT, 'js'), { recursive: true });
 cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true });
 cpSync('src/assets/og', join(OUT, 'og'), { recursive: true });
 cpSync('src/assets/img', join(OUT, 'img'), { recursive: true });
+cpSync('src/assets/brands', join(OUT, 'brands'), { recursive: true });
 cpSync('src/assets/icons', OUT, { recursive: true });
 cpSync('src/assets/fonts', join(OUT, 'fonts'), { recursive: true });
 cpSync('src/root', OUT, { recursive: true });

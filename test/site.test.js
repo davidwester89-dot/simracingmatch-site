@@ -40,6 +40,29 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   assert.ok(home.includes("<meta name='impact-site-verification' value='35fa02aa-9ecb-4229-ae1e-7f5c562867eb'>"), 'Impact-meta op /');
   for (const f of html) if (!f.endsWith(join('dist', 'index.html'))) assert.ok(!readFileSync(f, 'utf8').includes('impact-site-verification'), `${f}: Impact-meta alleen op /`);
   assert.doesNotMatch(home, /Also from us/);
+  // Hero brand block (replaces the trackmap)
+  assert.match(home, /Brands we compare/);
+  assert.doesNotMatch(home, /NIGHT RACE/);
+  const blk = home.match(/<div class="hero-a brands"[\s\S]*?<\/div>/);
+  assert.ok(blk, 'hero brand block');
+  const b = blk[0];
+  assert.doesNotMatch(b.replace(/<[^>]+>/g, ' '), /partner|official/i);
+  assert.doesNotMatch(b, /partner|official/i);
+  const imgs = [...b.matchAll(/<img [^>]*>/g)].map((m) => m[0]);
+  assert.ok(imgs.length >= 5, `brand logos ${imgs.length}`);
+  for (const im of imgs) {
+    assert.match(im, /width="\d+"/, im);
+    assert.match(im, /height="\d+"/, im);
+    assert.match(im, /alt="[^"]+"/, im);
+    const src = im.match(/src="([^"]+)"/)[1];
+    assert.ok(src.startsWith('/brands/') && existsSync(join('dist', src)), `logo file ${src}`);
+  }
+  const hrefs = [...b.matchAll(/href="([^"]*)"/g)].map((m) => m[1]);
+  assert.equal(hrefs.length, imgs.length);
+  for (const h of hrefs) assert.ok(h.startsWith('/') && !h.startsWith('//'), `external href ${h}`);
+  assert.equal((b.match(/data-cta="hero_brand"/g) || []).length, imgs.length);
+  assert.equal((b.match(/data-brand="[a-z0-9-]+"/g) || []).length, imgs.length);
+  assert.doesNotMatch(b, /rel="sponsored|target="_blank"/);
   const verboden = [/Dave/i, /Wester/i, /batterijmatch/i, /reddit/i, /aggregateRating/, /reviewCount/, /ratingValue/, /★/, /content volgt/i, /Redactie /];
   for (const f of html) {
     const s = readFileSync(f, 'utf8');
