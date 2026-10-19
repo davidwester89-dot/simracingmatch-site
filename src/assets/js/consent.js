@@ -42,7 +42,7 @@ function build() {
   el.setAttribute('role', 'region');
   el.setAttribute('aria-label', 'Cookie settings');
   el.hidden = true;
-  el.innerHTML = '<div class="consent-in"><p id="consent-text">Cookies for analytics? <a href="' + BASE + '/privacy/#cookies">More info</a></p>'
+  el.innerHTML = '<div class="consent-in"><p id="consent-text">Cookies for analytics? See our <a href="' + BASE + '/privacy/#cookies">cookie policy</a></p>'
     + '<div class="consent-btns"><button type="button" class="consent-btn" data-c="yes" aria-describedby="consent-text">Accept</button>'
     + '<button type="button" class="consent-btn" data-c="no" aria-describedby="consent-text">Reject</button></div></div>';
   el.addEventListener('click', (e) => {
