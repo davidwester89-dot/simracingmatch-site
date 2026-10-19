@@ -71,9 +71,9 @@ A few practical checks before you buy a PS5 direct drive wheel:
 - **Space.** The Gran Turismo DD Pro bundle and the RS50 System include a table clamp. For the ClubSport DD+, Fanatec sells a table clamp separately, or you mount it on a cockpit.
 - **Timing.** The T-GT III has a date. Moza's PS5 bases don't yet.
 
-Not sure which mix fits? Our setup match asks five questions about budget, platform, space, experience and driving style, and shows setups that fit. The order never depends on commission. Want the wider picture? See [everything announced at SimRacing Expo 2026](https://simracingmatch.com/blog/simracing-expo-2026-announcements/).
+Not sure which mix fits? Our setup match asks five questions about budget, platform, space, experience and driving style, and shows setups that fit. The order never depends on commission. Want the wider picture? See [everything announced at SimRacing Expo 2026](/blog/simracing-expo-2026-announcements/).
 
-[Find your setup](https://simracingmatch.com/#setup-match) · [More articles on the blog](https://simracingmatch.com/blog/)
+[Find your setup](/#setup-match) · [More articles on the blog](/blog/)
 
 ## Sources
 

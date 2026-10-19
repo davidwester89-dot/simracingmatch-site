@@ -83,12 +83,12 @@ Trak Racer showed two TRZ motorcycle simulators, licensed racing simulators and 
 Expo news is exciting, but most of it isn't on sale yet. Some practical points:
 
 - **Want direct drive soon?** The Asetek DD10 has a confirmed price and a date only days away. Just check the platform: it supports PC, and Xbox only with an Xbox-compatible Asetek wheel.
-- **On PS5?** Moza's PS5 bases are announced, but without a price, torque figures or Sony's final approval, you can't plan around them yet. Read our guide to [PS5 direct drive wheels in 2026](https://simracingmatch.com/blog/ps5-direct-drive-wheels-2026/) for the options you can buy today.
+- **On PS5?** Moza's PS5 bases are announced, but without a price, torque figures or Sony's final approval, you can't plan around them yet. Read our guide to [PS5 direct drive wheels in 2026](/blog/ps5-direct-drive-wheels-2026/) for the options you can buy today.
 - **Prototypes are not products.** Project Obsidian and ClubSport Pedals V4 are aimed at 2027. Specs and prices can still change.
 
 The safest way to choose is to start from your own situation: budget, platform, space and how seriously you race. Our setup match asks exactly those questions and shows setups that fit. The order never depends on commission.
 
-[Find your setup](https://simracingmatch.com/#setup-match) · [More articles on the blog](https://simracingmatch.com/blog/)
+[Find your setup](/#setup-match) · [More articles on the blog](/blog/)
 
 ## Sources
 

@@ -25,7 +25,6 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   // home, privacy, disclaimer, contact, blog (noindex), 404
   assert.ok(html.length >= 5, `pages ${html.length}`);
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
-  assert.ok(!sm.includes('/blog/'), 'empty blog not in sitemap');
   assert.match(readFileSync('dist/robots.txt', 'utf8'), /Sitemap: https:\/\/simracingmatch\.com\/sitemap\.xml/);
   assert.equal(readFileSync('dist/CNAME', 'utf8').trim(), 'simracingmatch.com');
   const home = readFileSync('dist/index.html', 'utf8');
@@ -81,4 +80,40 @@ test('analytics: quiz_start + quiz_complete stub + vendor_click', () => {
   execSync('node build.mjs', { env: { ...process.env, BASE: '', GO_LIVE: '1', GA_ID: 'G-TEST1234', THEME: 'A' } });
   assert.match(readFileSync('dist/index.html', 'utf8'), /data-ga="G-TEST1234"/);
   assert.match(readFileSync('dist/privacy/index.html', 'utf8'), /_ga/);
+});
+
+test('blog posts: title <=60, meta <=155, one H1, BlogPosting, sitemap, index, links', () => {
+  execSync('node build.mjs', { env: { ...process.env, BASE: '', GO_LIVE: '1', THEME: 'A' } });
+  const sm = readFileSync('dist/sitemap.xml', 'utf8');
+  const index = readFileSync('dist/blog/index.html', 'utf8');
+  assert.ok(!index.includes('noindex'), 'blog index indexable');
+  assert.match(sm, /<loc>https:\/\/simracingmatch\.com\/blog\/<\/loc>/);
+  const home = readFileSync('dist/index.html', 'utf8');
+  assert.match(home, /id="setup-match"/);
+  const slugs = ['simracing-expo-2026-announcements', 'ps5-direct-drive-wheels-2026'];
+  for (const slug of slugs) {
+    const s = readFileSync(`dist/blog/${slug}/index.html`, 'utf8');
+    const title = unesc(s.match(/<title>(.*?)<\/title>/)[1]);
+    assert.ok(title.length <= 60, `${slug}: title ${title.length}`);
+    const desc = unesc(s.match(/<meta name="description" content="([^"]*)"/)[1]);
+    assert.ok(desc.length >= 70 && desc.length <= 155, `${slug}: meta ${desc.length}`);
+    assert.equal((s.match(/<h1[\s>]/g) || []).length, 1, `${slug}: H1`);
+    const lds = [...s.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+    const bp = lds.find((x) => x['@type'] === 'BlogPosting');
+    assert.ok(bp, `${slug}: BlogPosting`);
+    assert.equal(bp.datePublished, '2026-10-19');
+    assert.equal(bp.author.name, 'SimracingMatch Editorial');
+    assert.equal(bp.mainEntityOfPage, `https://simracingmatch.com/blog/${slug}/`);
+    assert.equal(bp.headline, title);
+    assert.ok(sm.includes(`<loc>https://simracingmatch.com/blog/${slug}/</loc>`), `${slug}: sitemap`);
+    assert.ok(index.includes(`href="/blog/${slug}/"`), `${slug}: blog index`);
+    assert.ok(!/href="https:\/\/simracingmatch\.com/.test(s.replace(/<link[^>]+>/g, '')), `${slug}: absolute internal link`);
+    assert.match(s, /href="\/#setup-match" class="btn" data-cta="blog_match" data-quiz="start"/);
+  }
+  execSync('node build.mjs', { env: { ...process.env, BASE: '/simracingmatch-site', GO_LIVE: '', THEME: 'B' } });
+  const pv = readFileSync('dist/blog/ps5-direct-drive-wheels-2026/index.html', 'utf8');
+  assert.match(pv, /href="\/simracingmatch-site\/blog\/simracing-expo-2026-announcements\/"/);
+  assert.match(pv, /href="\/simracingmatch-site\/#setup-match"/);
+  assert.ok(!pv.includes('/simracingmatch-site/simracingmatch-site/'));
+  execSync('node build.mjs', { env: { ...process.env, BASE: '', GO_LIVE: '1', THEME: 'A' } });
 });

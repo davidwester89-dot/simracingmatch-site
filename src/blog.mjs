@@ -4,6 +4,9 @@ import { fileURLToPath } from 'node:url';
 import { SITE, esc, ORG, AUTHOR, fmtDate } from './layout.mjs';
 import { renderMarkdown } from './markdown.mjs';
 
+/** Reading time from the real word count (≈220 words per minute). */
+export const readMin = (md) => Math.max(1, Math.round(md.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').split(/\s+/).filter(Boolean).length / 220));
+
 const POSTS_DIR = join(dirname(fileURLToPath(import.meta.url)), 'posts');
 
 /** Parse YAML-like front-matter between --- lines. Keys: title, description, slug, datePublished, keyword (optional dateModified). */
@@ -42,7 +45,7 @@ export function loadPosts() {
 
 export function blogIndexPage(posts) {
   const list = posts.length
-    ? `<ul class="blog-list">${posts.map((p) => `<li><a class="card" href="/blog/${p.slug}/"><p class="meta"><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time></p><h2>${esc(p.title)}</h2><p class="muted">${esc(p.description)}</p></a></li>`).join('')}</ul>`
+    ? `<ul class="blog-list">${posts.map((p) => `<li><a class="card" href="/blog/${p.slug}/"><p class="meta"><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time> · ${readMin(p.body)} min read</p><h2>${esc(p.title)}</h2><p class="muted">${esc(p.description)}</p><span class="more">Read article <span aria-hidden="true">→</span></span></a></li>`).join('')}</ul>`
     : `<p class="muted">No posts yet. Check back soon — or <a href="/#setup-match" data-cta="blog_empty_match" data-quiz="start">Find your setup</a>.</p>`;
   return {
     path: '/blog/',
@@ -88,8 +91,8 @@ export function blogPostPages(posts) {
         inLanguage: 'en',
         keywords: p.keyword || undefined,
       }],
-      body: `<article class="article-body prose"><h1>${esc(p.title.replace(/\s*\|\s*SimracingMatch\s*$/i, ''))}</h1>
-<p class="src author">By ${SITE.owner} · <time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time></p>
+      body: `<article class="article-body prose"><header class="article-head"><p class="meta"><span class="kicker">Blog</span><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time> · ${readMin(p.body)} min read</p><h1>${esc(p.title.replace(/\s*\|\s*SimracingMatch\s*$/i, ''))}</h1>
+<p class="src author">By ${SITE.owner}</p></header>
 ${html}
 </article>`,
     };

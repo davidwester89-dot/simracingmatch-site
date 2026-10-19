@@ -24,30 +24,37 @@ export const home = {
   body: `<section class="hero">
 <div>
 <p class="hero-brand">SimracingMatch.com</p>
-<h1>Find the sim racing setup that fits you</h1>
+<h1>Find the sim racing setup that <em>fits you</em></h1>
 <p class="lead">Answer five short questions. Get setups that match your platform, budget and space — ranked by fit, never by commission.</p>
 <div class="actions">
 <a class="btn lg" href="/#setup-match" data-cta="home_hero" data-quiz="start">Find your setup</a>
-<a class="btn ghost" href="/blog/">Read the blog</a>
+<a class="btn ghost" href="/blog/">Read the blog <span aria-hidden="true">→</span></a>
 </div>
 </div>
 <div class="hero-art">
-<div class="hero-a" aria-hidden="true"><svg viewBox="0 0 320 220" role="img"><title>Racing line</title>
-<rect width="320" height="220" rx="12" fill="#12141a"/>
-<path class="race-line" d="M20 180 C60 160,80 40,140 50 C200 60,200 170,260 140 C290 120,300 80,310 40"/>
-<circle cx="140" cy="50" r="5" fill="#f5c518"/>
-<circle cx="260" cy="140" r="5" fill="#e10600"/>
-<text x="24" y="28" fill="#a3a8b5" font-size="12" font-family="system-ui">NIGHT RACE · BEST LINE</text>
+<div class="hero-a" aria-hidden="true"><svg class="track" viewBox="0 0 360 240" focusable="false">
+<path class="trk-edge" d="M70 196 C40 196 30 160 46 136 L96 66 C112 44 146 40 164 60 C178 76 174 100 192 108 C212 117 232 92 254 74 C278 54 318 56 328 88 C338 120 318 144 294 154 L216 186 C196 194 176 196 156 196 Z"/>
+<path class="trk-tar" d="M70 196 C40 196 30 160 46 136 L96 66 C112 44 146 40 164 60 C178 76 174 100 192 108 C212 117 232 92 254 74 C278 54 318 56 328 88 C338 120 318 144 294 154 L216 186 C196 194 176 196 156 196 Z"/>
+<path class="trk-kerb" d="M46 136 L96 66"/><path class="trk-kerb" d="M254 74 C278 54 318 56 328 88"/>
+<path class="race-glow" pathLength="1" d="M70 196 C40 196 30 160 46 136 L96 66 C112 44 146 40 164 60 C178 76 174 100 192 108 C212 117 232 92 254 74 C278 54 318 56 328 88 C338 120 318 144 294 154 L216 186 C196 194 176 196 156 196 Z"/>
+<path class="race-line" pathLength="1" d="M70 196 C40 196 30 160 46 136 L96 66 C112 44 146 40 164 60 C178 76 174 100 192 108 C212 117 232 92 254 74 C278 54 318 56 328 88 C338 120 318 144 294 154 L216 186 C196 194 176 196 156 196 Z"/>
+<g class="sf"><rect x="104" y="188" width="4" height="4" fill="#fff"/><rect x="108" y="192" width="4" height="4" fill="#fff"/><rect x="104" y="196" width="4" height="4" fill="#fff"/><rect x="108" y="188" width="4" height="4" fill="#222"/><rect x="104" y="192" width="4" height="4" fill="#222"/><rect x="108" y="196" width="4" height="4" fill="#222"/></g>
+<circle class="apex" cx="96" cy="66" r="4.5"/><circle class="apex" cx="192" cy="108" r="4.5"/><circle class="apex hot" cx="328" cy="88" r="4.5"/>
+<text class="hud" x="18" y="28">NIGHT RACE · BEST LINE</text>
+<text class="tag" x="72" y="56">T1</text><text class="tag" x="200" y="132">T2</text><text class="tag" x="336" y="72" text-anchor="end">T3</text>
+<text class="tag dim" x="122" y="224">START / FINISH</text>
 </svg></div>
-<div class="hero-b" aria-hidden="true"><svg class="telem" viewBox="0 0 320 220" role="img"><title>Telemetry</title>
-<rect width="320" height="220" rx="12" fill="#151a22"/>
-<g class="telem-grid" stroke="#2c3644" stroke-width="1">
-<line x1="0" y1="20" x2="320" y2="20"/><line x1="0" y1="40" x2="320" y2="40"/><line x1="0" y1="60" x2="320" y2="60"/><line x1="0" y1="80" x2="320" y2="80"/><line x1="0" y1="100" x2="320" y2="100"/><line x1="0" y1="120" x2="320" y2="120"/><line x1="0" y1="140" x2="320" y2="140"/><line x1="0" y1="160" x2="320" y2="160"/><line x1="0" y1="180" x2="320" y2="180"/><line x1="0" y1="200" x2="320" y2="200"/>
-<line x1="20" y1="0" x2="20" y2="220"/><line x1="40" y1="0" x2="40" y2="220"/><line x1="60" y1="0" x2="60" y2="220"/><line x1="80" y1="0" x2="80" y2="220"/><line x1="100" y1="0" x2="100" y2="220"/><line x1="120" y1="0" x2="120" y2="220"/><line x1="140" y1="0" x2="140" y2="220"/><line x1="160" y1="0" x2="160" y2="220"/><line x1="180" y1="0" x2="180" y2="220"/><line x1="200" y1="0" x2="200" y2="220"/><line x1="220" y1="0" x2="220" y2="220"/><line x1="240" y1="0" x2="240" y2="220"/><line x1="260" y1="0" x2="260" y2="220"/><line x1="280" y1="0" x2="280" y2="220"/><line x1="300" y1="0" x2="300" y2="220"/>
-</g>
-<path class="telem-line" d="M10 160 L40 150 L70 155 L100 120 L130 130 L160 90 L190 100 L220 70 L250 85 L280 50 L310 55"/>
-<circle class="telem-dot" cx="310" cy="55" r="4"/>
-<text x="16" y="24" fill="#f5c518" font-size="11" font-family="ui-monospace,monospace">PIT WALL · SPD 184 · THR 0.92</text>
+<div class="hero-b" aria-hidden="true"><svg class="telem" viewBox="0 0 360 240" focusable="false">
+<defs><linearGradient id="tf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5c518" stop-opacity=".28"/><stop offset="1" stop-color="#f5c518" stop-opacity="0"/></linearGradient></defs>
+<g class="telem-grid"><line x1="0" y1="40" x2="360" y2="40"/><line x1="0" y1="80" x2="360" y2="80"/><line x1="0" y1="120" x2="360" y2="120"/><line x1="0" y1="160" x2="360" y2="160"/><line x1="0" y1="200" x2="360" y2="200"/><line x1="40" y1="0" x2="40" y2="240"/><line x1="80" y1="0" x2="80" y2="240"/><line x1="120" y1="0" x2="120" y2="240"/><line x1="160" y1="0" x2="160" y2="240"/><line x1="200" y1="0" x2="200" y2="240"/><line x1="240" y1="0" x2="240" y2="240"/><line x1="280" y1="0" x2="280" y2="240"/><line x1="320" y1="0" x2="320" y2="240"/></g>
+<g class="sector"><line x1="120" y1="36" x2="120" y2="226"/><line x1="240" y1="36" x2="240" y2="226"/></g>
+<text class="tag" x="60" y="232" text-anchor="middle">S1</text><text class="tag" x="180" y="232" text-anchor="middle">S2</text><text class="tag" x="300" y="232" text-anchor="middle">S3</text>
+<path class="telem-fill" d="M12 176 L42 168 L66 172 L92 128 L118 138 L146 96 L172 108 L200 74 L228 90 L256 56 L284 62 L312 40 L348 46 L348 226 L12 226 Z"/>
+<path class="telem-brake" pathLength="1" d="M12 214 L42 214 L66 196 L92 214 L118 202 L146 214 L172 198 L200 214 L228 204 L256 214 L284 208 L312 214 L348 214"/>
+<path class="telem-line" pathLength="1" d="M12 176 L42 168 L66 172 L92 128 L118 138 L146 96 L172 108 L200 74 L228 90 L256 56 L284 62 L312 40 L348 46"/>
+<circle class="telem-dot" cx="348" cy="46" r="5"/>
+<text class="hud" x="18" y="24">PIT WALL · THROTTLE TRACE</text>
+<g class="legend"><rect x="250" y="15" width="10" height="3" fill="#f5c518"/><text class="tag" x="264" y="20">THR</text><rect x="300" y="15" width="10" height="3" fill="#e8edf4"/><text class="tag" x="314" y="20">BRK</text></g>
 </svg></div>
 </div>
 </section>

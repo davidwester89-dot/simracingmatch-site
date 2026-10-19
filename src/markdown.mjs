@@ -1,6 +1,21 @@
 import { esc } from './layout.mjs';
 
-/** Minimal markdown → HTML for blog posts. Supports: # ## ###, paragraphs, **bold**, *italic*, [text](url), lists, \`code\`. */
+const MATCH_HASH = '/#setup-match';
+
+/** Link HTML. External https → rel=noopener. Root-relative (/..., /#...) stay root-relative here;
+ *  layout() runs withBase() over the whole page, so the BASE prefix (preview) is added exactly once.
+ *  Links to the setup match carry data-quiz/data-cta so consent.js sends quiz_start. */
+function link(text, href, cls) {
+  if (href.startsWith('/')) {
+    const quiz = href === MATCH_HASH ? ' data-cta="blog_match" data-quiz="start"' : '';
+    return `<a href="${href}"${cls ? ` class="${cls}"` : ''}${quiz}>${text}</a>`;
+  }
+  return `<a href="${href}" rel="noopener">${text}</a>`;
+}
+
+const LINK_RE = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]*)\)/g;
+
+/** Minimal markdown → HTML for blog posts. Supports: # ## ###, paragraphs, **bold**, *italic*, [text](url) with https or root-relative URLs, lists, `code`. */
 export function renderMarkdown(md) {
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   const out = [];
@@ -9,14 +24,16 @@ export function renderMarkdown(md) {
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, '<a href="$2" rel="noopener">$1</a>');
+    .replace(LINK_RE, (m, t, h) => link(t, h));
 
   while (i < lines.length) {
     const line = lines[i];
     if (!line.trim()) { i++; continue; }
     if (line.startsWith('### ')) { out.push(`<h3>${inline(line.slice(4))}</h3>`); i++; continue; }
-    if (line.startsWith('## ')) { out.push(`<h2>${inline(line.slice(3))}</h2>`); i++; continue; }
-    if (line.startsWith('# ')) { out.push(`<h2>${inline(line.slice(2))}</h2>`); i++; continue; } // H1 is from template
+    if (line.startsWith('## ') || line.startsWith('# ')) { // H1 comes from the template
+      const t = line.replace(/^#{1,2} /, '');
+      out.push(/^sources$/i.test(t.trim()) ? `<h2 class="src-h">${inline(t)}</h2>` : `<h2>${inline(t)}</h2>`); i++; continue;
+    }
     if (/^[-*] /.test(line)) {
       const items = [];
       while (i < lines.length && /^[-*] /.test(lines[i])) { items.push(`<li>${inline(lines[i].slice(2))}</li>`); i++; }
@@ -25,7 +42,14 @@ export function renderMarkdown(md) {
     }
     const para = [];
     while (i < lines.length && lines[i].trim() && !/^#{1,3} /.test(lines[i]) && !/^[-*] /.test(lines[i])) { para.push(lines[i]); i++; }
-    out.push(`<p>${inline(para.join(' '))}</p>`);
+    const text = para.join(' ');
+    // A paragraph made only of internal links that starts with the setup match → CTA box.
+    const only = [...text.matchAll(LINK_RE)];
+    if (only.length && only[0][2] === MATCH_HASH && text.replace(LINK_RE, '').replace(/[\s·|]/g, '') === '') {
+      out.push(`<p class="post-cta">${only.map(([, t, h], n) => link(esc(t), h, n === 0 ? 'btn' : '')).join('')}</p>`);
+      continue;
+    }
+    out.push(`<p>${inline(text)}</p>`);
   }
   return out.join('\n');
 }

@@ -17,8 +17,10 @@ test('consent + partner knop data-vendor/pos', () => {
   assert.match(html, /rel="sponsored nofollow noopener"/);
 });
 
-test('blog front-matter + empty posts dir', () => {
-  assert.deepEqual(loadPosts(), []);
+test('blog front-matter + posts load', () => {
+  const posts = loadPosts();
+  assert.ok(posts.length >= 2, `posts ${posts.length}`);
+  for (const p of posts) assert.ok(!/\]\(https:\/\/simracingmatch\.com/.test(p.body), `${p.file}: internal links must be root-relative`);
   const { meta, body } = parseFrontMatter(`---
 title: Test post title here for length ok
 description: A description that is long enough for the meta description field on the page itself here.
@@ -33,4 +35,11 @@ This is **bold** and a [link](https://example.com/).
   assert.equal(meta.slug, 'test-post');
   assert.match(renderMarkdown(body), /<h2>Hello<\/h2>/);
   assert.match(renderMarkdown(body), /<strong>bold<\/strong>/);
+});
+
+test('markdown: root-relative links + setup-match CTA box', () => {
+  const h = renderMarkdown('See [the PS5 guide](/blog/x/) and [Moza](https://mozaracing.com/).\n\n[Find your setup](/#setup-match) · [More articles](/blog/)\n');
+  assert.match(h, /<a href="\/blog\/x\/">the PS5 guide<\/a>/);
+  assert.match(h, /<a href="https:\/\/mozaracing\.com\/" rel="noopener">Moza<\/a>/);
+  assert.match(h, /<p class="post-cta"><a href="\/#setup-match" class="btn" data-cta="blog_match" data-quiz="start">Find your setup<\/a><a href="\/blog\/">More articles<\/a><\/p>/);
 });
