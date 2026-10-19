@@ -1,0 +1,104 @@
+/**
+ * Photos for blog posts + licence record (one entry per image).
+ * Only photos that show real sim racing hardware (wheel, pedals, rig, cockpit): manufacturer/event press
+ * photos whose press page explicitly allows editorial use, else free-licence photos (Wikimedia Commons,
+ * Unsplash, Pexels). No generic mood stock, no generated product images, no standalone logos. Captions must say what the photo really shows; a photo of a
+ * different product than the one in the section says so. All files: src/assets/img/blog/*.webp,
+ * cropped + resized by us (CC BY/BY-SA: "cropped" noted in the caption).
+ * Keys of `sections` are the exact H2 text in the post. Sections without a usable licensed photo
+ * are listed in `noPhoto` (documentation only).
+ */
+const L = {
+  'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
+  'CC BY 4.0': 'https://creativecommons.org/licenses/by/4.0/',
+  'CC BY 2.0': 'https://creativecommons.org/licenses/by/2.0/',
+  CC0: 'https://creativecommons.org/publicdomain/zero/1.0/',
+};
+const img = (o) => ({ widths: [1200, 900, 600], width: 1200, height: 800, licenceUrl: L[o.licence], ...o });
+
+export const POST_IMAGES = {
+  'ps5-direct-drive-wheels-2026': {
+    hero: img({
+      file: 'ps5-hero-logitech-g923-playstation',
+      alt: 'Logitech G923 racing wheel and three-pedal set, PlayStation version, on a white table',
+      caption: 'Logitech G923 wheel and pedals, PlayStation version. The G923 is a gear-driven wheel, not direct drive; it is shown as an example of PlayStation racing hardware.',
+      author: 'FreeMediaKid!', licence: 'CC BY 4.0',
+      source: 'https://commons.wikimedia.org/wiki/File:Logitech_G923_(PlayStation_variant)_complete_set.jpg',
+    }),
+    sections: {
+      'Why PS5 sim racers had fewer direct drive options': img({
+        file: 'ps5-logitech-g923-wheel-playstation',
+        alt: 'Logitech G923 steering wheel, PlayStation version, with PlayStation buttons on the hub',
+        caption: 'The PlayStation version of the Logitech G923 has PlayStation buttons on the hub. It is a gear-driven wheel, not direct drive.',
+        author: 'FreeMediaKid!', licence: 'CC BY 4.0',
+        source: 'https://commons.wikimedia.org/wiki/File:Logitech_G923_(PlayStation_variant)_wheel,_front.jpg',
+      }),
+      "Moza R5S Pro and R16S Ultra: Moza's first PS5 bases": img({
+        file: 'ps5-moza-ks-wheel',
+        alt: 'Moza KS steering wheel with buttons, rotary knobs and a colour rev-light ring',
+        caption: 'A Moza KS steering wheel. This is an existing Moza wheel, not one of the new PS5 products, which Moza has not yet priced.',
+        author: 'TaurusEmerald', licence: 'CC BY-SA 4.0',
+        source: 'https://commons.wikimedia.org/wiki/File:MOZA_KS_Racing_Steering_Wheel_Controller.jpg',
+      }),
+      'Thrustmaster TGT III: €699.99, sales from 3 December': img({
+        file: 'ps5-thrustmaster-tx-wheel',
+        alt: 'Thrustmaster TX Racing Wheel Leather Edition clamped to a desk',
+        caption: 'An earlier Thrustmaster wheel, the TX Racing Wheel Leather Edition. It is not the T-GT III.',
+        author: 'Asmoth', licence: 'CC BY-SA 4.0',
+        source: 'https://commons.wikimedia.org/wiki/File:Thrustmaster_TX_Racing_Wheel_Leather_edition_-_front.jpg',
+      }),
+      'How to choose: torque, platform, budget, space': img({
+        file: 'ps5-logitech-pedals',
+        alt: 'Logitech three-pedal set with clutch, brake and throttle on a carpet',
+        caption: 'Pedals are part of the budget: a Logitech three-pedal set (G29/G920 type).',
+        author: 'Wikiediter2029', licence: 'CC0',
+        source: 'https://commons.wikimedia.org/wiki/File:Logitech_G29_and_G920_Pedals.jpg',
+      }),
+    },
+    noPhoto: ['Fanatec: bundle prices changed on 1 October', 'Other PS5-compatible direct drive options today'],
+  },
+  'simracing-expo-2026-announcements': {
+    hero: img({
+      file: 'expo-hero-racing-simulators-gamescom',
+      alt: 'Row of racing simulators with visitors at a gaming trade fair stand',
+      caption: 'Racing simulators on a trade fair stand at Gamescom 2022 in Cologne. Not a photo of SimRacing Expo 2026.',
+      author: 'dronepicr', licence: 'CC BY 2.0',
+      source: 'https://commons.wikimedia.org/wiki/File:Porsche_racing_simulators_at_Gamescom_2022_in_Cologne,_Germany_(52760064794).jpg',
+    }),
+    sections: {
+      "Moza brings direct drive to PS5 (R5S Pro, R16S Ultra)": img({
+        file: 'expo-moza-cs-pro-racers-day',
+        alt: 'Driver in a sim racing cockpit with a Moza CS Pro steering wheel at a racing event',
+        caption: 'A Moza CS Pro wheel at Racers Day in Taiwan, 13 September 2026. Not one of the new PS5 products.',
+        author: 'Solomon203', licence: 'CC BY-SA 4.0',
+        source: 'https://commons.wikimedia.org/wiki/File:AOC_monitor,_Moza_CS_Pro_and_Noyaya_Wang_at_Racers_Day_20260913_170903.jpg',
+      }),
+      'Fanatec Project Obsidian and Trak Racer': img({
+        file: 'expo-trak-racer-rig',
+        alt: 'Trak Racer sim racing cockpit with racing seat and triple screens on a display stand',
+        caption: 'A Trak Racer cockpit at an iRacing demo at Las Vegas Motor Speedway in 2024. Not from SimRacing Expo.',
+        author: 'TaurusEmerald', licence: 'CC BY-SA 4.0',
+        source: 'https://commons.wikimedia.org/wiki/File:Toyota_iRacing_Trak_Racer_Las_Vegas_Fall_2024.jpg',
+      }),
+    },
+    noPhoto: ['What happened at SimRacing Expo Frankfurt (16–18 October 2026)', 'Asetek DD10: €499 direct drive, launching 27 October', 'Asetek GT Nova wheel (March 2027, €299.99)', 'PXN S16 and S23: first hands-on in Europe', "What this means if you're buying a wheelbase now"],
+  },
+};
+
+const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const src = (im, w) => `/img/blog/${im.file}${w === im.widths[0] ? '' : `-${w}`}.webp`;
+
+/** <figure> for one image. Hero: eager + fetchpriority=high (LCP); others lazy. */
+export function figure(im, { hero = false } = {}) {
+  const srcset = [...im.widths].reverse().map((w) => `${src(im, w)} ${w}w`).join(', ');
+  const sizes = im.portrait ? '(max-width: 520px) 100vw, 420px' : '(max-width: 760px) 100vw, 704px';
+  const load = hero ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"';
+  const credit = `Photo: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">Wikimedia Commons</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a>${im.licence === 'CC0' ? '' : ', cropped'}`;
+  return `<figure class="post-fig${hero ? ' post-hero' : ''}${im.portrait ? ' post-fig-portrait' : ''}"><img src="${src(im, im.widths[0])}" srcset="${srcset}" sizes="${sizes}" width="${im.width}" height="${im.height}" alt="${esc(im.alt)}" ${load}><figcaption>${esc(im.caption)} <span class="credit">${credit}</span></figcaption></figure>`;
+}
+
+/** Photo credits list for the bottom of a post. */
+export function creditsList(set) {
+  const all = [set.hero, ...Object.values(set.sections)].filter(Boolean);
+  return `<h2 class="src-h">Photo credits</h2><ul class="credits">${all.map((im) => `<li>${esc(im.alt)}: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">Wikimedia Commons</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a></li>`).join('')}</ul>`;
+}

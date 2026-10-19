@@ -16,7 +16,7 @@ function link(text, href, cls) {
 const LINK_RE = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]*)\)/g;
 
 /** Minimal markdown → HTML for blog posts. Supports: # ## ###, paragraphs, **bold**, *italic*, [text](url) with https or root-relative URLs, lists, `code`. */
-export function renderMarkdown(md) {
+export function renderMarkdown(md, { afterH2 } = {}) {
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   const out = [];
   let i = 0;
@@ -32,7 +32,9 @@ export function renderMarkdown(md) {
     if (line.startsWith('### ')) { out.push(`<h3>${inline(line.slice(4))}</h3>`); i++; continue; }
     if (line.startsWith('## ') || line.startsWith('# ')) { // H1 comes from the template
       const t = line.replace(/^#{1,2} /, '');
-      out.push(/^sources$/i.test(t.trim()) ? `<h2 class="src-h">${inline(t)}</h2>` : `<h2>${inline(t)}</h2>`); i++; continue;
+      out.push(/^sources$/i.test(t.trim()) ? `<h2 class="src-h">${inline(t)}</h2>` : `<h2>${inline(t)}</h2>`);
+      if (afterH2 && line.startsWith('## ')) { const extra = afterH2(t.trim()); if (extra) out.push(extra); }
+      i++; continue;
     }
     if (/^[-*] /.test(line)) {
       const items = [];

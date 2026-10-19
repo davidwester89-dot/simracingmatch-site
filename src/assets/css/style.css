@@ -265,3 +265,13 @@ html[data-theme="B"] .hud{fill:#f5c518}
 .soon{display:inline-block;vertical-align:middle;margin-left:8px;padding:3px 10px;border-radius:99px;border:1.5px solid var(--brand);color:var(--brand-txt);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-style:normal}
 .soon-mini{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:99px;background:rgba(0,0,0,.22);font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle}
 .cta-hint{margin:14px 0 0;font-size:.92rem;color:var(--muted)}.cta-hint .soon{margin:0 8px 0 0}
+
+/* Blog photos (src/post-images.mjs) */
+.post-fig{margin:1.2em 0 1.6em}
+.post-fig img{width:100%;height:auto;border-radius:10px;background:#15171c}
+.post-fig figcaption{font-size:.85rem;color:var(--muted);margin-top:.5em;line-height:1.45}
+.post-fig .credit{display:block;font-size:.78rem;opacity:.85}
+.post-fig .credit a{font-weight:400;color:inherit}
+.post-hero{margin-top:.4em}
+.article-body ul.credits{font-size:.85rem;color:var(--muted)}
+.article-body ul.credits a{font-weight:400;color:var(--muted)}

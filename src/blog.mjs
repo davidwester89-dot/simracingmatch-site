@@ -3,6 +3,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE, esc, ORG, AUTHOR, fmtDate } from './layout.mjs';
 import { renderMarkdown } from './markdown.mjs';
+import { POST_IMAGES, figure, creditsList } from './post-images.mjs';
 
 /** Reading time from the real word count (≈220 words per minute). */
 export const readMin = (md) => Math.max(1, Math.round(md.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1').split(/\s+/).filter(Boolean).length / 220));
@@ -64,7 +65,12 @@ export function blogIndexPage(posts) {
 export function blogPostPages(posts) {
   return posts.map((p) => {
     const path = `/blog/${p.slug}/`;
-    const html = renderMarkdown(p.body);
+    const imgs = POST_IMAGES[p.slug];
+    const used = new Set();
+    const html = renderMarkdown(p.body, imgs ? { afterH2: (t) => { const im = imgs.sections[t]; if (!im) return ''; used.add(t); return figure(im); } } : {});
+    if (imgs) for (const k of Object.keys(imgs.sections)) if (!used.has(k)) throw new Error(`${p.slug}: no H2 "${k}" for its photo`);
+    const hero = imgs?.hero ? figure(imgs.hero, { hero: true }) : '';
+    const credits = imgs ? creditsList(imgs) : '';
     return {
       path,
       title: p.title.length <= 60 ? p.title : p.title.slice(0, 57) + '…',
@@ -90,11 +96,12 @@ export function blogPostPages(posts) {
         mainEntityOfPage: SITE.domain + path,
         inLanguage: 'en',
         keywords: p.keyword || undefined,
+        image: imgs?.hero ? SITE.domain + `/img/blog/${imgs.hero.file}.webp` : undefined,
       }],
       body: `<article class="article-body prose"><header class="article-head"><p class="meta"><span class="kicker">Blog</span><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time> · ${readMin(p.body)} min read</p><h1>${esc(p.title.replace(/\s*\|\s*SimracingMatch\s*$/i, ''))}</h1>
 <p class="src author">By ${SITE.owner}</p></header>
-${html}
-</article>`,
+${hero}${html}
+${credits}</article>`,
     };
   });
 }
