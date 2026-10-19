@@ -14,8 +14,8 @@ test('build (productie): pagina’s, sitemap, robots, IndexNow, CNAME, regels', 
   assert.equal(html.length, 5, `aantal pagina's ${html.length}`);
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
   assert.equal((sm.match(/<loc>/g) || []).length, html.length - 1); // 404 noindex
-  assert.match(readFileSync('dist/robots.txt', 'utf8'), /Sitemap: https:\/\/simracingmatch\.nl\/sitemap\.xml/);
-  assert.equal(readFileSync('dist/CNAME', 'utf8').trim(), 'simracingmatch.nl');
+  assert.match(readFileSync('dist/robots.txt', 'utf8'), /Sitemap: https:\/\/simracingmatch\.com\/sitemap\.xml/);
+  assert.equal(readFileSync('dist/CNAME', 'utf8').trim(), 'simracingmatch.com');
   const key = readdirSync('dist').find((f) => /^[0-9a-f]{32}\.txt$/.test(f));
   assert.ok(key && readFileSync(join('dist', key), 'utf8') === key.replace('.txt', ''));
   assert.ok(existsSync('dist/google78d915054efb904d.html'));
@@ -29,12 +29,12 @@ test('build (productie): pagina’s, sitemap, robots, IndexNow, CNAME, regels', 
   for (const f of html) {
     const s = readFileSync(f, 'utf8');
     for (const r of verboden) assert.ok(!r.test(s), `${f} bevat ${r}`);
-    if (!f.endsWith('404.html')) { assert.match(s, /<link rel="canonical" href="https:\/\/simracingmatch\.nl\//); assert.ok(!s.includes('noindex'), f); }
+    if (!f.endsWith('404.html')) { assert.match(s, /<link rel="canonical" href="https:\/\/simracingmatch\.com\//); assert.ok(!s.includes('noindex'), f); }
     const title = unesc(s.match(/<title>(.*?)<\/title>/)[1]); assert.ok(title.length <= 60, `${f}: titel te lang (${title.length}) ${title}`);
     assert.match(s, /Ook van ons/);
     for (const d of ['boekhoudmatch.nl', 'shopmatch.nl', 'verduurzaammatch.nl', 'warmtepompenmatch.nl', 'thuisaccumatch.nl', 'kassamatch.nl']) assert.ok(s.includes(`https://${d}/`), `${f}: netwerk ${d}`);
     const net = s.slice(s.indexOf('<div class="net">'), s.indexOf('<p class="fine">'));
-    assert.ok(!net.includes('simracingmatch.nl'), `${f}: netwerkfooter linkt naar zichzelf`);
+    assert.ok(!net.includes('simracingmatch.com'), `${f}: netwerkfooter linkt naar zichzelf`);
     assert.match(s, /<details class="menu">/); assert.match(s, /<footer class="site">/);
     if (/class="src">Door/.test(s) || /class="author">Door/.test(s)) assert.match(s, /Redactie SimracingMatch/);
     for (const m of s.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)) JSON.parse(m[1]);
@@ -53,7 +53,7 @@ test('build (productie): pagina’s, sitemap, robots, IndexNow, CNAME, regels', 
   assert.match(home, /Welke simrace-setup past bij jou/);
   assert.match(home, /5 vragen/);
   assert.match(home, /partnerlink/);
-  assert.match(sm, /<loc>https:\/\/simracingmatch\.nl\/<\/loc>/);
+  assert.match(sm, /<loc>https:\/\/simracingmatch\.com\/<\/loc>/);
 });
 
 test('build (preview): noindex, Disallow, BASE-paden, geen CNAME', () => {
@@ -61,7 +61,7 @@ test('build (preview): noindex, Disallow, BASE-paden, geen CNAME', () => {
   const s = readFileSync('dist/index.html', 'utf8');
   assert.match(s, /<meta name="robots" content="noindex">/);
   assert.match(s, /href="\/simracingmatch-site\/contact\/"/);
-  assert.match(s, /<link rel="canonical" href="https:\/\/simracingmatch\.nl\/">/);
+  assert.match(s, /<link rel="canonical" href="https:\/\/simracingmatch\.com\/">/);
   assert.match(readFileSync('dist/robots.txt', 'utf8'), /Disallow: \//);
   assert.ok(!existsSync('dist/CNAME'));
 });

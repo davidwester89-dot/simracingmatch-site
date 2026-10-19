@@ -11,7 +11,7 @@ export const PREVIEW = BASE !== '' || process.env.PREVIEW === '1';
 const G = GA_ID ? { script: ' https://www.googletagmanager.com', connect: ' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com', img: ' https://*.google-analytics.com https://www.googletagmanager.com' } : { script: '', connect: '', img: '' };
 
 export const SITE = {
-  name: 'SimracingMatch', domain: 'https://simracingmatch.nl', email: 'info@simracingmatch.nl',
+  name: 'SimracingMatch', domain: 'https://simracingmatch.com', email: 'info@simracingmatch.com',
   tagline: 'Welke simrace-setup past bij jou?', updated: '2026-10-19', theme: '#b42318', owner: 'Redactie SimracingMatch',
 };
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -39,7 +39,7 @@ const CSS = readFileSync(new URL('./assets/css/style.css', import.meta.url), 'ut
   .replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s*\n\s*/g, '').replace(/\s*([{};:,>])\s*/g, '$1').replace(/;}/g, '}');
 
 export function networkFooter() {
-  return `<div class="net"><p class="fh">Ook van ons</p><ul>${networkFor('simracingmatch.nl').map((s) => `<li><a href="${s.url}">${s.logo}</a> · ${esc(s.wat)}</li>`).join('')}</ul></div>`;
+  return `<div class="net"><p class="fh">Ook van ons</p><ul>${networkFor('simracingmatch.com').map((s) => `<li><a href="${s.url}">${s.logo}</a> · ${esc(s.wat)}</li>`).join('')}</ul></div>`;
 }
 
 /** Interne links (en lettertypes in de CSS) krijgen in de preview het BASE-pad; externe links en canonicals blijven gelijk. */
@@ -83,7 +83,7 @@ ${ld.map((x) => `<script type="application/ld+json">${JSON.stringify(x).replace(
 </head>
 <body${hasCta ? ' class="has-cta"' : ''}${GA_ID ? ` data-ga="${GA_ID}"` : ''}${BASE ? ` data-base="${BASE}"` : ''}>
 <a class="skip" href="#inhoud">Naar de inhoud</a>
-${PREVIEW ? '<p class="preview">Preview van SimracingMatch.nl, nog niet live</p>' : ''}
+${PREVIEW ? '<p class="preview">Preview van SimracingMatch.com, nog niet live</p>' : ''}
 <header class="site"><div class="wrap">
 <a class="logo" href="/" aria-label="${SITE.name}, naar de homepage">${LOGO}<span>${BRAND}</span></a>
 <nav class="main" aria-label="Hoofdmenu">${navLinks(navPath)}</nav>

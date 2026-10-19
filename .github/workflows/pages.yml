@@ -1,6 +1,6 @@
 # Bouwt SimracingMatch en publiceert via GitHub Pages (bron: GitHub Actions).
 # PREVIEW (nu): BASE=/simracingmatch-site → https://davidwester89-dot.github.io/simracingmatch-site/ (noindex, robots Disallow, geen CNAME).
-# LIVEGANG (pas na akkoord Moneymaker + Site-controleur): BASE leeg en GO_LIVE=1 (schrijft CNAME simracingmatch.nl).
+# LIVEGANG (pas na akkoord Moneymaker + Site-controleur): BASE leeg en GO_LIVE=1 (schrijft CNAME simracingmatch.com).
 name: Deploy SimracingMatch
 on:
   push:
