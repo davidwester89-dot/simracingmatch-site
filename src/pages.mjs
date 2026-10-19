@@ -30,6 +30,7 @@ export const home = {
 <a class="btn lg" href="/#setup-match" data-cta="home_hero" data-quiz="start">Find your setup</a>
 <a class="btn ghost" href="/blog/">Read the blog <span aria-hidden="true">→</span></a>
 </div>
+<p class="cta-hint"><span class="soon">Coming soon</span> The interactive match launches soon. Until then, read the blog.</p>
 </div>
 <div class="hero-art">
 <div class="hero-a" aria-hidden="true"><svg class="track" viewBox="0 0 360 240" focusable="false">

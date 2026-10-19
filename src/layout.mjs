@@ -47,7 +47,7 @@ const NAV = [
 const navLinks = (navPath) => NAV.map(([h, t, c]) => {
   const current = h === '/' ? navPath === '/' : (h.startsWith('/#') ? false : navPath.startsWith(h));
   const cta = c === 'nav-cta' ? ` class="nav-cta" data-cta="nav_match" data-quiz="start"` : (c ? ` class="${c}"` : '');
-  return `<a href="${h}"${cta}${current ? ' aria-current="page"' : ''}>${esc(t)}</a>`;
+  return `<a href="${h}"${cta}${current ? ' aria-current="page"' : ''}>${esc(t)}${c === 'nav-cta' ? ' <span class="soon-mini">soon</span>' : ''}</a>`;
 }).join('');
 
 const CSS = readFileSync(new URL('./assets/css/style.css', import.meta.url), 'utf8')

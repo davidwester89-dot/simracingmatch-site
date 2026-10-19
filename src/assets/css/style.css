@@ -263,3 +263,5 @@ html[data-theme="B"] .hud{fill:#f5c518}
 }
 .crumbs{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .soon{display:inline-block;vertical-align:middle;margin-left:8px;padding:3px 10px;border-radius:99px;border:1.5px solid var(--brand);color:var(--brand-txt);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-style:normal}
+.soon-mini{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:99px;background:rgba(0,0,0,.22);font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle}
+.cta-hint{margin:14px 0 0;font-size:.92rem;color:var(--muted)}.cta-hint .soon{margin:0 8px 0 0}
