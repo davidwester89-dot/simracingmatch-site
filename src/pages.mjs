@@ -7,7 +7,7 @@ const homeFaq = [
   ['Wat is SimracingMatch?', 'Een Nederlandse site die je helpt een simrace-setup te kiezen. Binnenkort starten we een match met vijf vragen over budget, platform, ruimte, ervaring en rijstijl. Je krijgt dan setups die bij jouw antwoorden passen.'],
   ['Waar komen de gegevens vandaan?', 'Alleen van de fabrikant of de officiële shop, met de datum waarop we het controleerden. Geen verzonnen specs, prijzen of sterren.'],
   ['Verdient SimracingMatch aan aanbevelingen?', 'Soms, via een partnerlink. Zo\'n link heeft altijd het zichtbare label "partnerlink" en telt nooit mee in de match of de volgorde.'],
-  ['Wanneer komt de match?', 'De setup-match met vijf vragen volgt spoedig. Tot die tijd staat hier hoe we werken. Mail <a href="mailto:info@simracingmatch.com">info@simracingmatch.com</a> bij vragen.'],
+  ['Wanneer komt de match?', 'De setup-match met vijf vragen volgt spoedig. Tot die tijd staat hier hoe we werken. Mail <a href="mailto:info@simracingmatch.nl">info@simracingmatch.nl</a> bij vragen.'],
 ];
 
 export const home = {
@@ -19,7 +19,7 @@ export const home = {
   description: 'SimracingMatch: kies een simrace-setup. Binnenkort een match met 5 vragen (budget, platform, ruimte, ervaring, rijstijl). Alleen fabrikantgegevens.',
   schema: [faqSchema(homeFaq)],
   body: `<section class="hero"><div>
-<p class="h1-brand">Simracing<b>Match</b>.com</p>
+<p class="h1-brand">Simracing<b>Match</b>.nl</p>
 <h1 class="tagline">Welke simrace-setup past bij jou?</h1>
 <p class="lead">Racestuur, pedalen of een complete cockpit: we helpen je kiezen op basis van jouw platform, budget en ruimte. Binnenkort start de match met vijf korte vragen. Tot die tijd lees je hier hoe we werken.</p>
 <div class="actions"><a class="btn ghost" href="/contact/">Houd me op de hoogte</a><a class="btn ghost" href="/disclaimer/">Zo werken we</a></div>
@@ -45,7 +45,7 @@ export const home = {
 <li><strong>Partnerlinks veranderen niets.</strong> Soms krijgen we een vergoeding via een partnerlink. Zo'n link heeft altijd het label "partnerlink" en <code>rel="sponsored nofollow"</code>. De match en de volgorde lezen die links niet.</li>
 </ol>
 <h2>Wat komt eraan</h2>
-<p>Na de match volgen gidsen over racesturen per platform, complete sets, direct drive, pedalen, cockpits en een paar eerlijke vergelijkingen (zoals Fanatec versus Moza). Alles in het Nederlands, op simracingmatch.com.</p>
+<p>Na de match volgen gidsen over racesturen per platform, complete sets, direct drive, pedalen, cockpits en een paar eerlijke vergelijkingen (zoals Fanatec versus Moza). Alles in het Nederlands, op simracingmatch.nl.</p>
 <section class="band method-band">
 <h2>Voor wie is dit?</h2>
 <p>Voor wie in Nederland of België een eerste racestuur zoekt, of een bestaande setup wil uitbreiden. We schrijven in gewoon Nederlands. Geen persoonsnamen of foto's van "experts" op de site: de auteur is altijd <a href="/contact/">${SITE.owner}</a>.</p>

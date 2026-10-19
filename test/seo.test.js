@@ -14,7 +14,7 @@ test('on-page SEO: unieke titels, meta 70-155, één H1, canonical, og, schema',
   const titles = new Map(); const descs = new Map();
   for (const f of files) {
     const s = readFileSync(f, 'utf8');
-    const url = 'https://simracingmatch.com/' + f.replace(/^dist\//, '').replace(/index\.html$/, '');
+    const url = 'https://simracingmatch.nl/' + f.replace(/^dist\//, '').replace(/index\.html$/, '');
     const title = unesc(s.match(/<title>(.*?)<\/title>/)[1]);
     assert.ok(!titles.has(title), `${f}: dubbele titel`); titles.set(title, f);
     const desc = unesc(s.match(/<meta name="description" content="([^"]*)"/)[1]);
@@ -22,11 +22,11 @@ test('on-page SEO: unieke titels, meta 70-155, één H1, canonical, og, schema',
     assert.ok(!descs.has(desc), `${f}: dubbele description`); descs.set(desc, f);
     assert.equal((s.match(/<h1[\s>]/g) || []).length, 1, `${f}: precies één H1`);
     assert.ok(s.includes(`<link rel="canonical" href="${url}">`), `${f}: canonical`);
-    const og = s.match(/<meta property="og:image" content="https:\/\/simracingmatch\.com(\/[^"]+)"/)[1];
+    const og = s.match(/<meta property="og:image" content="https:\/\/simracingmatch\.nl(\/[^"]+)"/)[1];
     assert.ok(existsSync(join('dist', og)), `${f}: og:image ${og}`);
     assert.ok(sm.includes(`<loc>${url}</loc>`), `${f}: sitemap`);
     const ld = [...s.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
-    if (url !== 'https://simracingmatch.com/') assert.ok(ld.some((x) => x['@type'] === 'BreadcrumbList'), `${f}: BreadcrumbList`);
+    if (url !== 'https://simracingmatch.nl/') assert.ok(ld.some((x) => x['@type'] === 'BreadcrumbList'), `${f}: BreadcrumbList`);
     const faq = ld.find((x) => x['@type'] === 'FAQPage');
     if (faq) assert.ok((s.match(/<details>/g) || []).length >= faq.mainEntity.length, `${f}: FAQPage zonder zichtbare FAQ`);
     const hs = [...s.split('<main')[1].matchAll(/<h([1-6])[\s>]/g)].map((m) => Number(m[1]));

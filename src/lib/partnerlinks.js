@@ -1,4 +1,4 @@
-// Goedgekeurde partnerlinks. LEEG tot Partnermanager een programma voor simracingmatch.com goedkeurt.
+// Goedgekeurde partnerlinks. LEEG tot Partnermanager een programma voor simracingmatch.nl goedkeurt.
 // De match leest dit bestand NOOIT: partnerlinks hebben geen invloed op advies of volgorde.
 export const PARTNERLINKS = {};
 

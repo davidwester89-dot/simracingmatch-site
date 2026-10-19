@@ -12,19 +12,19 @@ test('consent: key is sm-consent, GA-id-patroon, opslaan en lezen', () => {
   saveConsent(store, 'granted');
   assert.equal(readConsent(store).choice, 'granted');
   assert.deepEqual(cleanParams({ a: 'x', n: 1, long: 'a'.repeat(200) }), { a: 'x', long: 'a'.repeat(100) });
-  assert.equal(cleanUrl('https://simracingmatch.com/x?b=1#y'), 'https://simracingmatch.com/x');
+  assert.equal(cleanUrl('https://simracingmatch.nl/x?b=1#y'), 'https://simracingmatch.nl/x');
 });
 
 test('consent: zonder ID geen start; met ID alleen na accept', () => {
   const loads = [];
   const doc = { cookie: '', referrer: '' };
-  const win = { location: { href: 'https://simracingmatch.com/' } };
+  const win = { location: { href: 'https://simracingmatch.nl/' } };
   const store = { data: {}, getItem(k) { return this.data[k] ?? null; }, setItem(k, v) { this.data[k] = v; } };
-  const c0 = createConsent({ gaId: '', storage: store, doc, win, hostname: 'simracingmatch.com', load: (s) => loads.push(s) });
+  const c0 = createConsent({ gaId: '', storage: store, doc, win, hostname: 'simracingmatch.nl', load: (s) => loads.push(s) });
   assert.equal(c0.enabled, false);
   assert.equal(c0.init(), false);
   assert.equal(loads.length, 0);
-  const c1 = createConsent({ gaId: 'G-HJLSDLMDD0', storage: store, doc, win, hostname: 'simracingmatch.com', load: (s) => loads.push(s) });
+  const c1 = createConsent({ gaId: 'G-HJLSDLMDD0', storage: store, doc, win, hostname: 'simracingmatch.nl', load: (s) => loads.push(s) });
   assert.equal(c1.init(), true); // melding tonen
   assert.equal(loads.length, 0);
   c1.accept();
