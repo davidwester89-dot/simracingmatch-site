@@ -37,6 +37,8 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   assert.match(home, /data-quiz="start"/);
   assert.match(home, /og:locale" content="en_US"/);
   assert.ok(!home.includes('noindex'));
+  assert.ok(home.includes('Honest help choosing a sim racing setup.</p>'), 'footer tagline kort');
+  assert.ok(!home.includes('never affect rankings or the match'), 'footer bottom line kort');
   assert.ok(home.includes("<meta name='impact-site-verification' value='35fa02aa-9ecb-4229-ae1e-7f5c562867eb'>"), 'Impact-meta op /');
   for (const f of html) if (!f.endsWith(join('dist', 'index.html'))) assert.ok(!readFileSync(f, 'utf8').includes('impact-site-verification'), `${f}: Impact-meta alleen op /`);
   assert.doesNotMatch(home, /Also from us/);

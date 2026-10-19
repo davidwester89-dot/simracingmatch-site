@@ -123,12 +123,12 @@ ${reportError(url)}
 </div></main>
 <footer class="site"><div class="wrap">
 <div class="cols">
-<div><a class="logo" href="/">${LOGO}<span>${BRAND}</span></a><p class="muted">Honest help choosing a sim racing setup. Manufacturer data only.</p></div>
+<div><a class="logo" href="/">${LOGO}<span>${BRAND}</span></a><p class="muted">Honest help choosing a sim racing setup.</p></div>
 <div><p class="fh">Explore</p><ul><li><a href="/#setup-match" data-cta="footer_match" data-quiz="start">Find your setup</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul></div>
 <div><p class="fh">Legal</p><ul><li><a href="/privacy/">Privacy &amp; cookies</a></li>${GA_ID ? '<li><a href="/privacy/#cookies" data-consent-open>Cookie settings</a></li>' : ''}<li><a href="/disclaimer/">Disclaimer</a></li></ul></div>
 </div>
 
-<p class="fine">© 2026 ${SITE.name}. Partner links never affect rankings or the match.</p>
+<p class="fine">© 2026 ${SITE.name}.</p>
 </div></footer>
 ${[...(GA_ID ? ['/js/consent.js'] : []), ...(p.scripts || [])].map((s) => `<script type="module" src="${s}"></script>`).join('\n')}
 </body>
