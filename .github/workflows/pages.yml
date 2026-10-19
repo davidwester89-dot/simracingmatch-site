@@ -14,8 +14,9 @@ concurrency:
   group: pages
   cancel-in-progress: true
 env:
-  BASE: /simracingmatch-site
-  GO_LIVE: ''
+  BASE: ''
+  GO_LIVE: '1'
+  THEME: A
 jobs:
   build:
     runs-on: ubuntu-latest
