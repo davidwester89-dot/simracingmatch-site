@@ -154,13 +154,16 @@ body.has-consent{padding-bottom:84px}
 .partner{white-space:nowrap;font-size:.85rem;font-weight:700;padding:1px 6px;border:1px solid var(--line);border-radius:4px;color:var(--muted);margin-left:6px}
 
 /* ===== Theme A: Night Race (default) — carbon + signal red ===== */
-html[data-theme="A"]{--brand:#e10600;--brand-d:#b30500;--brand-txt:#ff4136;--accent:#e10600;--focus:#f5c518}
+html[data-theme="A"]{--brand:#ff6b1a;--brand-d:#ff8a45;--brand-txt:#ff7a2e;--accent:#ff6b1a;--amber:#ff9a5c;--focus:#ffffff}
+html[data-theme="A"] .skip,html[data-theme="A"] .preview,html[data-theme="A"] nav.main a.nav-cta,html[data-theme="A"] .btn:not(.ghost),html[data-theme="A"] .btn:not(.ghost):hover,html[data-theme="A"] .steps li::before,html[data-theme="A"] .consent .consent-btn:not([data-c=no]){color:#0b0c0f!important}
+html[data-theme="A"] .logo-bg{fill:#ff6b1a}html[data-theme="A"] .logo-dot{fill:#fff}html[data-theme="A"] .wheel-rim{stroke:#ff6b1a}
+html[data-theme="A"] .track .trk-kerb,html[data-theme="A"] .race-glow{stroke:#ff6b1a}html[data-theme="A"] .apex{fill:#fff}html[data-theme="A"] .race-line{stroke:#ff7a2e}html[data-theme="A"] .apex.hot{fill:#ff6b1a}html[data-theme="A"] .hero-art{background:radial-gradient(90% 70% at 85% 0%,rgba(255,107,26,.22),transparent 65%),linear-gradient(180deg,#15181f,#101217)}
 html[data-theme="A"] h1,html[data-theme="A"] h2,html[data-theme="A"] .logo{text-transform:uppercase;letter-spacing:-.025em}
 html[data-theme="A"] .article-head h1{text-transform:none;letter-spacing:-.015em}
 .article-head h1{font-size:clamp(1.75rem,6vw + .3rem,2.6rem);line-height:1.15}
 html[data-theme="A"] h1{font-style:italic;letter-spacing:-.035em}
 html[data-theme="A"] .hero h1 em{font-style:inherit;color:var(--brand-txt)}
-html[data-theme="A"] .kerb{background:repeating-linear-gradient(90deg,#fff 0 12px,#e10600 12px 24px)}
+html[data-theme="A"] .kerb{background:repeating-linear-gradient(90deg,#fff 0 12px,#ff6b1a 12px 24px)}
 
 /* ===== Theme B: Pit Wall Telemetry — graphite + amber ===== */
 html[data-theme="B"]{

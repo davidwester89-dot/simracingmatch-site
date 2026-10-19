@@ -15,7 +15,7 @@ export const SITE = {
 };
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export const BRAND = 'Simracing<b>Match</b>';
-export const LOGO = '<svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect width="40" height="40" rx="11" fill="#e10600"/><circle cx="20" cy="20" r="12" fill="none" stroke="#fff" stroke-width="2.8"/><circle cx="20" cy="20" r="4.2" fill="#fff"/><path d="M20 8v5M20 27v5M8 20h5M27 20h5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle cx="32" cy="8" r="4" fill="#f5c518"/></svg>';
+export const LOGO = '<svg viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect class="logo-bg" width="40" height="40" rx="11" fill="#e10600"/><circle cx="20" cy="20" r="12" fill="none" stroke="#fff" stroke-width="2.8"/><circle cx="20" cy="20" r="4.2" fill="#fff"/><path d="M20 8v5M20 27v5M8 20h5M27 20h5" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle class="logo-dot" cx="32" cy="8" r="4" fill="#f5c518"/></svg>';
 
 const ic = (d) => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 export const ICONS = {
@@ -28,7 +28,7 @@ export const ICONS = {
 
 /** Simple inline SVGs for hero / question cards — no brand logos. */
 export const SVG = {
-  wheel: `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="48" fill="none" stroke="#e10600" stroke-width="6"/><circle cx="60" cy="60" r="14" fill="#f2f3f5"/><path d="M60 12v20M60 88v20M12 60h20M88 60h20" stroke="#f2f3f5" stroke-width="5" stroke-linecap="round"/><path d="M28 28l14 14M78 78l14 14M92 28L78 42M42 78L28 92" stroke="#a3a8b5" stroke-width="4" stroke-linecap="round"/></svg>`,
+  wheel: `<svg viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle class="wheel-rim" cx="60" cy="60" r="48" fill="none" stroke="#e10600" stroke-width="6"/><circle cx="60" cy="60" r="14" fill="#f2f3f5"/><path d="M60 12v20M60 88v20M12 60h20M88 60h20" stroke="#f2f3f5" stroke-width="5" stroke-linecap="round"/><path d="M28 28l14 14M78 78l14 14M92 28L78 42M42 78L28 92" stroke="#a3a8b5" stroke-width="4" stroke-linecap="round"/></svg>`,
   pedals: `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="8" y="12" width="18" height="40" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><rect x="32" y="20" width="18" height="32" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M12 28h10M36 32h10" stroke="currentColor" stroke-width="2"/></svg>`,
   rig: `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M10 48h44M18 48V28l14-10 14 10v20" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="32" cy="30" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M22 48l-4 10M42 48l4 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
   budget: `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><circle cx="32" cy="32" r="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M32 18v28M24 24h12a6 6 0 0 1 0 12H24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>`,
