@@ -22,11 +22,11 @@ const img = (o) => ({ widths: [1200, 900, 600], width: 1200, height: 800, licenc
 export const POST_IMAGES = {
   'ps5-direct-drive-wheels-2026': {
     hero: img({
-      file: 'ps5-hero-logitech-g923-playstation', height: 768,
-      alt: 'Logitech G923 racing wheel and three-pedal set, PlayStation version, on a white table',
-      caption: 'Logitech G923 wheel and pedals, PlayStation version. The G923 is a gear-driven wheel, not direct drive; it is shown as an example of PlayStation racing hardware.',
-      author: 'FreeMediaKid!', licence: 'CC BY 4.0',
-      source: 'https://commons.wikimedia.org/wiki/File:Logitech_G923_(PlayStation_variant)_complete_set.jpg',
+      file: 'ps5-hero-sim-racing-pedals-close-up',
+      alt: 'Close-up of metal sim racing pedals with drilled pedal faces under blue light',
+      caption: 'Sim racing pedals under blue light. Shown as a general example of racing hardware.',
+      author: 'Gergő', licence: 'Pexels License', site: 'Pexels',
+      source: 'https://www.pexels.com/photo/9787475/',
     }),
     sections: {
       'Why PS5 sim racers had fewer direct drive options': img({
@@ -51,10 +51,11 @@ export const POST_IMAGES = {
         source: 'https://commons.wikimedia.org/wiki/File:Thrustmaster_TX_Racing_Wheel_Leather_edition_-_front.jpg',
       }),
       'How to choose: torque, platform, budget, space': img({
-        file: 'ps5-rig-pedals-cockpit', height: 675,
-        alt: 'Sim racing cockpit with triple curved screens, steering wheel, pedals and a bucket seat',
-        caption: 'Budget for more than the wheel base: pedals, a cockpit, a seat and screens all add to the total.',
-        own: true, source: 'eigen beeld Goodfellas',
+        file: 'ps5-sim-racing-shifter-knob',
+        alt: 'Close-up of a metal H-pattern gear shifter knob on a dark background',
+        caption: 'Budget for more than the wheel base: pedals, a shifter, a cockpit, a seat and screens all add to the total.',
+        author: 'Gergő', licence: 'Pexels License', site: 'Pexels',
+        source: 'https://www.pexels.com/photo/9787472/',
       }),
     },
     noPhoto: ['Fanatec: bundle prices changed on 1 October', 'Other PS5-compatible direct drive options today'],
@@ -76,11 +77,11 @@ export const POST_IMAGES = {
         source: 'https://commons.wikimedia.org/wiki/File:MOZA_KS_Racing_Steering_Wheel_Controller.jpg',
       }),
       'Fanatec Project Obsidian and Trak Racer': img({
-        file: 'expo-trak-racer-rig',
-        alt: 'Trak Racer sim racing cockpit with racing seat and triple screens on a display stand',
-        caption: 'A Trak Racer cockpit at an iRacing demo at Las Vegas Motor Speedway in 2024. Not from SimRacing Expo.',
-        author: 'TaurusEmerald', licence: 'CC BY-SA 4.0',
-        source: 'https://commons.wikimedia.org/wiki/File:Toyota_iRacing_Trak_Racer_Las_Vegas_Fall_2024.jpg',
+        file: 'expo-sim-racing-cockpits-row',
+        alt: 'Row of empty sim racing cockpits with bucket seats and pedal sets under blue light',
+        caption: 'A row of sim racing cockpits at a gaming event. Not from SimRacing Expo.',
+        author: 'Matheus Bertelli', licence: 'Pexels License', site: 'Pexels',
+        source: 'https://www.pexels.com/photo/28993113/',
       }),
     },
     noPhoto: ['What happened at SimRacing Expo Frankfurt (16–18 October 2026)', 'Asetek DD10: €499 direct drive, launching 27 October', 'Asetek GT Nova wheel (March 2027, €299.99)', 'PXN S16 and S23: first hands-on in Europe', "What this means if you're buying a wheelbase now"],
