@@ -58,11 +58,10 @@ export const POST_IMAGES = {
   },
   'simracing-expo-2026-announcements': {
     hero: img({
-      file: 'expo-hero-racing-simulators-gamescom',
-      alt: 'Row of racing simulators with visitors at a gaming trade fair stand',
-      caption: 'Racing simulators on a trade fair stand at Gamescom 2022 in Cologne. Not a photo of SimRacing Expo 2026.',
-      author: 'dronepicr', licence: 'CC BY 2.0',
-      source: 'https://commons.wikimedia.org/wiki/File:Porsche_racing_simulators_at_Gamescom_2022_in_Cologne,_Germany_(52760064794).jpg',
+      file: 'expo-hero-simucube-wheelbase-pedals',
+      alt: 'Simucube sim racing hardware being assembled on a wooden table, with tools laid out beside it',
+      caption: 'Simucube sim racing hardware being unboxed and assembled. Not a photo of SimRacing Expo 2026.',
+      own: true, source: 'eigen beeld Goodfellas',
     }),
     sections: {
       "Moza brings direct drive to PS5 (R5S Pro, R16S Ultra)": img({
