@@ -1,5 +1,6 @@
 import { SITE, esc, ORG, GA_ID, ICONS, SVG, fmtDate, MATCH_LIVE, MATCH_CTA } from './layout.mjs';
 import { PRIVACY_UPDATED, cookieTable, partnerNetwork, legalBasis, transfers, retention, rights } from './privacy-gdpr.mjs';
+import { CONSENT_KEY } from './lib/consent.js';
 import { PARTNERLINKS } from './lib/partnerlinks.js';
 import { loadPosts, blogIndexPage, blogPostPages } from './blog.mjs';
 
@@ -112,7 +113,7 @@ export const privacy = {
 ${GA_ID ? `<h2 id="cookies">Cookies &amp; analytics</h2><p>We do not use advertising cookies. We turn on Google Analytics only if you click “Accept” on the cookie banner. Without consent we never load Google Analytics.</p>
 <p>If you consent, Google Analytics sets cookies (such as <code>_ga</code>) and we measure page views and button clicks. Match answers are not sent. Google Analytics 4 does not store IP addresses (see <a href="#retention">retention</a>). See the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.</p>
 <p>Your choice is stored for 12 months in localStorage. You can withdraw consent via <a href="/privacy/#cookies" data-consent-open>Cookie settings</a>. We then stop Analytics and clear <code>_ga</code> cookies.</p>
-<h3>Which cookies and storage?</h3>${cookieTable(GA_ID, 'sm-consent')}
+<h3>Which cookies and storage?</h3>${cookieTable(GA_ID, CONSENT_KEY)}
 ` : '<h2 id="cookies">Cookies &amp; analytics</h2><p>We set no cookies. If we enable analytics later, we will ask for consent first and update this page.</p>'}
 <h2>Links to shops</h2><p>If you click through to a manufacturer or shop, their privacy policy applies. A partner link tells them you came via SimracingMatch.</p>
 ${partnerNetwork(SITE.name, Object.values(PARTNERLINKS))}

@@ -108,7 +108,7 @@ test('analytics: quiz_start + quiz_complete stub + vendor_click', () => {
   assert.match(c, /track\('quiz_complete'/);
   assert.match(c, /track\('vendor_click'/);
   assert.match(c, /sm:quiz/);
-  assert.match(readFileSync('src/lib/consent.js', 'utf8'), /sm-consent/);
+  assert.match(readFileSync('src/lib/consent.js', 'utf8'), /'srm-consent'/);
   execSync('node build.mjs', { env: { ...process.env, BASE: '', GO_LIVE: '1', GA_ID: 'G-TEST1234', THEME: 'A' } });
   assert.match(readFileSync('dist/index.html', 'utf8'), /data-ga="G-TEST1234"/);
   assert.match(readFileSync('dist/privacy/index.html', 'utf8'), /_ga/);

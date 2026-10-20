@@ -6,7 +6,7 @@ import { renderMarkdown } from '../src/markdown.mjs';
 import { knop } from '../src/lib/partnerlinks.js';
 
 test('consent + partner knop data-vendor/pos', () => {
-  assert.equal(CONSENT_KEY, 'sm-consent');
+  assert.equal(CONSENT_KEY, 'srm-consent');
   assert.ok(GA_ID_RE.test('G-HJLSDLMDD0'));
   const store = { data: {}, getItem(k) { return this.data[k] ?? null; }, setItem(k, v) { this.data[k] = v; } };
   saveConsent(store, 'granted');
