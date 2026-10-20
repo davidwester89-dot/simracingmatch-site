@@ -7,12 +7,15 @@
  * cropped + resized by us (CC BY/BY-SA: "cropped" noted in the caption).
  * Keys of `sections` are the exact H2 text in the post. Sections without a usable licensed photo
  * are listed in `noPhoto` (documentation only).
+ * Non-Wikimedia photos record `site` (e.g. 'Pexels'; licence 'Pexels License', no attribution required,
+ * credited anyway); the credit line then names that site instead of Wikimedia Commons.
  */
 const L = {
   'CC BY-SA 4.0': 'https://creativecommons.org/licenses/by-sa/4.0/',
   'CC BY 4.0': 'https://creativecommons.org/licenses/by/4.0/',
   'CC BY 2.0': 'https://creativecommons.org/licenses/by/2.0/',
   CC0: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  'Pexels License': 'https://www.pexels.com/license/',
 };
 const img = (o) => ({ widths: [1200, 900, 600], width: 1200, height: 800, licenceUrl: L[o.licence], ...o });
 
@@ -58,10 +61,11 @@ export const POST_IMAGES = {
   },
   'simracing-expo-2026-announcements': {
     hero: img({
-      file: 'expo-hero-simucube-wheelbase-pedals',
-      alt: 'Simucube sim racing hardware being assembled on a wooden table, with tools laid out beside it',
-      caption: 'Simucube sim racing hardware being unboxed and assembled. Not a photo of SimRacing Expo 2026.',
-      own: true, source: 'eigen beeld Goodfellas',
+      file: 'expo-hero-sim-racing-pedals-blue-light',
+      alt: 'Three metal sim racing pedals with drilled pedal faces, lit from the side by blue light',
+      caption: 'A set of sim racing pedals under blue light. Not a photo of SimRacing Expo 2026.',
+      author: 'Gergő', licence: 'Pexels License', site: 'Pexels',
+      source: 'https://www.pexels.com/photo/9787476/',
     }),
     sections: {
       "Moza brings direct drive to PS5 (R5S Pro, R16S Ultra)": img({
@@ -91,12 +95,12 @@ export function figure(im, { hero = false } = {}) {
   const srcset = [...im.widths].reverse().map((w) => `${src(im, w)} ${w}w`).join(', ');
   const sizes = im.portrait ? '(max-width: 520px) 100vw, 420px' : '(max-width: 760px) 100vw, 704px';
   const load = hero ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"';
-  const credit = im.own ? '' : `Photo: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">Wikimedia Commons</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a>${im.licence === 'CC0' ? '' : ', cropped'}`;
+  const credit = im.own ? '' : `Photo: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">${esc(im.site || 'Wikimedia Commons')}</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a>${im.licence === 'CC0' ? '' : ', cropped'}`;
   return `<figure class="post-fig${hero ? ' post-hero' : ''}${im.portrait ? ' post-fig-portrait' : ''}"><img src="${src(im, im.widths[0])}" srcset="${srcset}" sizes="${sizes}" width="${im.width}" height="${im.height}" alt="${esc(im.alt)}" ${load}><figcaption>${esc(im.caption)} <span class="credit">${credit}</span></figcaption></figure>`;
 }
 
 /** Photo credits list for the bottom of a post. */
 export function creditsList(set) {
   const all = [set.hero, ...Object.values(set.sections)].filter((im) => im && !im.own);
-  return `<h2 class="src-h">Photo credits</h2><ul class="credits">${all.map((im) => `<li>${esc(im.alt)}: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">Wikimedia Commons</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a></li>`).join('')}</ul>`;
+  return `<h2 class="src-h">Photo credits</h2><ul class="credits">${all.map((im) => `<li>${esc(im.alt)}: ${esc(im.author)}, <a href="${esc(im.source)}" rel="noopener">${esc(im.site || 'Wikimedia Commons')}</a>, <a href="${esc(im.licenceUrl)}" rel="noopener license">${esc(im.licence)}</a></li>`).join('')}</ul>`;
 }
