@@ -1,4 +1,6 @@
-import { SITE, esc, ORG, GA_ID, ICONS, SVG, fmtDate } from './layout.mjs';
+import { SITE, esc, ORG, GA_ID, ICONS, SVG, fmtDate, MATCH_LIVE, MATCH_CTA } from './layout.mjs';
+import { PRIVACY_UPDATED, cookieTable, partnerNetwork, legalBasis, transfers, retention, rights } from './privacy-gdpr.mjs';
+import { PARTNERLINKS } from './lib/partnerlinks.js';
 import { loadPosts, blogIndexPage, blogPostPages } from './blog.mjs';
 
 const faqSchema = (faq) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) });
@@ -27,8 +29,9 @@ export const home = {
 <h1>Find the sim racing setup that <em>fits you</em></h1>
 <p class="lead">Answer five short questions. Get setups that match your platform, budget and space — ranked by fit, never by commission.</p>
 <div class="actions">
-<a class="btn lg" href="/#setup-match" data-cta="home_hero" data-quiz="start">Find your setup</a>
-<a class="btn ghost" href="/blog/">Read the blog <span aria-hidden="true">→</span></a>
+${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data-quiz="start">Find your setup</a>
+<a class="btn ghost" href="/blog/">Read the blog <span aria-hidden="true">→</span></a>` : `<a class="btn lg" href="/blog/" data-cta="home_hero_blog">Read the blog</a>
+<a class="btn ghost" href="/#setup-match" data-cta="home_hero" data-quiz="start">Preview the 5 questions <span aria-hidden="true">↓</span></a>`}
 </div>
 <p class="cta-hint"><span class="soon">Coming soon</span> The interactive match launches soon. Until then, read the blog.</p>
 </div>
@@ -102,16 +105,22 @@ export const privacy = {
   description: 'How SimracingMatch handles data: no account, answers stay in your browser, and analytics only after you consent.',
   hreflangNl: '',
   body: `<article class="prose"><h1>Privacy &amp; cookies</h1>
+<p class="muted">Last updated: ${PRIVACY_UPDATED}</p>
 <p>Questions? Email <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
 <h2>Who is responsible?</h2><p>Controller for personal data on this site: SimracingMatch, <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
 <h2>What data?</h2><p>Answers in the future match stay in your browser. We do not store them or send them anywhere. We do not ask for your name, email or other personal data via the site forms.</p>
 ${GA_ID ? `<h2 id="cookies">Cookies &amp; analytics</h2><p>We do not use advertising cookies. We turn on Google Analytics only if you click “Accept” on the cookie banner. Without consent we never load Google Analytics.</p>
-<p>If you consent, Google Analytics sets cookies (such as <code>_ga</code>) and we measure page views and button clicks. Match answers are not sent. Google Analytics 4 does not store IP addresses. We keep analytics data for at most 14 months. See the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.</p>
+<p>If you consent, Google Analytics sets cookies (such as <code>_ga</code>) and we measure page views and button clicks. Match answers are not sent. Google Analytics 4 does not store IP addresses (see <a href="#retention">retention</a>). See the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a>.</p>
 <p>Your choice is stored for 12 months in localStorage. You can withdraw consent via <a href="/privacy/#cookies" data-consent-open>Cookie settings</a>. We then stop Analytics and clear <code>_ga</code> cookies.</p>
+<h3>Which cookies and storage?</h3>${cookieTable(GA_ID, 'sm-consent')}
 ` : '<h2 id="cookies">Cookies &amp; analytics</h2><p>We set no cookies. If we enable analytics later, we will ask for consent first and update this page.</p>'}
 <h2>Links to shops</h2><p>If you click through to a manufacturer or shop, their privacy policy applies. A partner link tells them you came via SimracingMatch.</p>
-<h2>Hosting</h2><p>The site runs on GitHub Pages. GitHub processes technical data such as your IP address to deliver the site.</p>
-<h2>Your rights</h2><p>You may ask what data we hold and request deletion. You can complain to your local data-protection authority.</p></article>`,
+${partnerNetwork(SITE.name, Object.values(PARTNERLINKS))}
+${legalBasis()}
+${transfers()}
+${retention(2)}
+<h2>Hosting</h2><p>The site runs on GitHub Pages. GitHub processes technical data such as your IP address to deliver the site (see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub privacy statement</a>).</p>
+${rights(SITE.email)}</article>`,
 };
 
 export const disclaimer = {
@@ -142,7 +151,7 @@ export const contact = {
 export const notfound = {
   path: '/404.html', title: 'Page not found | SimracingMatch', h1: 'Not found', noindex: true, og: 'home',
   description: 'This page does not exist.',
-  body: `<div class="notfound"><h1>This page does not exist</h1><div class="actions"><a class="btn" href="/" data-cta="404_home">Home</a><a class="btn ghost" href="/#setup-match" data-cta="404_match" data-quiz="start">Find your setup</a></div></div>`,
+  body: `<div class="notfound"><h1>This page does not exist</h1><div class="actions"><a class="btn" href="/" data-cta="404_home">Home</a><a class="btn ghost" href="/#setup-match" data-cta="404_match" data-quiz="start">${MATCH_CTA}</a></div></div>`,
 };
 
 /** All pages for the build: home, legal, blog index, posts (if any), 404. */
