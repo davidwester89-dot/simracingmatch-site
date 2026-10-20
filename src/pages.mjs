@@ -118,7 +118,7 @@ ${GA_ID ? `<h2 id="cookies">Cookies &amp; analytics</h2><p>We do not use adverti
 ${partnerNetwork(SITE.name, Object.values(PARTNERLINKS))}
 ${legalBasis()}
 ${transfers()}
-${retention(2)}
+${retention(14)}
 <h2>Hosting</h2><p>The site runs on GitHub Pages. GitHub processes technical data such as your IP address to deliver the site (see the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener">GitHub privacy statement</a>).</p>
 ${rights(SITE.email)}</article>`,
 };
