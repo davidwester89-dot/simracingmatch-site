@@ -38,8 +38,14 @@ This is **bold** and a [link](https://example.com/).
 });
 
 test('markdown: root-relative links + setup-match CTA box', () => {
-  const h = renderMarkdown('See [the PS5 guide](/blog/x/) and [Moza](https://mozaracing.com/).\n\n[Find your setup](/#setup-match) · [More articles](/blog/)\n');
+  const h = renderMarkdown('See [the PS5 guide](/blog/x/) and [Moza](https://mozaracing.com/).\n\n[Find your setup](/#setup-match) · [More articles](/blog/)\n', { matchLive: true });
   assert.match(h, /<a href="\/blog\/x\/">the PS5 guide<\/a>/);
   assert.match(h, /<a href="https:\/\/mozaracing\.com\/" rel="noopener">Moza<\/a>/);
   assert.match(h, /<p class="post-cta"><a href="\/#setup-match" class="btn" data-cta="blog_match" data-quiz="start">Find your setup<\/a><a href="\/blog\/">More articles<\/a><\/p>/);
+});
+
+test('markdown: match not live yet → blog link is the main button, match link says preview', () => {
+  const h = renderMarkdown('[Find your setup](/#setup-match) · [More articles](/blog/)\n', { matchLive: false });
+  assert.match(h, /<p class="post-cta"><a href="\/blog\/" class="btn">More articles<\/a><a href="\/#setup-match" data-cta="blog_match" data-quiz="start">Preview the 5 questions<\/a><\/p>/);
+  assert.ok(!h.includes('Find your setup'));
 });
