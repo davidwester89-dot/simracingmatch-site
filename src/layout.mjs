@@ -7,6 +7,9 @@ export const GA_ID = (process.env.GA_ID ?? GA_CONFIG).trim();
 if (GA_ID && !GA_ID_RE.test(GA_ID)) throw new Error(`Invalid GA_ID "${GA_ID}"`);
 export const BASE = (process.env.BASE || '').replace(/\/$/, '');
 export const PREVIEW = BASE !== '' || process.env.PREVIEW === '1';
+/** Is de setup-match live? Zolang dit false is, beloven de CTA's geen match: 'Preview the match' en de blog als hoofdknop (audit 20-10, F2). */
+export const MATCH_LIVE = false;
+export const MATCH_CTA = MATCH_LIVE ? 'Find your setup' : 'Preview the match';
 const G = GA_ID ? { script: ' https://www.googletagmanager.com', connect: ' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com', img: ' https://*.google-analytics.com https://www.googletagmanager.com' } : { script: '', connect: '', img: '' };
 
 export const SITE = {
@@ -40,14 +43,14 @@ export const SVG = {
 
 const NAV = [
   ['/', 'Home'],
-  ['/#setup-match', 'Find your setup', 'nav-cta'],
+  ['/#setup-match', MATCH_CTA, 'nav-cta'],
   ['/blog/', 'Blog'],
   ['/contact/', 'Contact'],
 ];
 const navLinks = (navPath) => NAV.map(([h, t, c]) => {
   const current = h === '/' ? navPath === '/' : (h.startsWith('/#') ? false : navPath.startsWith(h));
   const cta = c === 'nav-cta' ? ` class="nav-cta" data-cta="nav_match" data-quiz="start"` : (c ? ` class="${c}"` : '');
-  return `<a href="${h}"${cta}${current ? ' aria-current="page"' : ''}>${esc(t)}${c === 'nav-cta' ? ' <span class="soon-mini">soon</span>' : ''}</a>`;
+  return `<a href="${h}"${cta}${current ? ' aria-current="page"' : ''}>${esc(t)}${c === 'nav-cta' && !MATCH_LIVE ? ' <span class="soon-mini">soon</span>' : ''}</a>`;
 }).join('');
 
 const CSS = readFileSync(new URL('./assets/css/style.css', import.meta.url), 'utf8')
@@ -124,13 +127,13 @@ ${reportError(url)}
 <footer class="site"><div class="wrap">
 <div class="cols">
 <div><a class="logo" href="/">${LOGO}<span>${BRAND}</span></a><p class="muted">Honest help choosing a sim racing setup.</p></div>
-<div><p class="fh">Explore</p><ul><li><a href="/#setup-match" data-cta="footer_match" data-quiz="start">Find your setup</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+<div><p class="fh">Explore</p><ul><li><a href="/#setup-match" data-cta="footer_match" data-quiz="start">${MATCH_CTA}</a></li><li><a href="/blog/">Blog</a></li><li><a href="/contact/">Contact</a></li></ul></div>
 <div><p class="fh">Legal</p><ul><li><a href="/privacy/">Privacy &amp; cookies</a></li>${GA_ID ? '<li><a href="/privacy/#cookies" data-consent-open>Cookie settings</a></li>' : ''}<li><a href="/disclaimer/">Disclaimer</a></li></ul></div>
 </div>
 
 <p class="fine">© 2026 ${SITE.name}.</p>
 </div></footer>
-${[...(GA_ID ? ['/js/consent.js'] : []), ...(p.scripts || [])].map((s) => `<script type="module" src="${s}"></script>`).join('\n')}
+${['/js/menu.js', ...(GA_ID ? ['/js/consent.js'] : []), ...(p.scripts || [])].map((s) => `<script type="module" src="${s}"></script>`).join('\n')}
 </body>
 </html>`;
   return withBase(html);

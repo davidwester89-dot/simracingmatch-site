@@ -33,7 +33,12 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   assert.match(home, /hreflang="en"/);
   assert.match(home, /hreflang="x-default"/);
   assert.ok(!home.includes('hreflang="nl"'));
-  assert.match(home, /Find your setup/);
+  // Match not live yet (MATCH_LIVE=false): no CTA promises a match (audit 20-10, F2).
+  assert.ok(!home.includes('Find your setup'), 'no "Find your setup" while the match is not live');
+  assert.match(home, /<a class="btn lg" href="\/blog\/" data-cta="home_hero_blog">Read the blog<\/a>/);
+  assert.match(home, /Preview the 5 questions/);
+  assert.match(home, /html\{scroll-padding-top:80px\}/);
+  assert.ok(!/consent-btn\[data-c=no\]/.test(home), 'Accept and Reject styled the same');
   assert.match(home, /data-quiz="start"/);
   assert.match(home, /og:locale" content="en_US"/);
   assert.ok(!home.includes('noindex'));
@@ -135,7 +140,7 @@ test('blog posts: title <=60, meta <=155, one H1, BlogPosting, sitemap, index, l
     assert.ok(sm.includes(`<loc>https://simracingmatch.com/blog/${slug}/</loc>`), `${slug}: sitemap`);
     assert.ok(index.includes(`href="/blog/${slug}/"`), `${slug}: blog index`);
     assert.ok(!/href="https:\/\/simracingmatch\.com/.test(s.replace(/<link[^>]+>/g, '')), `${slug}: absolute internal link`);
-    assert.match(s, /href="\/#setup-match" class="btn" data-cta="blog_match" data-quiz="start"/);
+    assert.match(s, /<p class="post-cta"><a href="\/blog\/" class="btn">[^<]+<\/a><a href="\/#setup-match" data-cta="blog_match" data-quiz="start">Preview the 5 questions<\/a>/);
   }
   execSync('node build.mjs', { env: { ...process.env, BASE: '/simracingmatch-site', GO_LIVE: '', THEME: 'B' } });
   const pv = readFileSync('dist/blog/ps5-direct-drive-wheels-2026/index.html', 'utf8');

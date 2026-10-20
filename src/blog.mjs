@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SITE, esc, ORG, AUTHOR, fmtDate } from './layout.mjs';
+import { SITE, esc, ORG, AUTHOR, fmtDate, MATCH_CTA } from './layout.mjs';
 import { renderMarkdown } from './markdown.mjs';
 import { POST_IMAGES, figure, creditsList } from './post-images.mjs';
 
@@ -47,7 +47,7 @@ export function loadPosts() {
 export function blogIndexPage(posts) {
   const list = posts.length
     ? `<ul class="blog-list">${posts.map((p) => `<li><a class="card" href="/blog/${p.slug}/"><p class="meta"><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time> · ${readMin(p.body)} min read</p><h2>${esc(p.title)}</h2><p class="muted">${esc(p.description)}</p><span class="more">Read article <span aria-hidden="true">→</span></span></a></li>`).join('')}</ul>`
-    : `<p class="muted">No posts yet. Check back soon — or <a href="/#setup-match" data-cta="blog_empty_match" data-quiz="start">Find your setup</a>.</p>`;
+    : `<p class="muted">No posts yet. Check back soon — or <a href="/#setup-match" data-cta="blog_empty_match" data-quiz="start">${MATCH_CTA}</a>.</p>`;
   return {
     path: '/blog/',
     title: 'Blog | SimracingMatch',

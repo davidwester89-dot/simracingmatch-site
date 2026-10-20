@@ -1,4 +1,4 @@
-import { esc } from './layout.mjs';
+import { esc, MATCH_LIVE } from './layout.mjs';
 
 const MATCH_HASH = '/#setup-match';
 
@@ -16,7 +16,7 @@ function link(text, href, cls) {
 const LINK_RE = /\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]*)\)/g;
 
 /** Minimal markdown → HTML for blog posts. Supports: # ## ###, paragraphs, **bold**, *italic*, [text](url) with https or root-relative URLs, lists, `code`. */
-export function renderMarkdown(md, { afterH2 } = {}) {
+export function renderMarkdown(md, { afterH2, matchLive = MATCH_LIVE } = {}) {
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   const out = [];
   let i = 0;
@@ -48,7 +48,9 @@ export function renderMarkdown(md, { afterH2 } = {}) {
     // A paragraph made only of internal links that starts with the setup match → CTA box.
     const only = [...text.matchAll(LINK_RE)];
     if (only.length && only[0][2] === MATCH_HASH && text.replace(LINK_RE, '').replace(/[\s·|]/g, '') === '') {
-      out.push(`<p class="post-cta">${only.map(([, t, h], n) => link(esc(t), h, n === 0 ? 'btn' : '')).join('')}</p>`);
+      // Match nog niet live: blog-link als hoofdknop, match-link als 'Preview the 5 questions' (audit 20-10, F2).
+      const items = matchLive || only.length < 2 ? only : [...only.slice(1), only[0]];
+      out.push(`<p class="post-cta">${items.map(([, t, h], n) => link(esc(h === MATCH_HASH && !matchLive ? 'Preview the 5 questions' : t), h, n === 0 ? 'btn' : '')).join('')}</p>`);
       continue;
     }
     out.push(`<p>${inline(text)}</p>`);
