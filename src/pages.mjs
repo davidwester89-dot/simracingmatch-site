@@ -132,7 +132,7 @@ export const disclaimer = {
 <h2>Specs and prices</h2><p>All specs and prices come from the manufacturer or official shop on the date shown. Prices, stock and platform compatibility can change. The seller’s offer always wins.</p>
 <h2>The match</h2><p>The setup match (coming soon) is a helper based on fixed rules and your answers. It is a first shortlist, not personal advice. Always confirm compatibility with the manufacturer.</p>
 <h2>Partner links</h2><p>For some products we may earn a fee if you buy through us. Those links are always clearly labelled “Partner link”. They never affect the match or on-page order.</p>
-<h2>No reviews or stars</h2><p>We do not show star scores or invented tests we have not done.</p>
+<h2>No reviews or stars</h2><p>We do not show star ratings or invented tests we have not done.</p>
 <h2>Brands</h2><p>Brand names belong to their owners. SimracingMatch is not affiliated with those brands.</p>
 <h2>Spotted an error?</h2><p>Email <a href="mailto:${SITE.email}">${SITE.email}</a> and we will fix it with a source.</p></article>`,
 };
