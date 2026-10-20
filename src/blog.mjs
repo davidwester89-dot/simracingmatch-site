@@ -58,7 +58,7 @@ export function blogIndexPage(posts) {
     hreflangNl: '',
     // Keep index out of sitemap until there is at least one post (thin otherwise).
     noindex: posts.length === 0,
-    body: `<article class="prose"><h1>Blog</h1><p class="lead">Practical guides for choosing sim racing gear. Specs and prices from manufacturers, with check dates.</p>${list}</article>`,
+    body: `<article class="prose"><h1>Blog</h1><p class="lead">Practical guides for choosing sim racing gear. Specs and prices from manufacturers, with check dates.</p><p>Here you find buying guides per platform, such as which direct drive wheel bases work on PS5, and news on new wheel bases, wheels and pedals with their prices and launch dates. Every post links to the manufacturer pages it is based on. Not sure where to start? <a href="/#setup-match" data-cta="blog_intro_match" data-quiz="start">${MATCH_CTA}</a>.</p>${list}</article>`,
   };
 }
 
