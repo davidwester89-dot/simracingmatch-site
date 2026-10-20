@@ -93,7 +93,7 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 <ol class="steps">
 <li><strong>Source only.</strong><span class="muted"> Specs and prices from the manufacturer or official shop, with a check date. If it is not public, we write “unknown”.</span></li>
 <li><strong>No stars.</strong><span class="muted"> We do not invent scores or show buyer star ratings. The match follows fixed rules on your answers.</span></li>
-<li><strong>Partner links change nothing.</strong><span class="muted"> When we earn a fee, the link is clearly labelled “Partner link”. It never changes the match or the order.</span></li>
+<li><strong>Partner links change nothing.</strong><span class="muted"> Links through which we may earn a fee are clearly labelled “Partner link”. It never changes the match or the order.</span></li>
 </ol>
 
 ${faqHtml(homeFaq)}
