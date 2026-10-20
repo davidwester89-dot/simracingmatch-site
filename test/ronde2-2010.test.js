@@ -36,3 +36,13 @@ test('small body/source text at least 16px; consent link and crumbs at least 44p
   assert.match(rule('.crumbs a'), /padding-block:12px/);
   assert.doesNotMatch(css, /\.consent p\{font-size:\.9/);
 });
+
+test('SC ronde 2 fix: plural "They never change", 44px tap targets, hero/brands/kicker 1rem', () => {
+  assert.match(read('src/pages.mjs'), /They never change the match or the order\./);
+  assert.doesNotMatch(read('src/pages.mjs'), /It never changes the match/);
+  const css = read('src/assets/css/style.css');
+  assert.match(css, /footer\.site li a, \.article-body h2\.src-h\+ul a, \.post-cta a\{display:inline-block;min-height:44px;padding-block:12px;box-sizing:border-box\}/);
+  assert.match(css, /\.hero-brand\{[^}]*font:800 1rem/);
+  assert.match(css, /\.brands-h\{[^}]*font:700 1rem/);
+  assert.match(css, /\.article-head \.kicker\{[^}]*font-size:1rem/);
+});

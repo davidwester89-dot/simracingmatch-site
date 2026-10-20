@@ -74,7 +74,7 @@ h3{font-size:1.15rem;font-weight:700}
 .hero .btn.ghost{min-height:52px;padding:12px 18px;font-size:1rem}
 @media(min-width:600px){.hero .lead{font-size:1.15rem}.hero .btn.lg{min-height:56px;padding:14px 28px;font-size:1.1rem}}
 @media(min-width:900px){.hero{grid-template-columns:1.1fr .9fr;align-items:center;gap:56px;padding:64px 0 72px}}
-.hero-brand{display:inline-flex;align-items:center;gap:8px;font:800 .9rem/1 var(--head);letter-spacing:.14em;text-transform:uppercase;color:var(--brand-txt);margin:0 0 14px}
+.hero-brand{display:inline-flex;align-items:center;gap:8px;font:800 1rem/1 var(--head);letter-spacing:.14em;text-transform:uppercase;color:var(--brand-txt);margin:0 0 14px}
 .hero-brand::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--brand)}
 .hero-art{background:radial-gradient(90% 70% at 85% 0%,rgba(225,6,0,.22),transparent 65%),linear-gradient(180deg,#15181f,#101217);border:1px solid var(--line);border-radius:18px;padding:10px;box-shadow:0 24px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.04)}
 .hero-art svg{width:100%;height:auto}
@@ -196,7 +196,7 @@ html[data-theme="B"] .hero-b{display:block}
 
 /* A: brand logo grid (white on dark, fixed img dimensions) */
 .brands{padding:14px 12px 10px}
-.hero-art .brands-h{font:700 .78rem/1 var(--head);letter-spacing:.14em;text-transform:uppercase!important;font-style:normal!important;color:#c9cdd6;margin:0 0 12px}
+.hero-art .brands-h{font:700 1rem/1 var(--head);letter-spacing:.14em;text-transform:uppercase!important;font-style:normal!important;color:#c9cdd6;margin:0 0 12px}
 .brand-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .brand-grid a{display:flex;align-items:center;justify-content:center;min-height:72px;padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}
 .brand-grid a:hover,.brand-grid a:focus-visible{border-color:var(--brand);background:rgba(255,255,255,.06)}
@@ -234,7 +234,7 @@ html[data-theme="B"] .hud{fill:#f5c518}
 .blog-list a.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--brand)}
 .blog-list h2{color:#fff}
 .blog-list .more{display:inline-block;margin-top:6px;font-weight:700;color:var(--brand-txt)}
-.blog-list .kicker,.article-head .kicker{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-txt);margin-right:10px}
+.blog-list .kicker,.article-head .kicker{display:inline-block;font-size:1rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-txt);margin-right:10px}
 .article-head{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:8px}
 .article-head h1{font-size:clamp(1.85rem,6.2vw,2.9rem);line-height:1.08;margin:.25em 0 .45em;text-wrap:balance}
 .article-head .author{margin:0}
@@ -282,3 +282,5 @@ html{scroll-padding-top:80px}
 .table-wrap table{border-collapse:collapse;width:100%;min-width:520px;font-size:1rem}
 .table-wrap th,.table-wrap td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 .table-wrap th{background:var(--card)}
+/* Tap targets >=44px: footerlinks, bronlinks onder posts, post-CTA (SC ronde 2, 20-10). Badges .soon/.soon-mini blijven bewust klein (11-11.5px). */
+footer.site li a, .article-body h2.src-h+ul a, .post-cta a{display:inline-block;min-height:44px;padding-block:12px;box-sizing:border-box}
