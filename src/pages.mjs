@@ -41,7 +41,7 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 <ul class="brand-grid">
 <li><a href="/blog/ps5-direct-drive-wheels-2026/" data-cta="hero_brand" data-brand="moza"><img src="/brands/moza.svg" width="132" height="30" alt="Moza Racing" decoding="async" fetchpriority="low"></a></li>
 <li><a href="/blog/ps5-direct-drive-wheels-2026/" data-cta="hero_brand" data-brand="fanatec"><img src="/brands/fanatec.svg" width="200" height="18" alt="Fanatec" decoding="async" fetchpriority="low"></a></li>
-<li><a href="/blog/simracing-expo-2026-announcements/" data-cta="hero_brand" data-brand="asetek"><img src="/brands/asetek.webp" width="175" height="24" alt="Asetek SimSports" decoding="async" fetchpriority="low"></a></li>
+<li><a href="/blog/simracing-expo-2026-announcements/" data-cta="hero_brand" data-brand="asetek"><img src="/brands/asetek.webp" width="175" height="24" alt="Asetek Racing" decoding="async" fetchpriority="low"></a></li>
 <li><a href="/blog/ps5-direct-drive-wheels-2026/" data-cta="hero_brand" data-brand="logitech-g"><img src="/brands/logitech-g.svg" width="116" height="28" alt="Logitech G" decoding="async" fetchpriority="low"></a></li>
 <li><a href="/#setup-match" data-cta="hero_brand" data-brand="sim-lab"><img src="/brands/sim-lab.webp" width="150" height="25" alt="Sim-Lab" decoding="async" fetchpriority="low"></a></li>
 <li><a href="/#setup-match" data-cta="hero_brand" data-brand="gt-omega"><img src="/brands/gt-omega.svg" width="179" height="28" alt="GT Omega" decoding="async" fetchpriority="low"></a></li>
