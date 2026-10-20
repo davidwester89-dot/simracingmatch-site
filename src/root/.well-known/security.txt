@@ -1,0 +1,4 @@
+Contact: mailto:info@simracingmatch.com
+Expires: 2027-10-19T22:00:00.000Z
+Preferred-Languages: en, nl
+Canonical: https://simracingmatch.com/.well-known/security.txt
