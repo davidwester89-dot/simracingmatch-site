@@ -28,3 +28,10 @@ test('on-page SEO: unique titles, meta 70-155, one H1, canonical, hreflang', () 
   }
   assert.ok([...titles.keys()].some((t) => /sim racing|SimracingMatch/i.test(t)));
 });
+
+test('merknaam Asetek: "Asetek Racing" (asetek.com/simsports/about-us), nergens "Asetek SimSports"', async () => {
+  const { readFileSync } = await import('node:fs');
+  const s = readFileSync(new URL('../src/pages.mjs', import.meta.url), 'utf8');
+  assert.ok(s.includes('alt="Asetek Racing"'));
+  assert.ok(!/Asetek SimSports/i.test(s));
+});
