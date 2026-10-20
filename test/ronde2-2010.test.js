@@ -23,3 +23,16 @@ test('fee wording is a possibility ("may earn"), not a certainty', () => {
   assert.match(read('src/privacy-gdpr.mjs'), /If you buy something, we may earn a fee\./);
   assert.match(s, /Links through which we may earn a fee are clearly labelled/);
 });
+
+test('small body/source text at least 16px; consent link and crumbs at least 44px tap target', () => {
+  const css = read('src/assets/css/style.css');
+  const rule = (sel) => { const i = css.indexOf(sel + '{'); assert.ok(i >= 0, sel); return css.slice(i, css.indexOf('}', i)); };
+  for (const sel of ['.crumbs', '.author,.report,.fine', '.stamp', '.blog-list .meta', '.consent p', '.qcard span', '.cta-hint', '.article-body h2.src-h+ul', '.post-fig figcaption', '.post-fig .credit', '.article-body ul.credits']) {
+    assert.match(rule(sel), /font-size:1rem/, sel);
+  }
+  assert.match(rule('nav.main a,details.menu nav a'), /min-height:44px/);
+  assert.match(rule('nav.main a,details.menu nav a'), /font-size:1rem/);
+  assert.match(rule('.consent a'), /min-height:44px/);
+  assert.match(rule('.crumbs a'), /padding-block:12px/);
+  assert.doesNotMatch(css, /\.consent p\{font-size:\.9/);
+});
