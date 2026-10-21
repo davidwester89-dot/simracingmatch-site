@@ -96,6 +96,6 @@ The safest way to choose is to start from your own situation: budget, platform, 
 - [Asetek: Asetek Racing at SimRacing Expo: what you missed](https://www.asetek.com/simsports/blogs/asetek-racing-at-simracing-expo-what-you-missed/)
 - [Asetek: DD10 Wheelbase](https://www.asetek.com/simsports/landing/dd10-wheelbase/)
 - [PXN press release via Games Press: S16 at SimRacing Expo Frankfurt 2026](https://www.gamespress.com/PXN-Brings-S16-Direct-Drive-Wheel-Base-to-Europe-for-First-Hands-On-Se)
-- [Moza Racing: PS5 racing wheels at TGS 2026](https://mozaracing.com/blogs/news/moza-tgs-2026)
+- [Moza Racing: PS5 racing wheels at TGS 2026](https://eu.mozaracing.com/blogs/news/moza-tgs-2026?ref=DAVIDWEST)
 - [Corsair Newsroom: Fanatec and Trak Racer at SimRacing Expo Frankfurt 2026](https://www.corsair.com/newsroom/press-release/fanatec-and-trak-racer-showcase-the-future-of-simulation-at-simracing-expo-frankfurt-2026)
 - [Fanatec: highlights at SimRacing Expo Frankfurt 2026](https://www.fanatec.com/us/en/explorer/products/racing-wheels-wheel-bases/fanatec-highlights-at-simracing-expo-frankfurt-2026/)

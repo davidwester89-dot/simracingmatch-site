@@ -1,4 +1,5 @@
 import { esc, MATCH_LIVE } from './layout.mjs';
+import { partnerVendor } from './lib/partnerlinks.js';
 
 const MATCH_HASH = '/#setup-match';
 
@@ -10,6 +11,8 @@ function link(text, href, cls) {
     const quiz = href === MATCH_HASH ? ' data-cta="blog_match" data-quiz="start"' : '';
     return `<a href="${href}"${cls ? ` class="${cls}"` : ''}${quiz}>${text}</a>`;
   }
+  const vendor = partnerVendor(href.replace(/&amp;/g, '&'));
+  if (vendor) return `<a href="${href}" rel="sponsored nofollow noopener" data-vendor="${vendor}" data-cta="outbound">${text}</a> <span class="partner">Partner link</span>`;
   return `<a href="${href}" rel="noopener">${text}</a>`;
 }
 

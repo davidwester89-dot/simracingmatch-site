@@ -78,7 +78,7 @@ Not sure which mix fits? Our setup match asks five questions about budget, platf
 
 ## Sources
 
-- [Moza Racing: PS5 racing wheels at TGS 2026](https://mozaracing.com/blogs/news/moza-tgs-2026)
+- [Moza Racing: PS5 racing wheels at TGS 2026](https://eu.mozaracing.com/blogs/news/moza-tgs-2026?ref=DAVIDWEST)
 - [Thrustmaster: T-GT III announcement](https://www.thrustmaster.com/t-gt-iii/)
 - [Fanatec Community: New Bundle Pricing and Contents](https://forum.fanatec.com/news/new-bundle-pricing-and-contents-r599/)
 - [Fanatec: Gran Turismo DD Pro (5 Nm) bundle](https://www.fanatec.com/eu/en/p/sim-racing-bundles/crd-9020007-eu/gran-turismo-dd-pro-5nm-qr2l-eu)

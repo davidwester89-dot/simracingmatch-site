@@ -1,6 +1,19 @@
 // Approved partner links. EMPTY until Partnermanager approves a programme for simracingmatch.com.
 // The match must NEVER import this file.
-export const PARTNERLINKS = {};
+export const PARTNERLINKS = {
+  // Moza Racing, own programme via GoAffPro (ref=DAVIDWEST), approved 21-10-2026.
+  moza: 'https://eu.mozaracing.com/?ref=DAVIDWEST',
+};
+
+/** Vendor key when href is an approved partner link (same host + same ref), else ''. */
+export function partnerVendor(href) {
+  let u; try { u = new URL(href); } catch { return ''; }
+  for (const [vendor, p] of Object.entries(PARTNERLINKS)) {
+    const q = new URL(p);
+    if (u.hostname === q.hostname && u.searchParams.get('ref') === q.searchParams.get('ref')) return vendor;
+  }
+  return '';
+}
 
 export function uitgaand(href, { partner = false, label = 'Visit shop', vendor = 'external' } = {}) {
   if (partner) return { href, rel: 'sponsored nofollow noopener', partner: true, label, vendor };

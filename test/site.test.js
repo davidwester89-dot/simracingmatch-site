@@ -85,7 +85,7 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
       assert.ok(existsSync(t), `${f}: broken ${path}`);
     }
   }
-  assert.deepEqual(PARTNERLINKS, {});
+  assert.deepEqual(Object.keys(PARTNERLINKS), ['moza']);
   const k = knop('https://example.com/', 'test_pos', { partner: true, vendor: 'moza', label: 'Moza' });
   assert.match(k, /data-vendor="moza"/);
   assert.match(k, /data-pos="test_pos"/);
