@@ -12,7 +12,7 @@ function link(text, href, cls) {
     return `<a href="${href}"${cls ? ` class="${cls}"` : ''}${quiz}>${text}</a>`;
   }
   const vendor = partnerVendor(href.replace(/&amp;/g, '&'));
-  if (vendor) return `<a href="${href}" rel="sponsored nofollow noopener" data-vendor="${vendor}" data-cta="outbound">${text}</a> <span class="partner">Partner link</span>`;
+  if (vendor) return `<a href="${href}" rel="sponsored nofollow noopener" data-vendor="${vendor}" data-cta="outbound">${text}</a>`;
   return `<a href="${href}" rel="noopener">${text}</a>`;
 }
 

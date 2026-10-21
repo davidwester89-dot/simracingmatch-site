@@ -89,7 +89,13 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   const k = knop('https://example.com/', 'test_pos', { partner: true, vendor: 'moza', label: 'Moza' });
   assert.match(k, /data-vendor="moza"/);
   assert.match(k, /data-pos="test_pos"/);
-  assert.match(k, />Partner link</);
+  assert.match(k, /rel="sponsored nofollow noopener"/);
+  assert.doesNotMatch(k, />\s*Partner link\s*</i);
+  for (const f of ['dist/blog/ps5-direct-drive-wheels-2026/index.html', 'dist/blog/simracing-expo-2026-announcements/index.html']) {
+    const h = readFileSync(f, 'utf8');
+    assert.match(h, /href="https:\/\/eu\.mozaracing\.com\/[^"]*ref=DAVIDWEST" rel="sponsored nofollow noopener" data-vendor="moza"/, f);
+    assert.doesNotMatch(h, /<span class="partner">\s*Partner link/i, f);
+  }
 });
 
 test('build theme B + preview', () => {

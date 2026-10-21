@@ -20,8 +20,8 @@ export function uitgaand(href, { partner = false, label = 'Visit shop', vendor =
   return { href, rel: 'noopener', partner: false, label, vendor };
 }
 
-/** Outbound button. Partner links always get the visible "Partner link" label + data-vendor/data-pos for vendor_click. */
+/** Outbound button. Partner links get rel sponsored nofollow (no visible label) + data-vendor/data-pos for vendor_click. */
 export function knop(href, pos, { partner = false, label = 'Visit shop', vendor = 'external', cls = 'btn' } = {}) {
   const o = uitgaand(href, { partner, label, vendor });
-  return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${o.vendor}" data-pos="${pos}" data-cta="outbound"${partner ? ` data-partner-slot="${o.vendor}"` : ''}>${o.label}</a>${o.partner ? '<span class="partner">Partner link</span>' : ''}`;
+  return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${o.vendor}" data-pos="${pos}" data-cta="outbound"${partner ? ` data-partner-slot="${o.vendor}"` : ''}>${o.label}</a>`;
 }
