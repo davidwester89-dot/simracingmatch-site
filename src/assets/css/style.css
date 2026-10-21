@@ -284,3 +284,6 @@ html{scroll-padding-top:80px}
 .table-wrap th{background:var(--card)}
 /* Tap targets >=44px: footerlinks, bronlinks onder posts, post-CTA (SC ronde 2, 20-10). Badges .soon/.soon-mini blijven bewust klein (11-11.5px). */
 footer.site li a, .article-body h2.src-h+ul a, .post-cta a{display:inline-block;min-height:44px;padding-block:12px;box-sizing:border-box}
+
+/* Partnerzin per blok met partnerlinks (vervangt het label per knop) */
+.pnoot{font-size:.875rem;color:var(--muted);margin:6px 0 0}

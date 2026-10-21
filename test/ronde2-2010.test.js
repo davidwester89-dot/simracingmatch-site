@@ -21,7 +21,7 @@ test('fee wording is a possibility ("may earn"), not a certainty', () => {
   const s = read('src/pages.mjs') + read('src/privacy-gdpr.mjs');
   assert.doesNotMatch(s, /When we earn a fee|we (will )?earn a fee\b(?! if)/i);
   assert.match(read('src/privacy-gdpr.mjs'), /If you buy something, we may earn a fee\./);
-  assert.match(s, /Links through which we may earn a fee are clearly labelled/);
+  assert.match(s, /Links through which we may earn a fee are disclosed where they appear/);
 });
 
 test('small body/source text at least 16px; consent link and crumbs at least 44px tap target', () => {

@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync, cpSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { layout, SITE, BASE, PREVIEW } from './src/layout.mjs';
 import { allPages } from './src/pages.mjs';
+import { partnerNoten } from './src/lib/partnerlinks.js';
 
 const OUT = 'dist';
 const THEME = (process.env.THEME || 'A').toUpperCase(); // A = Night Race, B = Pit Wall Telemetry
@@ -12,7 +13,7 @@ const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileS
 
 const pages = allPages();
 for (const p of pages) {
-  let html = layout(p);
+  let html = partnerNoten(layout(p));
   // Theme class on <html> for CSS variants
   html = html.replace('<html lang="en">', `<html lang="en" data-theme="${THEME}">`);
   write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), html);
