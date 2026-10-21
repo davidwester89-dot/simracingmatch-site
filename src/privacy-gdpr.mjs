@@ -32,7 +32,7 @@ export function cookieTable(gaId, storageKey) {
 export function partnerNetwork(siteName, partnerUrls) {
   const nw = networksOf(partnerUrls);
   if (!nw.length) return `<p>There are no partner links on this site right now. When there are, they are disclosed where they appear and we will name here the affiliate network that sets a cookie when you click.</p>`;
-  return `<p>Partner links are disclosed where they appear. When you click it, you pass through an affiliate network (${nw.map((n) => n.name).join(', ')}) to the shop. That network sets a cookie or click ID on its own domain to record that you came via ${siteName}. If you buy something, we may earn a fee. The network is responsible for that data; see the privacy policy of ${nw.map((n) => `<a href="${n.privacy}" rel="noopener">${n.name}</a>`).join(' and ')}.</p>`;
+  return `<p>Partner links are disclosed where they appear. When you click one, you pass through an affiliate network (${nw.map((n) => n.name).join(', ')}) to the shop. That network sets a cookie or click ID on its own domain to record that you came via ${siteName}. If you buy something, we may earn a fee. The network is responsible for that data; see the privacy policy of ${nw.map((n) => `<a href="${n.privacy}" rel="noopener">${n.name}</a>`).join(' and ')}.</p>`;
 }
 
 export function legalBasis() {
