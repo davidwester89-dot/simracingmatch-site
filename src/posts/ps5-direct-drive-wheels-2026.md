@@ -1,7 +1,7 @@
 ---
 slug: ps5-direct-drive-wheels-2026
-title: "PS5 Direct Drive Wheels 2026: Moza R16S Ultra and TGT III"
-description: "Which direct drive wheels work on PS5? Moza's R16S Ultra and R5S Pro depend on Sony's final approval; Thrustmaster's TGT III (€699.99) arrives 3 December."
+title: "PS5 Direct Drive Wheels 2026: Moza R16S Ultra and T-GT III"
+description: "Which direct drive wheels work on PS5? Moza's R16S Ultra and R5S Pro depend on Sony's final approval; Thrustmaster's T-GT III (€699.99) arrives 3 December."
 datePublished: 2026-10-19
 dateModified: 2026-10-26
 keyword: ps5 direct drive wheel
@@ -34,7 +34,7 @@ Moza says the line-up will support Gran Turismo 7 natively from launch, plus "a 
 
 What is **not yet announced**: prices, torque figures and a release date. Moza also says the products will work with PS5 "subject to Sony Interactive Entertainment's final product approval". So for now, you can't compare them on price or strength.
 
-## Thrustmaster TGT III: €699.99, sales from 3 December
+## Thrustmaster T-GT III: €699.99, sales from 3 December
 
 Thrustmaster announced the **T-GT III**, an officially licensed Gran Turismo 7 wheel for PS5 and PS4. According to Thrustmaster's announcement page (checked 19 October 2026):
 

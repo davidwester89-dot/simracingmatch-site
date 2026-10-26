@@ -43,7 +43,7 @@ export const POST_IMAGES = {
         author: 'TaurusEmerald', licence: 'CC BY-SA 4.0',
         source: 'https://commons.wikimedia.org/wiki/File:MOZA_KS_Racing_Steering_Wheel_Controller.jpg',
       }),
-      'Thrustmaster TGT III: €699.99, sales from 3 December': img({
+      'Thrustmaster T-GT III: €699.99, sales from 3 December': img({
         file: 'ps5-thrustmaster-tx-wheel',
         alt: 'Thrustmaster TX Racing Wheel Leather Edition clamped to a desk',
         caption: 'An earlier Thrustmaster wheel, the TX Racing Wheel Leather Edition. It is not the T-GT III.',
