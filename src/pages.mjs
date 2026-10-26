@@ -102,7 +102,7 @@ ${faqHtml(homeFaq)}
 };
 
 export const privacy = {
-  path: '/privacy/', title: 'Privacy & cookies | SimracingMatch', h1: 'Privacy & cookies', crumb: 'Privacy', og: 'home',
+  path: '/privacy/', title: 'Privacy & cookies | SimracingMatch', h1: 'Privacy & cookies', crumb: 'Privacy', og: 'home', lastmod: '2026-10-21',
   description: 'How SimracingMatch handles data: no account, answers stay in your browser, and analytics only after you consent.',
   hreflangNl: '',
   body: `<article class="prose"><h1>Privacy &amp; cookies</h1>

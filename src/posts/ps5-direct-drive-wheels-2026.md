@@ -1,9 +1,9 @@
 ---
 slug: ps5-direct-drive-wheels-2026
-title: "PS5 Direct Drive Wheels 2026: Moza R16S, TGT III and More"
-description: "Moza is bringing direct drive to PS5 and Thrustmaster's TGT III goes on sale 3 December. What's confirmed, what isn't, and how to choose a PS5 wheel."
+title: "PS5 Direct Drive Wheels 2026: Moza R16S Ultra and TGT III"
+description: "Which direct drive wheels work on PS5? Moza's R16S Ultra and R5S Pro depend on Sony's final approval; Thrustmaster's TGT III (€699.99) arrives 3 December."
 datePublished: 2026-10-19
-dateModified: 2026-10-20
+dateModified: 2026-10-26
 keyword: ps5 direct drive wheel
 ---
 
