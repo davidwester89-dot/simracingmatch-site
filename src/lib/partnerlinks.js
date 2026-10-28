@@ -3,6 +3,8 @@
 export const PARTNERLINKS = {
   // Moza Racing, own programme via GoAffPro (ref=DAVIDWEST), approved 21-10-2026.
   moza: 'https://eu.mozaracing.com/?ref=DAVIDWEST',
+  // Sim-Lab, own programme via GoAffPro (ref=SINRACINGMATCH, code as supplied), approved 28-10-2026.
+  simlab: 'https://sim-lab.eu/?ref=SINRACINGMATCH',
 };
 
 /** Vendor key when href is an approved partner link (same host + same ref), else ''. */

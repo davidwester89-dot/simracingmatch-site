@@ -56,12 +56,13 @@ export const sortedBases = () => [...BASES].sort((a, b) => {
   return x - y;
 });
 
-/** Store links for the button block, alphabetical. Only Moza has an approved partner link (PARTNERLINKS.moza). */
+/** Store links for the button block, alphabetical. Partner links (Moza, Sim-Lab) only via PARTNERLINKS; order never depends on it. */
 const STORES = [
   ['asetek', 'Asetek Racing', 'https://www.asetek.com/simsports/product-category/wheelbases/'],
   ['fanatec', 'Fanatec', 'https://www.fanatec.com/eu/en/c/wheel-bases'],
   ['logitech-g', 'Logitech G', 'https://www.logitechg.com/en-eu/shop/c/racing-wheels-pedals'],
   ['moza', 'Moza Racing', PARTNERLINKS.moza],
+  ['simlab', 'Sim-Lab', PARTNERLINKS.simlab],
   ['simucube', 'Simucube', 'https://simucube.com/'],
   ['thrustmaster', 'Thrustmaster', 'https://shop.thrustmaster.com/en_eu/products-steering-wheels/plateform.html'],
 ];
@@ -145,7 +146,7 @@ ${compareTable()}
 </ul>
 <h2>Brand stores</h2>
 <p>The brand stores below are listed in alphabetical order. That order says nothing about the table.</p>
-<div class="out actions">${STORES.map(([v, n, h], i) => knop(h, `wb_compare_${i + 1}`, { partner: h === PARTNERLINKS.moza, label: n, vendor: v, cls: 'btn ghost' })).join('')}</div>
+<div class="out actions">${STORES.map(([v, n, h], i) => knop(h, `wb_compare_${i + 1}`, { partner: Object.values(PARTNERLINKS).includes(h), label: n, vendor: v, cls: 'btn ghost' })).join('')}</div>
 ${cluster('/wheel-bases/compare/')}
 ${sources(sortedBases().map((b) => [`${b.brand}: ${b.model}`, b.url]).concat([
   ['Simucube FAQ (platforms)', 'https://simucube.com/pages/faq'],
