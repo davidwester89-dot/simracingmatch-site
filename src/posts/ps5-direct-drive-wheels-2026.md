@@ -3,7 +3,7 @@ slug: ps5-direct-drive-wheels-2026
 title: "Moza PS5 Direct Drive Wheels: R16S Ultra and Sony Approval"
 description: "Moza's PS5 wheels, the R16S Ultra and R5S Pro, depend on Sony's final approval; no price or release date yet. Plus Thrustmaster's T-GT III from 3 December."
 datePublished: 2026-10-19
-dateModified: 2026-10-26
+dateModified: 2026-10-30
 keyword: ps5 direct drive wheel
 ---
 
@@ -67,7 +67,7 @@ Remember that a base alone needs a steering wheel and pedals. A bundle is often 
 A few practical checks before you buy a PS5 direct drive wheel:
 
 - **Platform first.** Check that the *base* is PlayStation-licensed. If you also race on PC or Xbox, check those platforms on the same product page.
-- **Torque.** The options above range from 5 Nm to 18 Nm. More torque gives stronger forces, but it isn't the only thing that matters for a first setup.
+- **Torque.** The options above range from 5 Nm to 18 Nm. More torque gives stronger forces, but it isn't the only thing that matters for a first setup. Our [direct drive wheel base comparison](/wheel-bases/compare/) lists torque, platforms and price per Nm for every base, and [direct drive vs belt driven wheels](/wheel-bases/direct-drive-vs-belt/) explains the drive types.
 - **Budget for the whole setup.** Add wheel, pedals and mounting. A base-only price can look cheaper than it really is.
 - **Space.** The Gran Turismo DD Pro bundle and the RS50 System include a table clamp. For the ClubSport DD+, Fanatec sells a table clamp separately, or you mount it on a cockpit.
 - **Timing.** The T-GT III has a date. Moza's PS5 bases don't yet.

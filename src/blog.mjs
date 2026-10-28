@@ -98,7 +98,7 @@ export function blogPostPages(posts) {
         keywords: p.keyword || undefined,
         image: imgs?.hero ? SITE.domain + `/img/blog/${imgs.hero.file}.webp` : undefined,
       }],
-      body: `<article class="article-body prose"><header class="article-head"><p class="meta"><span class="kicker">Blog</span><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time> · ${readMin(p.body)} min read</p><h1>${esc(p.title.replace(/\s*\|\s*SimracingMatch\s*$/i, ''))}</h1>
+      body: `<article class="article-body prose"><header class="article-head"><p class="meta"><span class="kicker">Blog</span><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time>${p.dateModified !== p.datePublished ? ` · Updated <time datetime="${p.dateModified}">${fmtDate(p.dateModified)}</time>` : ''} · ${readMin(p.body)} min read</p><h1>${esc(p.title.replace(/\s*\|\s*SimracingMatch\s*$/i, ''))}</h1>
 <p class="src author">By ${SITE.owner}</p></header>
 ${hero}${html}
 ${credits}</article>`,

@@ -3,7 +3,7 @@ slug: simracing-expo-2026-announcements
 title: "SimRacing Expo 2026: New Wheelbases and Wheels Announced"
 description: "Asetek DD10, PXN S16, Moza's first PS5 bases and Fanatec Project Obsidian: what was announced at SimRacing Expo Frankfurt 2026, with prices and dates."
 datePublished: 2026-10-19
-dateModified: 2026-10-20
+dateModified: 2026-10-30
 keyword: simracing expo 2026
 ---
 
@@ -32,6 +32,8 @@ According to Asetek's DD10 product page (checked 19 October 2026):
 - **Encoder:** 14-bit, 16,384 steps per turn
 - **Weight:** 7.92 kg
 - **Warranty:** 60 months
+
+Wondering whether 10 Nm is enough? See [how much torque you need for sim racing](/wheel-bases/how-much-torque/), or compare the DD10 with other bases in our [wheel base comparison](/wheel-bases/compare/).
 
 ### Xbox only with an Xbox-compatible Asetek wheel
 

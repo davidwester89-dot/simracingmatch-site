@@ -3,6 +3,7 @@ import { PRIVACY_UPDATED, cookieTable, partnerNetwork, legalBasis, transfers, re
 import { CONSENT_KEY } from './lib/consent.js';
 import { PARTNERLINKS } from './lib/partnerlinks.js';
 import { loadPosts, blogIndexPage, blogPostPages } from './blog.mjs';
+import { wheelBasePages, WB_DATE } from './wheelbases.mjs';
 
 const faqSchema = (faq) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) });
 const faqHtml = (faq) => `<h2>FAQ</h2>${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${a}</p></details>`).join('')}`;
@@ -20,6 +21,7 @@ export const home = {
   ogTitle: 'SimracingMatch: find the setup that fits you',
   h1: 'Find the sim racing setup that fits you',
   og: 'home',
+  lastmod: WB_DATE,
   description: 'Match a sim racing wheel, pedals and rig to your budget, platform and space. Manufacturer data only. Partner links disclosed — they never change the order.',
   schema: [faqSchema(homeFaq)],
   // hreflangNl left empty until /nl/ exists
@@ -75,6 +77,13 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 <li><strong>See setups that fit</strong><span class="muted"> Filtered by compatibility and your budget. Missing prices stay “unknown”.</span></li>
 <li><strong>Check the sources</strong><span class="muted"> Every figure links back to the manufacturer or official shop.</span></li>
 </ol>
+
+<h2>Wheel base guides</h2>
+<ul class="wb-links">
+<li><a href="/wheel-bases/compare/" data-cta="home_wb">Compare direct drive wheel bases</a><span class="muted"> Torque, platforms, EU price and price per Nm for six brands.</span></li>
+<li><a href="/wheel-bases/direct-drive-vs-belt/" data-cta="home_wb">Direct drive vs belt driven wheels</a><span class="muted"> How gear, belt and direct drive differ.</span></li>
+<li><a href="/wheel-bases/how-much-torque/" data-cta="home_wb">How much torque do you need?</a><span class="muted"> What makers advise, and what your mount must hold.</span></li>
+</ul>
 
 <section id="setup-match" class="band">
 <h2>The setup match — 5 questions <span class="soon">Coming soon</span></h2>
@@ -158,5 +167,5 @@ export const notfound = {
 /** All pages for the build: home, legal, blog index, posts (if any), 404. */
 export function allPages() {
   const posts = loadPosts();
-  return [home, privacy, disclaimer, contact, blogIndexPage(posts), ...blogPostPages(posts), notfound];
+  return [home, privacy, disclaimer, contact, ...wheelBasePages(), blogIndexPage(posts), ...blogPostPages(posts), notfound];
 }

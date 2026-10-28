@@ -287,3 +287,13 @@ footer.site li a, .article-body h2.src-h+ul a, .post-cta a{display:inline-block;
 
 /* Partnerzin per blok met partnerlinks (vervangt het label per knop) */
 .pnoot{font-size:.875rem;color:var(--muted);margin:6px 0 0}
+
+/* Wheel base cluster (28-10): comparison table, platform filter, home guide links */
+.wb-table caption{caption-side:top;text-align:left;padding:10px 12px;font-size:1rem}
+.wb-filter .actions{display:flex;flex-wrap:wrap;gap:8px}
+.wb-filter button[aria-pressed="true"]{border-color:var(--brand)}
+.wb-links{padding-left:1.1em}
+.wb-links li{margin:10px 0}
+.wb-links a{display:inline-block;min-height:44px;padding-block:12px;box-sizing:border-box}
+.table-wrap.wb-wrap{width:min(1040px,calc(100vw - 40px))}
+.wb-table{min-width:760px}
