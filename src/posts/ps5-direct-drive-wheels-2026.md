@@ -41,7 +41,7 @@ Thrustmaster announced the **T-GT III**, an officially licensed Gran Turismo 7 w
 - **Motor:** Direct Axial Drive, with 5 Nm of constant torque and an overshoot capacity of up to 10 Nm
 - **Pedals:** the first Thrustmaster Gran Turismo bundle with a load-cell pedal set included
 - **Wheel:** the T-GT steering wheel with a leather finish and four rotary encoders mapped for Gran Turismo
-- **Price:** €699.99, $749.99 or £649.99 (recommended retail price)
+- **Price:** €699.99 recommended retail price ([Thrustmaster: T-GT III](https://www.thrustmaster.com/t-gt-iii/), checked 28 October 2026)
 - **Availability:** on sale from **3 December 2026**, with worldwide availability expected before Christmas
 
 Thrustmaster says it will keep updating the T-GT III through software and firmware to follow Gran Turismo 7's Spec IV update. That update arrives in two parts, in October and December 2026.
