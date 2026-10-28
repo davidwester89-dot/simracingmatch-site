@@ -139,7 +139,7 @@ ${compareTable()}
 <p>Torque is not the only cost. Fanatec warns that for its Podium bases “it is particularly important to have a very strong sim cockpit”. Moza asks you to confirm “that the mounting solution can securely support a 16 N·m direct drive wheelbase” before buying the R16 Ultra. More on that in <a href="/wheel-bases/how-much-torque/">how much torque you need</a>.</p>
 <h2>Not in this table</h2>
 <ul>
-<li><strong>Sim-Lab:</strong> its EU store listed no wheel base of its own when we checked its product list on ${fmtDate(WB_CHECKED)}.</li>
+<li><strong>Sim-Lab DDS TorqueSync™ Founders Edition:</strong> Sim-Lab’s EU store lists this direct drive base as a preorder, with new orders shipping “from the end of November” (DDS26, 26 Nm, €1,499; DDS39, 39 Nm, €1,999; with VAT; checked on ${fmtDate(WB_CHECKED)}). We add it to the table once it ships.</li>
 <li><strong>Bundles</strong> with a wheel and pedals are left out, because their prices include other parts. Belt and gear wheels such as the Thrustmaster T300RS GT are covered in <a href="/wheel-bases/direct-drive-vs-belt/">direct drive vs belt</a>.</li>
 <li><strong>Announced, not yet on sale:</strong> Moza’s PS5 bases and the Thrustmaster T-GT III. See the <a href="/blog/ps5-direct-drive-wheels-2026/">PS5 article</a> and the <a href="/blog/simracing-expo-2026-announcements/">SimRacing Expo 2026 round-up</a>.</li>
 </ul>
@@ -152,7 +152,7 @@ ${sources(sortedBases().map((b) => [`${b.brand}: ${b.model}`, b.url]).concat([
   ['Asetek Racing: DD10 wheelbase (Xbox FAQ)', 'https://www.asetek.com/simsports/landing/dd10-wheelbase/'],
   ['Fanatec: wheel bases', 'https://www.fanatec.com/eu/en/c/wheel-bases'],
   ['Fanatec: NM for sim racing – what is best?', 'https://www.fanatec.com/eu/en/explorer/products/racing-wheels-wheel-bases/nm-for-sim-racing-what-is-best/'],
-  ['Sim-Lab EU store', 'https://www.sim-lab.eu/'],
+  ['Sim-Lab: DDS TorqueSync™ Founders Edition', 'https://sim-lab.eu/products/dds-torquesync'],
 ]).filter(([, h], i, arr) => arr.findIndex(([, x]) => x === h) === i))}`,
 });
 
