@@ -297,3 +297,5 @@ footer.site li a, .article-body h2.src-h+ul a, .post-cta a{display:inline-block;
 .wb-links a{display:inline-block;min-height:44px;padding-block:12px;box-sizing:border-box}
 .table-wrap.wb-wrap{width:min(1040px,calc(100vw - 40px))}
 .wb-table{min-width:760px}
+.wb-table td:first-child{min-width:170px}
+.wb-table .wb-logo{display:block;max-width:100%;height:auto;margin:2px 0 8px;filter:brightness(0) invert(1);opacity:.9}

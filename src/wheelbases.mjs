@@ -87,12 +87,29 @@ const cluster = (self) => `<h2>More on wheel bases</h2><ul>${[
   ['/wheel-bases/how-much-torque/', 'How much torque you need for sim racing, and what your mount must hold'],
 ].filter(([h]) => h !== self).map(([h, t]) => `<li><a href="${h}">${t}</a></li>`).join('')}</ul>`;
 
+/**
+ * Maker logos in the table (Dave 30-10). Files are the makers' own site logos (sources in the commit message), not redrawn.
+ * Fixed width/height per file (no CLS); shown white on the dark table via CSS, like the home brand grid. Logos never change the order.
+ */
+export const WB_LOGOS = {
+  'Moza': ['/brands/moza.svg', 88, 20],
+  'Fanatec': ['/brands/fanatec.svg', 140, 13],
+  'Simucube': ['/brands/simucube.webp', 124, 14],
+  'Asetek Racing': ['/brands/asetek.webp', 124, 17],
+  'Logitech G': ['/brands/logitech-g.svg', 83, 20],
+  'Thrustmaster': ['/brands/thrustmaster.webp', 150, 11],
+};
+const brandLogo = (brand) => {
+  const l = WB_LOGOS[brand];
+  return l ? `<img class="wb-logo" src="${l[0]}" width="${l[1]}" height="${l[2]}" alt="${esc(brand)} logo" loading="lazy" decoding="async">` : '';
+};
+
 function compareTable() {
   const rows = sortedBases().map((b) => {
     const pn = perNm(b);
     const priceCell = b.price == null ? `unknown <span class="muted">(${esc(b.shown)})</span>`
       : `${eur(b.price)}${b.exVat ? `<br><span class="muted">our sum: ${eur(b.exVat)} excl. VAT + 21% Dutch VAT</span>` : ''}`;
-    return `<tr data-platforms="${b.platforms.join(' ').toLowerCase()}"><td><strong>${esc(b.brand)}</strong> ${esc(b.model)}</td><td>${esc(b.torque)}</td><td>${b.platforms.join(', ')}${b.note ? ` <span class="muted">(${esc(b.note)})</span>` : ''}</td><td>${priceCell}</td><td>${pn == null ? 'unknown' : eur(Math.round(pn * 100) / 100)}</td><td>${a(b.url, 'product page')}</td></tr>`;
+    return `<tr data-platforms="${b.platforms.join(' ').toLowerCase()}"><td>${brandLogo(b.brand)}<strong>${esc(b.brand)}</strong> ${esc(b.model)}</td><td>${esc(b.torque)}</td><td>${b.platforms.join(', ')}${b.note ? ` <span class="muted">(${esc(b.note)})</span>` : ''}</td><td>${priceCell}</td><td>${pn == null ? 'unknown' : eur(Math.round(pn * 100) / 100)}</td><td>${a(b.url, 'product page')}</td></tr>`;
   }).join('\n');
   return `<div class="wb-filter" hidden><p class="muted">Show bases for:</p><div class="actions"><button type="button" class="btn ghost" data-wb="all" aria-pressed="true">All platforms</button><button type="button" class="btn ghost" data-wb="pc" aria-pressed="false">PC</button><button type="button" class="btn ghost" data-wb="playstation" aria-pressed="false">PlayStation</button><button type="button" class="btn ghost" data-wb="xbox" aria-pressed="false">Xbox</button></div></div>
 <div class="table-wrap wb-wrap"><table class="wb-table"><caption class="muted">Ordered by price per Nm, lowest first. Our sum: regular price ÷ Nm as the maker states it. Prices checked ${fmtDate(WB_CHECKED)}.</caption>

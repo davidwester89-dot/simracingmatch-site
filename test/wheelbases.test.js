@@ -2,8 +2,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
-import { BASES, sortedBases, perNm, WB_DATE } from '../src/wheelbases.mjs';
+import { readFileSync, existsSync } from 'node:fs';
+import { BASES, sortedBases, perNm, WB_DATE, WB_LOGOS } from '../src/wheelbases.mjs';
 import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 
 const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
@@ -62,4 +62,23 @@ test('2-3+ inbound internal links per cluster page from existing pages', () => {
   assert.ok(ps5.includes('href="/wheel-bases/compare/"') && expo.includes('href="/wheel-bases/compare/"'));
   assert.ok(ps5.includes('href="/wheel-bases/direct-drive-vs-belt/"'));
   assert.ok(expo.includes('href="/wheel-bases/how-much-torque/"'));
+});
+
+test('compare table: maker logo per row (Dave 30-10), fixed size, lazy, alt; order and partner links unchanged', () => {
+  execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', THEME: 'A' } });
+  const c = readFileSync('dist/wheel-bases/compare/index.html', 'utf8');
+  const rows = [...c.match(/<tbody>([\s\S]*?)<\/tbody>/)[1].matchAll(/<tr [^>]*>([\s\S]*?)<\/tr>/g)].map((m) => m[1]);
+  const s = sortedBases();
+  assert.equal(rows.length, s.length);
+  rows.forEach((r, i) => {
+    const b = s[i];
+    assert.ok(r.includes(`<strong>${b.brand}</strong> `), `row ${i + 1}: ${b.brand} ${b.model} (order)`);
+    const im = r.match(/<img [^>]*>/);
+    assert.ok(im, `${b.brand}: logo`);
+    const [src, w, h] = WB_LOGOS[b.brand];
+    assert.ok(im[0].includes(`src="${src}" width="${w}" height="${h}" alt="${b.brand} logo" loading="lazy"`), im[0]);
+    assert.ok(existsSync('dist' + src), src);
+  });
+  for (const b of BASES) assert.ok(WB_LOGOS[b.brand], b.brand);
+  assert.doesNotMatch(rows.join(''), /score|rating|★|\/10\b/i, 'no score or rating icons in the table');
 });
