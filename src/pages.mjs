@@ -84,6 +84,7 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 <li><a href="/wheel-bases/direct-drive-vs-belt/" data-cta="home_wb">Direct drive vs belt driven wheels</a><span class="muted"> How gear, belt and direct drive differ.</span></li>
 <li><a href="/wheel-bases/how-much-torque/" data-cta="home_wb">How much torque do you need?</a><span class="muted"> What makers advise, and what your mount must hold.</span></li>
 </ul>
+<p class="muted">Updated <time datetime="${WB_DATE}">${fmtDate(WB_DATE)}</time></p>
 
 <section id="setup-match" class="band">
 <h2>The setup match — 5 questions <span class="soon">Coming soon</span></h2>
