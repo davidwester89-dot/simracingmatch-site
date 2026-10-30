@@ -19,7 +19,7 @@ for (const p of pages) {
   write(p.path.endsWith('.html') ? join(OUT, p.path) : join(OUT, p.path, 'index.html'), html);
 }
 cpSync('src/assets/js', join(OUT, 'js'), { recursive: true });
-cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true });
+cpSync('src/lib', join(OUT, 'js/lib'), { recursive: true, filter: (p) => !/[\\/]partnerlinks\.js$/.test(p) }); // partnerlinks.js: alleen build (partnerNoten, pages), niet publiceren (SC 30-10)
 cpSync('src/assets/og', join(OUT, 'og'), { recursive: true });
 cpSync('src/assets/img', join(OUT, 'img'), { recursive: true });
 cpSync('src/assets/brands', join(OUT, 'brands'), { recursive: true });
