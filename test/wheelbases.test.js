@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { BASES, sortedBases, perNm, WB_DATE, WB_LOGOS } from '../src/wheelbases.mjs';
 import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 
@@ -51,6 +51,27 @@ test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push
   assert.ok(c.includes('<li><a href="https://sim-lab.eu/products/dds-torquesync" rel="noopener">'), 'Sim-Lab source stays a neutral link');
   assert.doesNotMatch(c, /<li><a href="[^"]*\?ref=/, 'no partner link in the sources list');
   assert.doesNotMatch(c, /sale €|special price/i, 'no sale prices on the compare page (L4)');
+});
+
+// L4 (gap SC 28-10 M2: 'special price of €349.99' on /direct-drive-vs-belt/ gave 0 fails): check EVERY built page, not only /compare/.
+// A promo/sale/special price is a price tied to sale/special/deal/discount wording, '€x off', 'x% off' or 'save €x'.
+// The one explanatory sentence 'Some stores showed a temporary sale price … we leave those out' is allowed (no amount).
+export const PROMO_PRICE = /special price|\b(?:sale|deal|promo(?:tional)?|discount(?:ed)?|introductory|launch|black friday|cyber monday) price\b|\b(?:sale|special|deal|discount|promo)\s*(?:price\s*)?(?:of\s*|:\s*)?€\s?\d|€\s?\d[\d.,]*\s*(?:sale|special|deal|off)\b|\d+\s?% off\b|\bsave (?:up to )?€\s?\d|limited[- ]time (?:price|offer|deal)/i;
+export function promoHits(html) {
+  const text = html.replace(/<!--[\s\S]*?-->/g, ' ').replace(/<(script|style|noscript)\b[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&euro;/g, '€').replace(/\s+/g, ' ');
+  return text.split(/(?<=[.!?])\s+/).filter((z) => PROMO_PRICE.test(z) && !/we leave (?:those|them) out/i.test(z)).map((z) => z.slice(0, 120));
+}
+test('L4: no sale, special or temporary promo price on ANY built page (all wheel-base pages, posts, home)', () => {
+  execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', THEME: 'A' } });
+  const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(`${d}/${e.name}`) : e.name.endsWith('.html') ? [`${d}/${e.name}`] : []));
+  const fout = walk('dist').flatMap((f) => promoHits(readFileSync(f, 'utf8')).map((z) => `${f}: ${z}`));
+  assert.deepEqual(fout, []);
+  // self-test on the exact SC mutations (M2, M3) and allowed wording
+  assert.equal(promoHits('<p>The T300 RS GT has a special price of €349.99 this week.</p>').length, 1);
+  assert.equal(promoHits('<p>R9 V3: sale €319.</p>').length, 1);
+  assert.equal(promoHits('<p>Now 20% off at the store.</p>').length, 1);
+  assert.equal(promoHits('<p>Some stores showed a temporary sale price on 28 October 2026 without an end date; we leave those out.</p><p>Announced, not yet on sale.</p><p>On sale from 3 December 2026.</p>').length, 0);
 });
 
 
