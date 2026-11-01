@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { GA_ID as GA_CONFIG } from './analytics.config.mjs';
 import { GA_ID_RE } from './lib/consent.js';
 import { networkFor } from './network.mjs';
+import { PARTNER_NOOT } from './lib/partnerlinks.js';
 
 export const GA_ID = (process.env.GA_ID ?? GA_CONFIG).trim();
 if (GA_ID && !GA_ID_RE.test(GA_ID)) throw new Error(`Invalid GA_ID "${GA_ID}"`);
@@ -131,7 +132,7 @@ ${reportError(url)}
 <div><p class="fh">Legal</p><ul><li><a href="/privacy/">Privacy &amp; cookies</a></li>${GA_ID ? '<li><a href="/privacy/#cookies" data-consent-open>Cookie settings</a></li>' : ''}<li><a href="/disclaimer/">Disclaimer</a></li></ul></div>
 </div>
 
-<p class="fine">© 2026 ${SITE.name}.</p>
+<p class="fine">© 2026 ${SITE.name}. ${PARTNER_NOOT}</p>
 </div></footer>
 ${['/js/menu.js', ...(GA_ID ? ['/js/consent.js'] : []), ...(p.scripts || [])].map((s) => `<script type="module" src="${s}"></script>`).join('\n')}
 </body>
