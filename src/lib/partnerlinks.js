@@ -32,6 +32,8 @@ export function knop(href, pos, { partner = false, label = 'Visit shop', vendor 
 // contains a partner link (rel sponsored). Automatic: no partner link in a block, no sentence.
 export const PARTNER_NOOT = 'Some links are partner links; this never affects the ranking.';
 export const NOOT_HTML = `<p class="pnoot">${PARTNER_NOOT}</p>`;
+// Footer (fine print, every page): the fuller disclosure, says what a partner link is (SC review e4176d2). The notes next to the buttons stay PARTNER_NOOT.
+export const FOOTER_NOOT = 'Some links are partner links, which may earn us a commission; this never affects the ranking.';
 const SPONSORED = /<a\s[^>]*rel="[^"]*\bsponsored\b/;
 /** Eén blok als string: de zin erachter als er een partnerlink in staat. */
 export const metNoot = (html) => (SPONSORED.test(html) ? html + NOOT_HTML : html);
