@@ -7,6 +7,10 @@ import { PARTNERLINKS, knop } from './lib/partnerlinks.js';
 
 /** Expected push/go-live date: every date field (visible, JSON-LD, sitemap). */
 export const WB_DATE = '2026-10-30';
+/** Push date of Moza vs Fanatec (SEO wk45) and of the compare page, which links to it. */
+export const MVF_DATE = '2026-11-03';
+/** Day we re-read the Moza and Fanatec product pages for Moza vs Fanatec (same regular prices and torque as on WB_CHECKED). */
+export const MVF_CHECKED = '2026-11-02';
 /** Day we read every price and spec on the manufacturer pages. */
 export const WB_CHECKED = '2026-10-28';
 
@@ -67,14 +71,14 @@ const STORES = [
   ['thrustmaster', 'Thrustmaster', 'https://shop.thrustmaster.com/en_eu/products-steering-wheels/plateform.html'],
 ];
 
-const page = ({ path, title, h1, crumb, description, keyword, body, scripts }) => ({
-  path, title, h1, crumb, description, og: 'home', ogType: 'article', lastmod: WB_DATE,
-  article: { date: WB_DATE, updated: WB_DATE },
+const page = ({ path, title, h1, crumb, description, keyword, body, scripts, published = WB_DATE, updated = WB_DATE, checked = WB_CHECKED, updatedLine = updated !== published }) => ({
+  path, title, h1, crumb, description, og: 'home', ogType: 'article', lastmod: updated,
+  article: { date: published, updated },
   parents: [['/wheel-bases/compare/', 'Wheel bases']].filter(([h]) => h !== path),
   hreflangNl: '', scripts,
-  schema: [{ '@context': 'https://schema.org', '@type': 'Article', headline: h1, description, datePublished: WB_DATE, dateModified: WB_DATE, author: AUTHOR, publisher: ORG, mainEntityOfPage: SITE.domain + path, inLanguage: 'en', keywords: keyword }],
-  body: `<article class="article-body prose"><header class="article-head"><p class="meta"><span class="kicker">Wheel bases</span><time datetime="${WB_DATE}">${fmtDate(WB_DATE)}</time></p><h1>${esc(h1)}</h1>
-<p class="src author">By ${SITE.owner} · Published ${fmtDate(WB_DATE)} · Prices and specs checked on the manufacturers’ pages on ${fmtDate(WB_CHECKED)}</p></header>
+  schema: [{ '@context': 'https://schema.org', '@type': 'Article', headline: h1, description, datePublished: published, dateModified: updated, author: AUTHOR, publisher: ORG, mainEntityOfPage: SITE.domain + path, inLanguage: 'en', keywords: keyword }],
+  body: `<article class="article-body prose"><header class="article-head"><p class="meta"><span class="kicker">Wheel bases</span><time datetime="${updated}">${fmtDate(updated)}</time></p><h1>${esc(h1)}</h1>
+<p class="src author">By ${SITE.owner} · Published ${fmtDate(published)}${updatedLine ? ` · Updated ${fmtDate(updated)}` : ''} · Prices and specs checked on the manufacturers’ pages on ${fmtDate(checked)}</p></header>
 ${body}
 <p class="post-cta"><a href="/blog/" class="btn">More articles on the blog</a><a href="/#setup-match" data-cta="wb_match" data-quiz="start">${MATCH_LIVE ? MATCH_CTA : 'Preview the 5 questions'}</a></p></article>`,
 });
@@ -104,15 +108,15 @@ const brandLogo = (brand) => {
   return l ? `<img class="wb-logo" src="${l[0]}" width="${l[1]}" height="${l[2]}" alt="${esc(brand)} logo" loading="lazy" decoding="async">` : '';
 };
 
-function compareTable() {
-  const rows = sortedBases().map((b) => {
+function compareTable(brands = null) {
+  const rows = sortedBases().filter((b) => !brands || brands.includes(b.brand)).map((b) => {
     const pn = perNm(b);
     const priceCell = b.price == null ? `unknown <span class="muted">(${esc(b.shown)})</span>`
       : `${eur(b.price)}${b.exVat ? `<br><span class="muted">our sum: ${eur(b.exVat)} excl. VAT + 21% Dutch VAT</span>` : ''}`;
     return `<tr data-platforms="${b.platforms.join(' ').toLowerCase()}"><td>${brandLogo(b.brand)}<strong>${esc(b.brand)}</strong> ${esc(b.model)}</td><td>${esc(b.torque)}</td><td>${b.platforms.join(', ')}${b.note ? ` <span class="muted">(${esc(b.note)})</span>` : ''}</td><td>${priceCell}</td><td>${pn == null ? 'unknown' : eur(Math.round(pn * 100) / 100)}</td><td>${a(b.url, 'product page')}</td></tr>`;
   }).join('\n');
   return `<div class="wb-filter" hidden><p class="muted">Show bases for:</p><div class="actions"><button type="button" class="btn ghost" data-wb="all" aria-pressed="true">All platforms</button><button type="button" class="btn ghost" data-wb="pc" aria-pressed="false">PC</button><button type="button" class="btn ghost" data-wb="playstation" aria-pressed="false">PlayStation</button><button type="button" class="btn ghost" data-wb="xbox" aria-pressed="false">Xbox</button></div></div>
-<div class="table-wrap wb-wrap"><table class="wb-table"><caption class="muted">Ordered by price per Nm, lowest first. Our sum: regular price ÷ Nm as the maker states it. Prices checked ${fmtDate(WB_CHECKED)}.</caption>
+<div class="table-wrap wb-wrap"><table class="wb-table"><caption class="muted">Ordered by price per Nm, lowest first. Our sum: regular price ÷ Nm as the maker states it. Prices checked ${fmtDate(brands ? MVF_CHECKED : WB_CHECKED)}.</caption>
 <thead><tr><th scope="col">Wheel base</th><th scope="col">Torque (maker’s wording)</th><th scope="col">Platforms (maker)</th><th scope="col">Regular price, EU store</th><th scope="col">Price per Nm</th><th scope="col">Source</th></tr></thead>
 <tbody>
 ${rows}
@@ -127,8 +131,9 @@ export const wbCompare = page({
   keyword: 'direct drive wheel base comparison',
   description: 'Compare direct drive wheel bases from Moza, Fanatec, Simucube, Asetek, Logitech G and Thrustmaster: torque, platforms, EU price and price per Nm.',
   scripts: ['/js/wb-filter.js'],
+  updated: MVF_DATE,
   body: `<p class="lead">This table puts the direct drive wheel bases that six brands sell on their own EU stores side by side: torque, platforms, regular price and price per Nm. We read every figure on the maker’s product page on ${fmtDate(WB_CHECKED)}. The order is price per Nm, lowest first, and it never depends on commission.</p>
-<p>New to direct drive? Read <a href="/wheel-bases/direct-drive-vs-belt/">how direct drive differs from belt and gear drive</a> first. Not sure how strong a base you need? See <a href="/wheel-bases/how-much-torque/">how much torque you need for sim racing</a>.</p>
+<p>New to direct drive? Read <a href="/wheel-bases/direct-drive-vs-belt/">how direct drive differs from belt and gear drive</a> first. Not sure how strong a base you need? See <a href="/wheel-bases/how-much-torque/">how much torque you need for sim racing</a>. Choosing between two brands? Read <a href="/wheel-bases/moza-vs-fanatec/">Moza vs Fanatec</a>.</p>
 <h2>The comparison table</h2>
 ${compareTable()}
 <h2>How to read the table</h2>
@@ -302,4 +307,64 @@ ${sources([
 ])}`,
 });
 
-export const wheelBasePages = () => [wbCompare, wbDdVsBelt, wbTorque];
+// Moza vs Fanatec (SEO briefing wk45): only the Moza and Fanatec rows of BASES (same values as /wheel-bases/compare/), re-read on
+// the brands' own product pages on MVF_CHECKED. No winner, no partner links (ALLOW_NAME keeps the Moza ref code to blog posts + compare).
+const MF = ['Moza', 'Fanatec'];
+const mf = (brand) => BASES.filter((b) => b.brand === brand);
+const mfEur = (b) => eur(b.price);
+const mfPerNm = (b) => eur(Math.round(perNm(b) * 100) / 100);
+const byModel = (m) => BASES.find((b) => b.model === m);
+export const wbMozaFanatec = page({
+  path: '/wheel-bases/moza-vs-fanatec/',
+  title: 'Moza vs Fanatec 2026: direct drive wheel bases compared',
+  h1: 'Moza vs Fanatec: direct drive wheel bases compared',
+  crumb: 'Moza vs Fanatec',
+  keyword: 'moza vs fanatec',
+  description: 'Moza or Fanatec? Their direct drive wheel bases side by side: torque, price, PS5, Xbox and PC support, and the wheels and pedals that work with each.',
+  scripts: ['/js/wb-filter.js'],
+  published: MVF_DATE, updated: MVF_DATE, checked: MVF_CHECKED, updatedLine: true,
+  body: `<p class="lead">Moza and Fanatec both sell direct drive wheel bases on their own EU stores. This page puts the ${mf('Moza').length} Moza and ${mf('Fanatec').length} Fanatec bases from our <a href="/wheel-bases/compare/">wheel base comparison</a> side by side: torque in the maker’s own wording, platforms, regular price and price per Nm. Every figure comes from the brand’s product page. We do not pick a winner; which base fits depends on your platform, budget and the gear you already own.</p>
+<h2>Quick comparison table</h2>
+${compareTable(MF)}
+<p>Every price is for the base only. You still need a steering wheel, pedals and a way to mount it. The full table with Simucube, Asetek Racing, Logitech G and Thrustmaster is on the <a href="/wheel-bases/compare/">comparison page</a>.</p>
+<h2>Torque and price per Nm</h2>
+<ul>
+<li><strong>Range.</strong> Moza’s bases run from 9 Nm (R9 V3, ${mfEur(byModel('R9 V3'))}) to 25 Nm (R25 Ultra, ${mfEur(byModel('R25 Ultra'))}). Fanatec’s run from 5 Nm (CSL DD, ${mfEur(byModel('CSL DD (5 Nm)'))}) to 25 Nm (Podium DD, ${mfEur(byModel('Podium DD (25 Nm)'))}).</li>
+<li><strong>Price per Nm.</strong> Our sum is the regular price divided by the maker’s torque figure. The lowest of the two brands is the Moza R16 Ultra at ${mfPerNm(byModel('R16 Ultra'))} (${mfEur(byModel('R16 Ultra'))} ÷ 16). Fanatec’s lowest is the ClubSport DD at ${mfPerNm(byModel('ClubSport DD (15 Nm)'))} (${mfEur(byModel('ClubSport DD (15 Nm)'))} ÷ 15). The highest of both brands is the Fanatec CSL DD (5 Nm) at ${mfPerNm(byModel('CSL DD (5 Nm)'))}.</li>
+<li><strong>The numbers are not measured the same way.</strong> Moza gives “Peak Torque: 9 N·m” for the R9 V3 and “Peak Torque: 12 N·m” for the R12 V2, but sustained torque for its Ultra bases: the R21 Ultra’s rating “refers to sustained torque, not a short-term peak”. Fanatec rates its ClubSport and Podium bases by holding torque and lists the Podium DD at “25 Nm holding torque (33 Nm peak overshoot)”. So the R25 Ultra and the Podium DD both say 25 Nm, but not for the same thing.</li>
+<li><strong>Fanatec CSL DD: 5 or 8 Nm.</strong> The 5 Nm version reaches 8 Nm with the “Boost Kit 180 (sold separately)”. The 8 Nm version has the “Boost Kit 180 included”.</li>
+<li><strong>Regular price.</strong> On ${fmtDate(MVF_CHECKED)} Moza’s store showed a temporary sale price for the R9 V3 and R12 V2 without an end date; we leave those out and use the regular price everywhere on this page.</li>
+</ul>
+<p>How much torque you actually need is covered in <a href="/wheel-bases/how-much-torque/">how much torque do you need for sim racing</a>.</p>
+<h2>PS5, Xbox and PC support</h2>
+<p>Platform is where the two brands differ most, so check it before price.</p>
+<ul>
+<li><strong>PC:</strong> all ${mf('Moza').length + mf('Fanatec').length} bases in the table. Moza says the R9 V3 “is fully PC-compatible”. Fanatec says its bases are compatible with PC “when combined with a Fanatec Steering Wheel”.</li>
+<li><strong>PlayStation:</strong> only two of these bases, both from Fanatec. The Gran Turismo DD Pro “is compatible with PS5® and PS4® consoles”, and the ClubSport DD+ “is compatible with all PlayStation®4 consoles and PlayStation®5 consoles”. For the CSL DD, ClubSport DD and Podium DD, Fanatec says the base “is not compatible with any PlayStation® console and cannot be upgraded to achieve compatibility”. On the R16 Ultra page Moza says “PlayStation is not officially supported”; its other bases list “Platform: PC”. Moza has announced its first PS5 bases and says it “will announce further details regarding pricing, availability, and the official launch date at a later stage”; see our <a href="/blog/ps5-direct-drive-wheels-2026/">article on Moza’s PS5 direct drive wheels</a>.</li>
+<li><strong>Xbox:</strong> always through the steering wheel. Fanatec says the CSL DD, ClubSport DD and Podium DD become compatible with “XBOX One® and XBOX Series X|S when used with any Fanatec XBOX-licensed steering wheel”. Of the Moza bases, only the R16 Ultra is listed for Xbox: it “can be used on Xbox when paired with the officially licensed MOZA ESX Steering Wheel. The wheelbase alone does not provide Xbox compatibility.”</li>
+</ul>
+<h2>Wheels and pedals in each ecosystem</h2>
+<p>A base is the start of a set, and both brands build their own wheels and pedals around it.</p>
+<ul>
+<li><strong>Fanatec:</strong> the ClubSport DD page says the base “is compatible with: All Fanatec Steering Wheels (with QR2)” and “All Fanatec Pedals (adapter cables might be required on pedals without RJ12 connection)”. Because Xbox and PlayStation support depend on the wheel, check the wheel’s own product page too; Fanatec says to “Check the individual Steering Wheel product pages for Wheel Base compatibility”.</li>
+<li><strong>Moza:</strong> the R16 Ultra has “dedicated ports for compatible MOZA pedals, shifters, dashboards, handbrakes, and emergency stop switches”, so you can “Connect peripherals directly to the wheelbase without extra USB hubs or separate PC connections”. On the R9 V3, Moza says its Pit House software and app “allow one-click setup and fine-tuning of wheel, pedals, and other peripherals”.</li>
+</ul>
+<p>Already own a wheel or pedals from one of the two brands? Then the compatibility lists above matter more than a few euros per Nm.</p>
+<h2>Which fits you</h2>
+<p>Sorted by platform and regular price, using only the figures above:</p>
+<ul>
+<li><strong>PlayStation:</strong> of these two brands, only the Fanatec Gran Turismo DD Pro (${mfEur(byModel('Gran Turismo DD Pro Wheel Base (8 Nm)'))}, 8 Nm) and ClubSport DD+ (${mfEur(byModel('ClubSport DD+ (18 Nm)'))}, 18 Nm) are listed for PS5 today.</li>
+<li><strong>Xbox:</strong> a Fanatec CSL DD, ClubSport DD or Podium DD with a Fanatec Xbox-licensed wheel, or the Moza R16 Ultra (${mfEur(byModel('R16 Ultra'))}) with the Moza ESX wheel.</li>
+<li><strong>PC, up to €400:</strong> Fanatec CSL DD (5 Nm) at ${mfEur(byModel('CSL DD (5 Nm)'))} or Moza R9 V3 (9 Nm) at ${mfEur(byModel('R9 V3'))}.</li>
+<li><strong>PC, €400 to €800:</strong> Fanatec CSL DD (8 Nm) ${mfEur(byModel('CSL DD (8 Nm)'))}, Gran Turismo DD Pro ${mfEur(byModel('Gran Turismo DD Pro Wheel Base (8 Nm)'))}, ClubSport DD ${mfEur(byModel('ClubSport DD (15 Nm)'))} and ClubSport DD+ ${mfEur(byModel('ClubSport DD+ (18 Nm)'))}; Moza R12 V2 ${mfEur(byModel('R12 V2'))}, R16 Ultra ${mfEur(byModel('R16 Ultra'))} and R21 Ultra ${mfEur(byModel('R21 Ultra'))}.</li>
+<li><strong>PC, above €800:</strong> Moza R25 Ultra ${mfEur(byModel('R25 Ultra'))} and Fanatec Podium DD ${mfEur(byModel('Podium DD (25 Nm)'))}.</li>
+</ul>
+<p>Plan the mount as well. Moza asks R16 Ultra buyers to confirm “that the mounting solution can securely support a 16 N·m direct drive wheelbase”, and Fanatec says that for its Podium bases “it is particularly important to have a very strong sim cockpit”. Still deciding between direct drive and a belt wheel? Read <a href="/wheel-bases/direct-drive-vs-belt/">direct drive vs belt</a>.</p>
+${cluster('/wheel-bases/moza-vs-fanatec/')}
+${sources([...mf('Moza'), ...mf('Fanatec')].map((b) => [`${b.brand}: ${b.model}`, b.url]).concat([
+  ['Moza Racing: PS5 racing wheels at TGS 2026', 'https://eu.mozaracing.com/blogs/news/moza-tgs-2026'],
+  ['Fanatec: NM for sim racing – what is best?', 'https://www.fanatec.com/eu/en/explorer/products/racing-wheels-wheel-bases/nm-for-sim-racing-what-is-best/'],
+]))}`,
+});
+
+export const wheelBasePages = () => [wbCompare, wbDdVsBelt, wbTorque, wbMozaFanatec];

@@ -3,11 +3,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
-import { BASES, sortedBases, perNm, WB_DATE, WB_LOGOS } from '../src/wheelbases.mjs';
+import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, WB_LOGOS } from '../src/wheelbases.mjs';
 import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 
 const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/wheel-bases/how-much-torque/'];
+const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/wheel-bases/how-much-torque/', '/wheel-bases/moza-vs-fanatec/'];
+// [datePublished, dateModified] per page: compare links to Moza vs Fanatec since MVF_DATE (body change, L7).
+const DATES = { '/wheel-bases/compare/': [WB_DATE, MVF_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, WB_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, MVF_DATE] };
 
 test('compare order: price per Nm low to high, unknown prices last; no commission input', () => {
   const s = sortedBases();
@@ -35,11 +37,12 @@ test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push
     assert.equal((s.match(/property="og:image"/g) || []).length, 1, `${p}: og:image`);
     const ld = [...s.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
     const art = ld.find((x) => x['@type'] === 'Article');
-    assert.equal(art.datePublished, WB_DATE); assert.equal(art.dateModified, WB_DATE);
+    const [pub, mod] = DATES[p];
+    assert.equal(art.datePublished, pub); assert.equal(art.dateModified, mod);
     assert.equal(art.author.name, 'SimracingMatch Editorial');
-    assert.ok(s.includes(`<time datetime="${WB_DATE}">`), `${p}: visible date`);
+    assert.ok(s.includes(`<time datetime="${mod}">`), `${p}: visible date`);
     assert.doesNotMatch(s, /aggregateRating|ratingValue|"Review"/);
-    assert.ok(sm.includes(`<loc>https://simracingmatch.com${p}</loc><lastmod>${WB_DATE}</lastmod>`), `${p}: sitemap`);
+    assert.ok(sm.includes(`<loc>https://simracingmatch.com${p}</loc><lastmod>${mod}</lastmod>`), `${p}: sitemap`);
     const sponsored = [...s.matchAll(/<a\s[^>]*rel="sponsored nofollow noopener"[^>]*>/g)].map((m) => m[0].match(/href="([^"]+)"/)[1]);
     for (const h of sponsored) assert.ok(Object.values(PARTNERLINKS).includes(h), `${p}: ${h}`);
     assert.equal(s.split('<p class="pnoot">').length - 1, sponsored.length ? 1 : 0, `${p}: disclosure count`);
@@ -102,4 +105,19 @@ test('compare table: maker logo per row (Dave 30-10), fixed size, lazy, alt; ord
   });
   for (const b of BASES) assert.ok(WB_LOGOS[b.brand], b.brand);
   assert.doesNotMatch(rows.join(''), /score|rating|★|\/10\b/i, 'no score or rating icons in the table');
+});
+
+test('Moza vs Fanatec (SEO wk45): only Moza and Fanatec rows with the compare values, links to the compare page, no partner link, no winner', () => {
+  execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', THEME: 'A' } });
+  const m = readFileSync('dist/wheel-bases/moza-vs-fanatec/index.html', 'utf8');
+  const c = readFileSync('dist/wheel-bases/compare/index.html', 'utf8');
+  const rows = [...m.match(/<tbody>([\s\S]*?)<\/tbody>/)[1].matchAll(/<tr [^>]*>([\s\S]*?)<\/tr>/g)].map((x) => x[1]);
+  const want = sortedBases().filter((b) => b.brand === 'Moza' || b.brand === 'Fanatec');
+  assert.equal(rows.length, want.length);
+  rows.forEach((r, i) => assert.ok(c.includes(r), `row ${i + 1} (${want[i].model}) identical to the compare table`));
+  for (const h of ['/wheel-bases/compare/', '/wheel-bases/how-much-torque/', '/wheel-bases/direct-drive-vs-belt/', '/blog/ps5-direct-drive-wheels-2026/']) assert.ok(m.includes(`href="${h}"`), h);
+  assert.ok(c.includes('href="/wheel-bases/moza-vs-fanatec/"'), 'compare → Moza vs Fanatec');
+  assert.ok(readFileSync('dist/index.html', 'utf8').includes('href="/wheel-bases/moza-vs-fanatec/"'), 'home → Moza vs Fanatec');
+  assert.doesNotMatch(m, /rel="sponsored|\?ref=|<p class="pnoot">/, 'no partner link or note on Moza vs Fanatec');
+  assert.doesNotMatch(m.replace(/<[^>]+>/g, ' '), /\b(the winner is|best buy|our pick|we recommend)\b/i);
 });
