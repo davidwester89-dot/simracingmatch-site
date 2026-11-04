@@ -12,7 +12,7 @@ export const MVF_DATE = '2026-11-03';
 /** Day we re-read the Moza and Fanatec product pages for Moza vs Fanatec (same regular prices and torque as on WB_CHECKED). */
 export const MVF_CHECKED = '2026-11-02';
 /** Push date of the blog post /blog/load-cell-pedals/; Moza vs Fanatec links to it in its body since then (L7). */
-export const LCP_DATE = '2026-11-06';
+export const LCP_DATE = '2026-11-05';
 /** Day we read every price and spec on the manufacturer pages. */
 export const WB_CHECKED = '2026-10-28';
 

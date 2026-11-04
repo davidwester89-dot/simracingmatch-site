@@ -2,8 +2,8 @@
 slug: load-cell-pedals
 title: "Load cell pedals 2026: worth it? Sets and prices compared"
 description: "Which load cell pedals fit your wheel base, console and budget? Sets from Fanatec, Logitech G, Moza and more: brake force, PS5/Xbox/PC and price."
-datePublished: 2026-11-06
-dateModified: 2026-11-06
+datePublished: 2026-11-05
+dateModified: 2026-11-05
 updatedLine: true
 keyword: load cell pedals
 ---

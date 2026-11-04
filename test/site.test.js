@@ -128,7 +128,7 @@ test('blog posts: title <=60, meta <=155, one H1, BlogPosting, sitemap, index, l
   assert.match(sm, /<loc>https:\/\/simracingmatch\.com\/blog\/<\/loc>/);
   const home = readFileSync('dist/index.html', 'utf8');
   assert.match(home, /id="setup-match"/);
-  const PUBLISHED = { 'simracing-expo-2026-announcements': '2026-10-19', 'ps5-direct-drive-wheels-2026': '2026-10-19', 'load-cell-pedals': '2026-11-06' };
+  const PUBLISHED = { 'simracing-expo-2026-announcements': '2026-10-19', 'ps5-direct-drive-wheels-2026': '2026-10-19', 'load-cell-pedals': '2026-11-05' };
   for (const [slug, published] of Object.entries(PUBLISHED)) {
     const s = readFileSync(`dist/blog/${slug}/index.html`, 'utf8');
     const title = unesc(s.match(/<title>(.*?)<\/title>/)[1]);
