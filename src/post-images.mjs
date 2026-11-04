@@ -60,6 +60,17 @@ export const POST_IMAGES = {
     },
     noPhoto: ['Fanatec: bundle prices changed on 1 October', 'Other PS5-compatible direct drive options today'],
   },
+  'load-cell-pedals': {
+    hero: img({
+      file: 'expo-hero-sim-racing-pedals-blue-light',
+      alt: 'Three metal sim racing pedals with drilled pedal faces, lit from the side by blue light',
+      caption: 'A set of metal sim racing pedals under blue light. The photo does not show which sensor the brake uses.',
+      author: 'Gergő', licence: 'Pexels License', site: 'Pexels',
+      source: 'https://www.pexels.com/photo/9787476/',
+    }),
+    sections: {},
+    noPhoto: ['What is a load cell pedal?', 'Are load cell pedals worth it?', 'Load cell pedal sets compared', 'Which pedals work with your wheel base and console?', 'Hydraulic and active pedals: the step after load cell', 'Which set fits you?'],
+  },
   'simracing-expo-2026-announcements': {
     hero: img({
       file: 'expo-hero-sim-racing-pedals-blue-light',

@@ -10,7 +10,7 @@ export const readMin = (md) => Math.max(1, Math.round(md.replace(/\[([^\]]*)\]\(
 
 const POSTS_DIR = join(dirname(fileURLToPath(import.meta.url)), 'posts');
 
-/** Parse YAML-like front-matter between --- lines. Keys: title, description, slug, datePublished, keyword (optional dateModified). */
+/** Parse YAML-like front-matter between --- lines. Keys: title, description, slug, datePublished, keyword (optional dateModified; optional updatedLine: true shows the Updated line also when it equals datePublished, as on the wheel base pages). */
 export function parseFrontMatter(raw) {
   if (!raw.startsWith('---')) throw new Error('Post must start with --- front-matter');
   const end = raw.indexOf('\n---', 3);
@@ -45,6 +45,9 @@ export function loadPosts() {
 }
 
 export function blogIndexPage(posts) {
+  // Hub date (rule D): the newest dateModified of its posts, in the visible Updated line and the sitemap lastmod.
+  const newest = posts.map((p) => p.dateModified).sort().at(-1);
+  const updated = newest ? `<p class="muted">Updated <time datetime="${newest}">${fmtDate(newest)}</time></p>` : '';
   const list = posts.length
     ? `<ul class="blog-list">${posts.map((p) => `<li><a class="card" href="/blog/${p.slug}/"><p class="meta"><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time> · ${readMin(p.body)} min read</p><h2>${esc(p.title)}</h2><p class="muted">${esc(p.description)}</p><span class="more">Read article <span aria-hidden="true">→</span></span></a></li>`).join('')}</ul>`
     : `<p class="muted">No posts yet. Check back soon — or <a href="/#setup-match" data-cta="blog_empty_match" data-quiz="start">${MATCH_CTA}</a>.</p>`;
@@ -54,11 +57,12 @@ export function blogIndexPage(posts) {
     h1: 'Blog',
     crumb: 'Blog',
     og: 'home',
+    lastmod: newest,
     description: 'Guides and explainers from SimracingMatch Editorial: sim racing setups, wheel bases and pedals — manufacturer data only, no invented scores.',
     hreflangNl: '',
     // Keep index out of sitemap until there is at least one post (thin otherwise).
     noindex: posts.length === 0,
-    body: `<article class="prose"><h1>Blog</h1><p class="lead">Practical guides for choosing sim racing gear. Specs and prices from manufacturers, with check dates.</p><p>Here you find buying guides per platform, such as which direct drive wheel bases work on PS5, and news on new wheel bases, wheels and pedals with their prices and launch dates. Every post links to the manufacturer pages it is based on. Not sure where to start? <a href="/#setup-match" data-cta="blog_intro_match" data-quiz="start">${MATCH_CTA}</a>.</p>${list}</article>`,
+    body: `<article class="prose"><h1>Blog</h1><p class="lead">Practical guides for choosing sim racing gear. Specs and prices from manufacturers, with check dates.</p><p>Here you find buying guides per platform, such as which direct drive wheel bases work on PS5, and news on new wheel bases, wheels and pedals with their prices and launch dates. Every post links to the manufacturer pages it is based on. Not sure where to start? <a href="/#setup-match" data-cta="blog_intro_match" data-quiz="start">${MATCH_CTA}</a>.</p>${list}${updated}</article>`,
   };
 }
 
@@ -98,7 +102,7 @@ export function blogPostPages(posts) {
         keywords: p.keyword || undefined,
         image: imgs?.hero ? SITE.domain + `/img/blog/${imgs.hero.file}.webp` : undefined,
       }],
-      body: `<article class="article-body prose"><header class="article-head"><p class="meta"><span class="kicker">Blog</span><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time>${p.dateModified !== p.datePublished ? ` · Updated <time datetime="${p.dateModified}">${fmtDate(p.dateModified)}</time>` : ''} · ${readMin(p.body)} min read</p><h1>${esc(p.title.replace(/\s*\|\s*SimracingMatch\s*$/i, ''))}</h1>
+      body: `<article class="article-body prose"><header class="article-head"><p class="meta"><span class="kicker">Blog</span><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time>${p.dateModified !== p.datePublished || p.updatedLine === 'true' ? ` · Updated <time datetime="${p.dateModified}">${fmtDate(p.dateModified)}</time>` : ''} · ${readMin(p.body)} min read</p><h1>${esc(p.title.replace(/\s*\|\s*SimracingMatch\s*$/i, ''))}</h1>
 <p class="src author">By ${SITE.owner}</p></header>
 ${hero}${html}
 ${credits}</article>`,

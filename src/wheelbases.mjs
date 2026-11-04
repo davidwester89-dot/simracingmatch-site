@@ -11,6 +11,8 @@ export const WB_DATE = '2026-10-30';
 export const MVF_DATE = '2026-11-03';
 /** Day we re-read the Moza and Fanatec product pages for Moza vs Fanatec (same regular prices and torque as on WB_CHECKED). */
 export const MVF_CHECKED = '2026-11-02';
+/** Push date of the blog post /blog/load-cell-pedals/; Moza vs Fanatec links to it in its body since then (L7). */
+export const LCP_DATE = '2026-11-06';
 /** Day we read every price and spec on the manufacturer pages. */
 export const WB_CHECKED = '2026-10-28';
 
@@ -322,7 +324,7 @@ export const wbMozaFanatec = page({
   keyword: 'moza vs fanatec',
   description: 'Moza or Fanatec? Their direct drive wheel bases side by side: torque, price, PS5, Xbox and PC support, and the wheels and pedals that work with each.',
   scripts: ['/js/wb-filter.js'],
-  published: MVF_DATE, updated: MVF_DATE, checked: MVF_CHECKED, updatedLine: true,
+  published: MVF_DATE, updated: LCP_DATE, checked: MVF_CHECKED, updatedLine: true,
   body: `<p class="lead">Moza and Fanatec both sell direct drive wheel bases on their own EU stores. This page puts the ${mf('Moza').length} Moza and ${mf('Fanatec').length} Fanatec bases from our <a href="/wheel-bases/compare/">wheel base comparison</a> side by side: torque in the maker’s own wording, platforms, regular price and price per Nm. Every figure comes from the brand’s product page. We do not pick a winner; which base fits depends on your platform, budget and the gear you already own.</p>
 <h2>Quick comparison table</h2>
 ${compareTable(MF)}
@@ -349,7 +351,7 @@ ${compareTable(MF)}
 <li><strong>Fanatec:</strong> the ClubSport DD page says the base “is compatible with: All Fanatec Steering Wheels (with QR2)” and “All Fanatec Pedals (adapter cables might be required on pedals without RJ12 connection)”. Because Xbox and PlayStation support depend on the wheel, check the wheel’s own product page too; Fanatec says to “Check the individual Steering Wheel product pages for Wheel Base compatibility”.</li>
 <li><strong>Moza:</strong> the R16 Ultra has “dedicated ports for compatible MOZA pedals, shifters, dashboards, handbrakes, and emergency stop switches”, so you can “Connect peripherals directly to the wheelbase without extra USB hubs or separate PC connections”. On the R9 V3, Moza says its Pit House software and app “allow one-click setup and fine-tuning of wheel, pedals, and other peripherals”.</li>
 </ul>
-<p>Already own a wheel or pedals from one of the two brands? Then the compatibility lists above matter more than a few euros per Nm.</p>
+<p>Already own a wheel or pedals from one of the two brands? Then the compatibility lists above matter more than a few euros per Nm. Thinking about a stronger brake? Our guide to <a href="/blog/load-cell-pedals/">load cell pedals</a> compares the sets from both brands, and from others, by brake force, platform and price.</p>
 <h2>Which fits you</h2>
 <p>Sorted by platform and regular price, using only the figures above:</p>
 <ul>

@@ -128,8 +128,8 @@ test('blog posts: title <=60, meta <=155, one H1, BlogPosting, sitemap, index, l
   assert.match(sm, /<loc>https:\/\/simracingmatch\.com\/blog\/<\/loc>/);
   const home = readFileSync('dist/index.html', 'utf8');
   assert.match(home, /id="setup-match"/);
-  const slugs = ['simracing-expo-2026-announcements', 'ps5-direct-drive-wheels-2026'];
-  for (const slug of slugs) {
+  const PUBLISHED = { 'simracing-expo-2026-announcements': '2026-10-19', 'ps5-direct-drive-wheels-2026': '2026-10-19', 'load-cell-pedals': '2026-11-06' };
+  for (const [slug, published] of Object.entries(PUBLISHED)) {
     const s = readFileSync(`dist/blog/${slug}/index.html`, 'utf8');
     const title = unesc(s.match(/<title>(.*?)<\/title>/)[1]);
     assert.ok(title.length <= 60, `${slug}: title ${title.length}`);
@@ -139,7 +139,7 @@ test('blog posts: title <=60, meta <=155, one H1, BlogPosting, sitemap, index, l
     const lds = [...s.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
     const bp = lds.find((x) => x['@type'] === 'BlogPosting');
     assert.ok(bp, `${slug}: BlogPosting`);
-    assert.equal(bp.datePublished, '2026-10-19');
+    assert.equal(bp.datePublished, published);
     assert.equal(bp.author.name, 'SimracingMatch Editorial');
     assert.equal(bp.mainEntityOfPage, `https://simracingmatch.com/blog/${slug}/`);
     assert.equal(bp.headline, title);

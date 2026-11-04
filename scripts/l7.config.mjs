@@ -13,6 +13,4 @@ export const CFG = {
 export const ALLOW_NAME = [{ file: /^(blog\/[\w-]+|wheel-bases\/compare)\/index\.html$/, match: /^=DAVIDWEST"$/, ctx: /href="https:\/\/eu\.mozaracing\.com\/[^"\s]*\?ref=DAVIDWEST"/, reden: 'Moza-refcode ref=DAVIDWEST (Dave-besluit)' }];
 export const BEKEND_ORPHAN = []; // SC 30-10 besluit 2: geserveerd = publiek, geen allowlist; build-only modules uit de output (zie build.mjs)
 // Hub-audit: bestaande bevindingen op origin/main (30-10). Haal een regel weg zodra de hub is gefixt; dan bewaakt de test hem.
-export const BEKEND_HUB = [
-  { pad: '/blog/', reden: 'blog index: no visible Updated line, lastmod 2026-10-19, posts 2026-10-30 (30-10, inhoudsfix niet in deze commit; SC/MM beslist)' },
-];
+export const BEKEND_HUB = [];

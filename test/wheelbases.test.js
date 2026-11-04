@@ -3,13 +3,13 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
-import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, WB_LOGOS } from '../src/wheelbases.mjs';
+import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, LCP_DATE, WB_LOGOS } from '../src/wheelbases.mjs';
 import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 
 const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/wheel-bases/how-much-torque/', '/wheel-bases/moza-vs-fanatec/'];
 // [datePublished, dateModified] per page: compare links to Moza vs Fanatec since MVF_DATE (body change, L7).
-const DATES = { '/wheel-bases/compare/': [WB_DATE, MVF_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, WB_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, MVF_DATE] };
+const DATES = { '/wheel-bases/compare/': [WB_DATE, MVF_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, WB_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
 
 test('compare order: price per Nm low to high, unknown prices last; no commission input', () => {
   const s = sortedBases();
