@@ -23,7 +23,7 @@ What the manufacturers promise is consistency. Sim-Lab explains: "you learn to b
 Two practical points before you buy:
 
 - **Mounting.** A brake that wants real force pushes the pedals away from you. Logitech G's setup guide for the PRO Racing Pedals says that for pedals on the floor, "30kg is likely the maximum, unless the pedals are secured". Plan a cockpit, a wheel stand or at least a wall brace.
-- **The feel is adjustable.** Every set below lets you change the brake feel, with software, elastomers or springs. Fanatec's CSL and ClubSport sets, the Logitech G PRO Racing Pedals and Thrustmaster's LC Upgrade also let you set the force needed for full braking.
+- **The feel is adjustable.** Every set below lets you change the brake feel, with software, elastomers or springs. Fanatec's CSL and ClubSport sets, the Logitech G PRO Racing Pedals and Thrustmaster's Raceline LC sets also let you set the force needed for full braking.
 
 No manufacturer publishes a lap time gain you can check, so we don't give one.
 
@@ -41,7 +41,8 @@ Sets with a load cell brake from brands we already compare, alphabetical. "Brake
 - **Moza SRP2 (brake + throttle):** "Load Cell Range: 0–100 kg". €159.00.
 - **Moza CRP2 (brake + throttle):** "Load Cell Sensor Range: 0–200kg". €449.00.
 - **Sim-Lab XP1:** "200 kg loadcell design, delivering up to 100 kg of brake pedal pressure". €399.00 for throttle + brake, €549.00 with clutch; on 4 November only the Black Edition with clutch was in stock. Sim-Lab's page lists no console support.
-- **Thrustmaster Raceline LC Upgrade:** a load cell brake kit with "a capacity of 220 lb / 100 kg" for the Raceline Pedals LTE (€89.99) or Raceline Pedals III (€129.99). €139.99, out of stock on 4 November.
+- **Thrustmaster Raceline Pedals III LC (3 pedals):** "a capacity of 220 lb / 100 kg". €219.99.
+- **Thrustmaster Raceline LC Upgrade:** the same load cell brake as a kit for the Raceline Pedals LTE (€89.99) or Raceline Pedals III (€129.99). €139.99, out of stock on 4 November.
 
 ## Which pedals work with your wheel base and console?
 
@@ -49,7 +50,7 @@ On PC, most of these sets also run on their own via USB, next to any wheel base.
 
 On consoles, the pedals must go through a licensed wheel base:
 
-- **PlayStation 5:** Fanatec's CSL Elite Pedals V2 work on PS4 and PS5 "if connected to a PlayStation-licensed Fanatec Wheel Base". For Logitech G, "Console compatibility requires connection to a compatible Logitech G Wheel". Thrustmaster's Raceline LC Upgrade works on PS5 "with Thrustmaster Force Feedback racing wheel bases". Moza does not list PS5 for these pedals; its first PS5 bases still await Sony's final approval (see [Moza's PS5 wheels](/blog/ps5-direct-drive-wheels-2026/)).
+- **PlayStation 5:** Fanatec's CSL Elite Pedals V2 work on PS4 and PS5 "if connected to a PlayStation-licensed Fanatec Wheel Base". For Logitech G, "Console compatibility requires connection to a compatible Logitech G Wheel". Thrustmaster's Raceline Pedals III LC and LC Upgrade work on PS5 "with Thrustmaster Force Feedback racing wheel bases". Moza does not list PS5 for these pedals; its first PS5 bases still await Sony's final approval (see [Moza's PS5 wheels](/blog/ps5-direct-drive-wheels-2026/)).
 - **Xbox:** Fanatec pedals need a compatible Fanatec base "combined with an XBOX-licensed Fanatec Steering Wheel". Moza lists the CRP2 for "PC and Xbox systems". Logitech G and Thrustmaster again work through their own bases.
 - **Logitech G29, G920 or G923:** Logitech says "Connection to G29/G920/G923 requires Racing Adapter". On PC, a USB pedal set can run next to these wheels in games that support a second controller.
 
@@ -64,7 +65,7 @@ Above load cell sit hydraulic and active pedals. Asetek's Invicta pedals use the
 By budget, using the prices above:
 
 - **Under €200:** Logitech G RS Pedals (€149.99), Moza SRP2 (€159.00) and Fanatec CSL Pedals LC (€179.90). Own Thrustmaster Raceline pedals? Thrustmaster sells the LC Upgrade kit for them (€139.99), out of stock on 4 November.
-- **€200 to €400:** Fanatec CSL Elite Pedals V2 (€299.95), ClubSport Pedals V3 (€329.95), Logitech G PRO Racing Pedals (€369.99) and Sim-Lab XP1 (€399.00 without clutch).
+- **€200 to €400:** Thrustmaster Raceline Pedals III LC (€219.99), Fanatec CSL Elite Pedals V2 (€299.95), ClubSport Pedals V3 (€329.95), Logitech G PRO Racing Pedals (€369.99) and Sim-Lab XP1 (€399.00 without clutch).
 - **€400 to €600:** Moza CRP2 (€449.00), Asetek Forte (€487.05), Sim-Lab XP1 with clutch (€549.00) and Fanatec Podium Pedals Sport (€599.95).
 
 By platform: on PS5 and Xbox, choose pedals from the brand of your wheel base. On PC, you are free to mix brands. Thrustmaster calls its T-GT III bundle for PS5 "the first to natively integrate a load-cell pedal set" (€699.99, from 3 December). Want torque advice for the base too? See [how much torque you need](/wheel-bases/how-much-torque/) and [direct drive vs belt](/wheel-bases/direct-drive-vs-belt/).
@@ -88,6 +89,7 @@ By platform: on PS5 and Xbox, choose pedals from the brand of your wheel base. O
 - [Sim-Lab: XP1 Loadcell Pedal Set](https://sim-lab.eu/products/pedal-set-xp1-loadcell-sim-racing)
 - [Sim-Lab: Sim racing pedals](https://sim-lab.eu/collections/pedals)
 - [Simucube: ActivePedal Pro](https://simucube.com/products/simucube-activepedal-pro)
+- [Thrustmaster: Raceline Pedals III LC](https://shop.thrustmaster.com/en_eu/raceline-pedals-iii-lc.html)
 - [Thrustmaster: Raceline LC Upgrade](https://shop.thrustmaster.com/en_eu/raceline-lc-upgrade.html)
 - [Thrustmaster: Raceline Pedals III](https://shop.thrustmaster.com/en_eu/raceline-pedals-iii.html)
 - [Thrustmaster: Raceline Pedals LTE](https://shop.thrustmaster.com/en_eu/raceline-pedals-lte.html)
