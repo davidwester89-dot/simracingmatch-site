@@ -40,7 +40,7 @@ Sets with a load cell brake from brands we already compare, alphabetical. "Brake
 - **Logitech G PRO Racing Pedals (3 pedals):** "100kg Load Cell". €369.99.
 - **Moza SRP2 (brake + throttle):** "Load Cell Range: 0–100 kg". €159.00.
 - **Moza CRP2 (brake + throttle):** "Load Cell Sensor Range: 0–200kg". €449.00.
-- **Sim-Lab XP1:** "200 kg loadcell design, delivering up to 100 kg of brake pedal pressure". €399.00 for throttle + brake, €549.00 with clutch; on 4 November only the Black Edition with clutch was in stock. Sim-Lab's page lists no console support.
+- **Sim-Lab XP1:** "200 kg loadcell design, delivering up to 100 kg of brake pedal pressure". €399.00 for throttle + brake, €549.00 with clutch. Sim-Lab's page lists no console support.
 - **Thrustmaster Raceline Pedals III LC (3 pedals):** "a capacity of 220 lb / 100 kg". €219.99.
 - **Thrustmaster Raceline LC Upgrade:** the same load cell brake as a kit for the Raceline Pedals LTE (€89.99) or Raceline Pedals III (€129.99). €139.99, out of stock on 4 November.
 
