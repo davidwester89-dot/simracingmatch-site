@@ -17,7 +17,7 @@ const homeFaq = [
   ['What is SimracingMatch?', 'An English-language site that helps you choose a sim racing setup. The setup match asks five questions about budget, platform, space, experience and driving style, and shows the wheel bases that fit your answers.'],
   ['Where do the specs and prices come from?', 'Only from the manufacturer or the official shop, with the date we checked them. No invented specs, prices or stars.'],
   ['Do you earn from recommendations?', 'Sometimes, via a partner link. Those links are disclosed where they appear and never affect the match or the order.'],
-  ['How does the match pick wheel bases?', 'With fixed rules: your platform and budget filter the bases in our comparison table, your mount sets a torque limit, and your experience and driving style set the torque range to aim for. Within that, the order is price per Nm. Partner links are never an input. Email <a href="mailto:info@simracingmatch.com">info@simracingmatch.com</a> with questions.'],
+  ['How does the match pick wheel bases?', 'With fixed rules: your platform and budget filter the bases in our comparison table, your mount adds the makers’ mount warnings, and your experience and driving style set the torque range to aim for. Within that, the order is price per Nm. Partner links are never an input. Email <a href="mailto:info@simracingmatch.com">info@simracingmatch.com</a> with questions.'],
 ];
 
 export const home = {
@@ -107,7 +107,7 @@ ${q(5, 'style', 'Driving style', [['casual', 'Casual (GT, F1, Forza)'], ['compet
 </form>
 <noscript><p>The match needs JavaScript. You can use the <a href="/wheel-bases/compare/">comparison table</a> instead.</p></noscript>
 <div id="match-results" class="match-results" tabindex="-1" aria-live="polite"></div>
-<p class="muted">How it works: platform and budget filter the bases; a desk clamp allows up to 12 Nm and a wheel stand up to 18 Nm, as our <a href="/wheel-bases/how-much-torque/">torque guide</a> explains; experience and driving style set the range to aim for (5–8 Nm to start, 8–15 Nm for most drivers, as the makers advise). Then price per Nm, low to high. Match logic never reads partner links. Commission cannot change the order.</p>
+<p class="muted">How it works: platform and budget filter the bases; your mount adds the makers’ mount warnings from our <a href="/wheel-bases/how-much-torque/">torque guide</a> but filters nothing; experience and driving style set the range to aim for (5–8 Nm to start, 8–15 Nm for most drivers, as the makers advise). Then price per Nm, low to high. Match logic never reads partner links. Commission cannot change the order.</p>
 <script type="application/json" id="match-data">${matchJson()}</script>
 </section>
 

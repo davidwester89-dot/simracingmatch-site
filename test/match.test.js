@@ -7,10 +7,12 @@ import { matchBases, targetBand } from '../src/assets/js/match-logic.js';
 import { BASES } from '../src/wheelbases.mjs';
 import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 
-test('filters on platform, budget and mount; best fit first, then price per Nm', () => {
+test('filters on platform and budget only (mount = note); best fit first, then price per Nm', () => {
   const r = matchBases(BASES, { budget: '300-700', platform: 'playstation', space: 'desk', experience: 'beginner', style: 'casual' });
   assert.ok(r.length > 0);
-  for (const b of r) { assert.ok(b.platforms.includes('PlayStation')); assert.ok(b.price <= 700); assert.ok(b.nm <= 12); }
+  for (const b of r) { assert.ok(b.platforms.includes('PlayStation')); assert.ok(b.price <= 700); }
+  assert.equal(r.length, matchBases(BASES, { budget: '300-700', platform: 'playstation', space: 'cockpit', experience: 'beginner', style: 'casual' }).length);
+  assert.ok(!/\b1[28] ?Nm\b/.test(readFileSync('src/assets/js/match-logic.js', 'utf8') + readFileSync('src/pages.mjs', 'utf8')), 'no invented mount caps');
   for (let i = 1; i < r.length; i++) assert.ok(r[i - 1].d < r[i].d || (r[i - 1].d === r[i].d && r[i - 1].perNm <= r[i].perNm));
   assert.ok(r[0].inBand);
   assert.equal(matchBases(BASES, { budget: 'u300', platform: 'playstation', space: 'desk', experience: 'beginner', style: 'casual' }).length, 0);
