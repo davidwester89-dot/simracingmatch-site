@@ -13,6 +13,8 @@ export const MVF_DATE = '2026-11-03';
 export const MVF_CHECKED = '2026-11-02';
 /** Push date of the blog post /blog/load-cell-pedals/; Moza vs Fanatec links to it in its body since then (L7). */
 export const LCP_DATE = '2026-11-05';
+/** Push date of the live setup match: pages whose match link text changed with it carry this as dateModified (L7). */
+export const MATCH_DATE = '2026-11-05';
 /** Day we read every price and spec on the manufacturer pages. */
 export const WB_CHECKED = '2026-10-28';
 
@@ -133,7 +135,7 @@ export const wbCompare = page({
   keyword: 'direct drive wheel base comparison',
   description: 'Compare direct drive wheel bases from Moza, Fanatec, Simucube, Asetek, Logitech G and Thrustmaster: torque, platforms, EU price and price per Nm.',
   scripts: ['/js/wb-filter.js'],
-  updated: MVF_DATE,
+  updated: MATCH_DATE,
   body: `<p class="lead">This table puts the direct drive wheel bases that six brands sell on their own EU stores side by side: torque, platforms, regular price and price per Nm. We read every figure on the maker’s product page on ${fmtDate(WB_CHECKED)}. The order is price per Nm, lowest first, and it never depends on commission.</p>
 <p>New to direct drive? Read <a href="/wheel-bases/direct-drive-vs-belt/">how direct drive differs from belt and gear drive</a> first. Not sure how strong a base you need? See <a href="/wheel-bases/how-much-torque/">how much torque you need for sim racing</a>. Choosing between two brands? Read <a href="/wheel-bases/moza-vs-fanatec/">Moza vs Fanatec</a>.</p>
 <h2>The comparison table</h2>
@@ -183,6 +185,7 @@ ${sources(sortedBases().map((b) => [`${b.brand}: ${b.model}`, b.url]).concat([
 
 export const wbDdVsBelt = page({
   path: '/wheel-bases/direct-drive-vs-belt/',
+  updated: MATCH_DATE,
   title: 'Direct Drive vs Belt Driven Wheel | SimracingMatch',
   h1: 'Direct drive vs belt driven wheel: what is the difference?',
   crumb: 'Direct drive vs belt',
@@ -245,6 +248,7 @@ ${sources([
 
 export const wbTorque = page({
   path: '/wheel-bases/how-much-torque/',
+  updated: MATCH_DATE,
   title: 'How Much Torque for Sim Racing? | SimracingMatch',
   h1: 'How much torque do you need for sim racing?',
   crumb: 'How much torque',
@@ -292,7 +296,7 @@ export const wbTorque = page({
 <li><strong>Then torque.</strong> For modern GT and formula cars, the makers’ own advice points to 8–15 Nm. More gives headroom, not automatically a better lap.</li>
 <li><strong>Then the whole budget.</strong> Add wheel, pedals and mount to the base price.</li>
 </ol>
-<p>Our setup match will ask about budget, platform, space, experience and driving style, and put those steps together for you.</p>
+<p>Our <a href="/#setup-match" data-cta="wb_match" data-quiz="start">setup match</a> asks about budget, platform, space, experience and driving style, and puts those steps together for you.</p>
 ${cluster('/wheel-bases/how-much-torque/')}
 ${sources([
   ['Fanatec: What does Nm represent when selecting a wheelbase for sim racing?', 'https://www.fanatec.com/eu/en/explorer/games/gaming-tips/what-does-nm-represent-when-selecting-a-wheelbase-for-sim-racing/'],

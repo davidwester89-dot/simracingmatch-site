@@ -299,3 +299,15 @@ footer.site li a, .article-body h2.src-h+ul a, .post-cta a{display:inline-block;
 .wb-table{min-width:760px}
 .wb-table td:first-child{min-width:170px}
 .wb-table .wb-logo{display:block;max-width:100%;height:auto;margin:2px 0 8px;filter:brightness(0) invert(1);opacity:.9}
+/* Setup match (5-11) */
+.match fieldset.qcard{margin:0}
+.match legend{padding:0 0 6px}
+.mopt{display:flex;align-items:center;gap:10px;min-height:44px;color:var(--ink);cursor:pointer}
+.mopt input{width:20px;height:20px;accent-color:var(--brand)}
+.match-results:focus{outline:none}
+.mlist{list-style:none;padding:0;display:grid;gap:12px;margin:12px 0}
+@media(min-width:900px){.mlist{grid-template-columns:repeat(3,1fr)}}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:8px}
+.mcard strong{color:#fff}
+.mcard .wb-logo{filter:brightness(0) invert(1);opacity:.9;height:auto;max-width:150px}
+.mcard .btn{margin-top:auto}

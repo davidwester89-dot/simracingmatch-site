@@ -3,16 +3,21 @@ import { PRIVACY_UPDATED, cookieTable, partnerNetwork, legalBasis, transfers, re
 import { CONSENT_KEY } from './lib/consent.js';
 import { PARTNERLINKS } from './lib/partnerlinks.js';
 import { loadPosts, blogIndexPage, blogPostPages } from './blog.mjs';
-import { wheelBasePages, MVF_DATE } from './wheelbases.mjs';
+import { wheelBasePages, MVF_DATE, BASES, WB_LOGOS, WB_CHECKED, MATCH_DATE } from './wheelbases.mjs';
+export { MATCH_DATE };
+/** Data for /js/match.js: only fields from the comparison table (manufacturer pages), never partner links. */
+export const matchJson = () => JSON.stringify({ checked: fmtDate(WB_CHECKED), logos: WB_LOGOS, bases: BASES.map(({ brand, model, nm, torque, platforms, note, price, url }) => ({ brand, model, nm, torque, platforms, note, price, url })) }).replace(/</g, '\\u003c');
+const opt = (name, v, t) => `<label class="mopt"><input type="radio" name="${name}" value="${v}" required> <span>${t}</span></label>`;
+const q = (n, name, title, opts) => `<fieldset class="qcard"><legend><strong>${n}. ${title}</strong></legend>${opts.map(([v, t]) => opt(name, v, t)).join('')}</fieldset>`;
 
 const faqSchema = (faq) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a.replace(/<[^>]+>/g, '') } })) });
 const faqHtml = (faq) => `<h2>FAQ</h2>${faq.map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${a}</p></details>`).join('')}`;
 
 const homeFaq = [
-  ['What is SimracingMatch?', 'An English-language site that helps you choose a sim racing setup. Soon: a match with five questions about budget, platform, space, experience and driving style. You get setups that fit your answers.'],
+  ['What is SimracingMatch?', 'An English-language site that helps you choose a sim racing setup. The setup match asks five questions about budget, platform, space, experience and driving style, and shows the wheel bases that fit your answers.'],
   ['Where do the specs and prices come from?', 'Only from the manufacturer or the official shop, with the date we checked them. No invented specs, prices or stars.'],
   ['Do you earn from recommendations?', 'Sometimes, via a partner link. Those links are disclosed where they appear and never affect the match or the order.'],
-  ['When does the match launch?', 'The five-question setup match is coming soon. Until then, this page explains how we work. Email <a href="mailto:info@simracingmatch.com">info@simracingmatch.com</a> with questions.'],
+  ['How does the match pick wheel bases?', 'With fixed rules: your platform and budget filter the bases in our comparison table, your mount sets a torque limit, and your experience and driving style set the torque range to aim for. Within that, the order is price per Nm. Partner links are never an input. Email <a href="mailto:info@simracingmatch.com">info@simracingmatch.com</a> with questions.'],
 ];
 
 export const home = {
@@ -21,7 +26,8 @@ export const home = {
   ogTitle: 'SimracingMatch: find the setup that fits you',
   h1: 'Find the sim racing setup that fits you',
   og: 'home',
-  lastmod: MVF_DATE,
+  lastmod: MATCH_DATE,
+  scripts: ['/js/match.js'],
   description: 'Match a sim racing wheel, pedals and rig to your budget, platform and space. Manufacturer data only. Partner links disclosed — they never change the order.',
   schema: [faqSchema(homeFaq)],
   // hreflangNl left empty until /nl/ exists
@@ -36,7 +42,6 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 <a class="btn ghost" href="/blog/">Read the blog <span aria-hidden="true">→</span></a>` : `<a class="btn lg" href="/blog/" data-cta="home_hero_blog">Read the blog</a>
 <a class="btn ghost" href="/#setup-match" data-cta="home_hero" data-quiz="start">Preview the 5 questions <span aria-hidden="true">↓</span></a>`}
 </div>
-<p class="cta-hint"><span class="soon">Coming soon</span> The interactive match launches soon. Until then, read the blog.</p>
 </div>
 <div class="hero-art">
 <div class="hero-a brands" data-block="hero-brands">
@@ -85,20 +90,25 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 <li><a href="/wheel-bases/how-much-torque/" data-cta="home_wb">How much torque do you need?</a><span class="muted"> What makers advise, and what your mount must hold.</span></li>
 <li><a href="/wheel-bases/moza-vs-fanatec/" data-cta="home_wb">Moza vs Fanatec</a><span class="muted"> Both brands’ direct drive bases: torque, price and platforms.</span></li>
 </ul>
-<p class="muted">Updated <time datetime="${MVF_DATE}">${fmtDate(MVF_DATE)}</time></p>
+<p class="muted">Updated <time datetime="${MATCH_DATE}">${fmtDate(MATCH_DATE)}</time></p>
 
 <section id="setup-match" class="band">
-<h2>The setup match — 5 questions <span class="soon">Coming soon</span></h2>
-<p class="muted">The interactive match is coming soon. Here are the five questions it will ask. Until then, read the blog for the latest wheelbase and pedal news.</p>
+<h2>The setup match: 5 questions</h2>
+<p class="muted">Answer five questions and see which direct drive wheel bases from our <a href="/wheel-bases/compare/">comparison table</a> fit you. Free, no account, and your answers stay in your browser.</p>
+<form id="match-form" class="match" hidden>
 <div class="qgrid">
-<article class="qcard">${SVG.budget}<strong>1. Budget</strong><span>Under €300 · €300–700 · €700–1,500 · Over €1,500</span></article>
-<article class="qcard">${SVG.platform}<strong>2. Platform</strong><span>PC · PlayStation 5 · Xbox</span></article>
-<article class="qcard">${SVG.space}<strong>3. Space</strong><span>Desk clamp · Foldable · Fixed cockpit</span></article>
-<article class="qcard">${SVG.experience}<strong>4. Experience</strong><span>Beginner / casual · Serious upgrader</span></article>
-<article class="qcard">${SVG.style}<strong>5. Driving style</strong><span>Casual (GT, F1, Forza) · Competitive (iRacing, ACC)</span></article>
+${q(1, 'budget', 'Budget for the wheel base', [['u300', 'Under €300'], ['300-700', 'Up to €700'], ['700-1500', 'Up to €1,500'], ['o1500', 'Over €1,500']])}
+${q(2, 'platform', 'Platform', [['pc', 'PC'], ['playstation', 'PlayStation 5'], ['xbox', 'Xbox']])}
+${q(3, 'space', 'Space and mount', [['desk', 'Desk clamp'], ['stand', 'Wheel stand'], ['cockpit', 'Fixed cockpit']])}
+${q(4, 'experience', 'Experience', [['beginner', 'Beginner / casual'], ['upgrader', 'Serious upgrader']])}
+${q(5, 'style', 'Driving style', [['casual', 'Casual (GT, F1, Forza)'], ['competitive', 'Competitive (iRacing, ACC)']])}
 </div>
-<p class="actions"><a class="btn" href="/blog/" data-cta="match_teaser_blog">Coming soon — read the blog</a></p>
-<p class="muted">Match logic never reads partner links. Commission cannot change the order.</p>
+<p class="actions"><button type="submit" class="btn" data-quiz="submit">Show my matches</button></p>
+</form>
+<noscript><p>The match needs JavaScript. You can use the <a href="/wheel-bases/compare/">comparison table</a> instead.</p></noscript>
+<div id="match-results" class="match-results" tabindex="-1" aria-live="polite"></div>
+<p class="muted">How it works: platform and budget filter the bases; a desk clamp allows up to 12 Nm and a wheel stand up to 18 Nm, as our <a href="/wheel-bases/how-much-torque/">torque guide</a> explains; experience and driving style set the range to aim for (5–8 Nm to start, 8–15 Nm for most drivers, as the makers advise). Then price per Nm, low to high. Match logic never reads partner links. Commission cannot change the order.</p>
+<script type="application/json" id="match-data">${matchJson()}</script>
 </section>
 
 <h2>How we work</h2>
@@ -136,13 +146,14 @@ ${rights(SITE.email)}</article>`,
 };
 
 export const disclaimer = {
-  path: '/disclaimer/', title: 'Disclaimer | SimracingMatch', h1: 'Disclaimer', crumb: 'Disclaimer', og: 'home',
+  path: '/disclaimer/', title: 'Disclaimer | SimracingMatch', h1: 'Disclaimer', crumb: 'Disclaimer', og: 'home', lastmod: MATCH_DATE,
   description: 'Terms for SimracingMatch: where specs and prices come from, how partner links work, and what the match result means.',
   hreflangNl: '',
   body: `<article class="prose"><h1>Disclaimer</h1>
+<p class="muted">Updated <time datetime="${MATCH_DATE}">${fmtDate(MATCH_DATE)}</time></p>
 <p>SimracingMatch summarises sim racing hardware from what manufacturers and official shops publish. We aim to keep pages accurate and current, and we show the last check date on each page.</p>
 <h2>Specs and prices</h2><p>All specs and prices come from the manufacturer or official shop on the date shown. Prices, stock and platform compatibility can change. The seller’s offer always wins.</p>
-<h2>The match</h2><p>The setup match (coming soon) is a helper based on fixed rules and your answers. It is a first shortlist, not personal advice. Always confirm compatibility with the manufacturer.</p>
+<h2>The match</h2><p>The setup match is a helper based on fixed rules and your answers. It is a first shortlist, not personal advice. Always confirm compatibility with the manufacturer.</p>
 <h2>Partner links</h2><p>For some products we may earn a fee if you buy through us. Those links are always disclosed where they appear. They never affect the match or on-page order.</p>
 <h2>No reviews or stars</h2><p>We do not show star ratings or invented tests we have not done.</p>
 <h2>Brands</h2><p>Brand names belong to their owners. SimracingMatch is not affiliated with those brands.</p>

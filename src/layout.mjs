@@ -9,7 +9,7 @@ if (GA_ID && !GA_ID_RE.test(GA_ID)) throw new Error(`Invalid GA_ID "${GA_ID}"`);
 export const BASE = (process.env.BASE || '').replace(/\/$/, '');
 export const PREVIEW = BASE !== '' || process.env.PREVIEW === '1';
 /** Is de setup-match live? Zolang dit false is, beloven de CTA's geen match: 'Preview the match' en de blog als hoofdknop (audit 20-10, F2). */
-export const MATCH_LIVE = false;
+export const MATCH_LIVE = true;
 export const MATCH_CTA = MATCH_LIVE ? 'Find your setup' : 'Preview the match';
 const G = GA_ID ? { script: ' https://www.googletagmanager.com', connect: ' https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com', img: ' https://*.google-analytics.com https://www.googletagmanager.com' } : { script: '', connect: '', img: '' };
 
