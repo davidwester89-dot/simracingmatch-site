@@ -17,6 +17,10 @@ test('filters on platform and budget only (mount = note); best fit first, then p
   assert.ok(r[0].inBand);
   assert.equal(matchBases(BASES, { budget: 'u300', platform: 'playstation', space: 'desk', experience: 'beginner', style: 'casual' }).length, 0);
   assert.ok(matchBases(BASES, { budget: 'o1500', platform: 'pc', space: 'cockpit', experience: 'upgrader', style: 'competitive' }).length === BASES.filter((b) => b.platforms.includes('PC')).length);
+  // No hidden mount cap (SC 5-11): a desk answer with the top budget still returns bases above 12 and 18 Nm.
+  const desk = matchBases(BASES, { budget: 'o1500', platform: 'pc', space: 'desk', experience: 'upgrader', style: 'competitive' });
+  assert.ok(desk.some((b) => b.nm > 12) && desk.some((b) => b.nm > 18));
+  assert.equal(desk.length, BASES.filter((b) => b.platforms.includes('PC')).length);
   assert.deepEqual(targetBand('beginner', 'casual'), [5, 8]);
   assert.deepEqual(targetBand('upgrader', 'competitive'), [10, 15]);
 });

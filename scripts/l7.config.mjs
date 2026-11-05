@@ -14,3 +14,9 @@ export const ALLOW_NAME = [{ file: /^(blog\/[\w-]+|wheel-bases\/compare)\/index\
 export const BEKEND_ORPHAN = []; // SC 30-10 besluit 2: geserveerd = publiek, geen allowlist; build-only modules uit de output (zie build.mjs)
 // Hub-audit: bestaande bevindingen op origin/main (30-10). Haal een regel weg zodra de hub is gefixt; dan bewaakt de test hem.
 export const BEKEND_HUB = [];
+// L7: bekende template-wijzigingen zonder inhoudswijziging (SC 5-11, keuzehulp live). Verloopt op tot; daarna weer rood.
+export const BEKEND_L7 = [
+  { pad: '/blog/simracing-expo-2026-announcements/', tot: '2026-11-19', reden: 'gedeelde CTA-tekst keuzehulp, geen inhoudswijziging' },
+  { pad: '/wheel-bases/compare/', tot: '2026-11-19', reden: 'gedeelde CTA-tekst keuzehulp, geen inhoudswijziging' },
+  { pad: '/wheel-bases/direct-drive-vs-belt/', tot: '2026-11-19', reden: 'gedeelde CTA-tekst keuzehulp, geen inhoudswijziging' },
+];

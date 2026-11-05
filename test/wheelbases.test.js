@@ -9,8 +9,8 @@ import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/wheel-bases/how-much-torque/', '/wheel-bases/moza-vs-fanatec/'];
 // [datePublished, dateModified] per page: compare links to Moza vs Fanatec since MVF_DATE (body change, L7).
-// Since MATCH_DATE the match link text changed on compare, belt and torque (match live, L7).
-const DATES = { '/wheel-bases/compare/': [WB_DATE, MATCH_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, MATCH_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, MATCH_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
+// Since MATCH_DATE the torque page body links to the live match (L7); compare and belt only have template changes.
+const DATES = { '/wheel-bases/compare/': [WB_DATE, MVF_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, MATCH_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
 
 test('compare order: price per Nm low to high, unknown prices last; no commission input', () => {
   const s = sortedBases();

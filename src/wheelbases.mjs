@@ -135,7 +135,7 @@ export const wbCompare = page({
   keyword: 'direct drive wheel base comparison',
   description: 'Compare direct drive wheel bases from Moza, Fanatec, Simucube, Asetek, Logitech G and Thrustmaster: torque, platforms, EU price and price per Nm.',
   scripts: ['/js/wb-filter.js'],
-  updated: MATCH_DATE,
+  updated: MVF_DATE,
   body: `<p class="lead">This table puts the direct drive wheel bases that six brands sell on their own EU stores side by side: torque, platforms, regular price and price per Nm. We read every figure on the maker’s product page on ${fmtDate(WB_CHECKED)}. The order is price per Nm, lowest first, and it never depends on commission.</p>
 <p>New to direct drive? Read <a href="/wheel-bases/direct-drive-vs-belt/">how direct drive differs from belt and gear drive</a> first. Not sure how strong a base you need? See <a href="/wheel-bases/how-much-torque/">how much torque you need for sim racing</a>. Choosing between two brands? Read <a href="/wheel-bases/moza-vs-fanatec/">Moza vs Fanatec</a>.</p>
 <h2>The comparison table</h2>
@@ -185,7 +185,6 @@ ${sources(sortedBases().map((b) => [`${b.brand}: ${b.model}`, b.url]).concat([
 
 export const wbDdVsBelt = page({
   path: '/wheel-bases/direct-drive-vs-belt/',
-  updated: MATCH_DATE,
   title: 'Direct Drive vs Belt Driven Wheel | SimracingMatch',
   h1: 'Direct drive vs belt driven wheel: what is the difference?',
   crumb: 'Direct drive vs belt',
