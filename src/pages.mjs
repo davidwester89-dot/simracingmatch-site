@@ -34,12 +34,12 @@ export const home = {
   hreflangNl: '',
   body: `<section class="hero">
 <div>
-<p class="hero-brand">SimracingMatch.com</p>
+<p class="hero-brand">Simracing<span class="wm-match">match</span>.com</p>
 <h1>Find the sim racing setup that <em>fits you</em></h1>
 <p class="lead">Answer five short questions. Get setups that match your platform, budget and space — ranked by fit, never by commission.</p>
 <div class="actions">
 ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data-quiz="start">Find your setup</a>
-<a class="btn ghost" href="/blog/">Read the blog <span aria-hidden="true">→</span></a>` : `<a class="btn lg" href="/blog/" data-cta="home_hero_blog">Read the blog</a>
+<a class="btn ghost" href="/wheel-bases/compare/" data-cta="home_hero_compare">Compare wheel bases</a>` : `<a class="btn lg" href="/blog/" data-cta="home_hero_blog">Read the blog</a>
 <a class="btn ghost" href="/#setup-match" data-cta="home_hero" data-quiz="start">Preview the 5 questions <span aria-hidden="true">↓</span></a>`}
 </div>
 </div>
@@ -56,7 +56,7 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 </ul>
 </div>
 <div class="hero-b" aria-hidden="true"><svg class="telem" viewBox="0 0 360 240" focusable="false">
-<defs><linearGradient id="tf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5c518" stop-opacity=".28"/><stop offset="1" stop-color="#f5c518" stop-opacity="0"/></linearGradient></defs>
+<defs><linearGradient id="tf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF6200" stop-opacity=".28"/><stop offset="1" stop-color="#FF6200" stop-opacity="0"/></linearGradient></defs>
 <g class="telem-grid"><line x1="0" y1="40" x2="360" y2="40"/><line x1="0" y1="80" x2="360" y2="80"/><line x1="0" y1="120" x2="360" y2="120"/><line x1="0" y1="160" x2="360" y2="160"/><line x1="0" y1="200" x2="360" y2="200"/><line x1="40" y1="0" x2="40" y2="240"/><line x1="80" y1="0" x2="80" y2="240"/><line x1="120" y1="0" x2="120" y2="240"/><line x1="160" y1="0" x2="160" y2="240"/><line x1="200" y1="0" x2="200" y2="240"/><line x1="240" y1="0" x2="240" y2="240"/><line x1="280" y1="0" x2="280" y2="240"/><line x1="320" y1="0" x2="320" y2="240"/></g>
 <g class="sector"><line x1="120" y1="36" x2="120" y2="226"/><line x1="240" y1="36" x2="240" y2="226"/></g>
 <text class="tag" x="60" y="232" text-anchor="middle">S1</text><text class="tag" x="180" y="232" text-anchor="middle">S2</text><text class="tag" x="300" y="232" text-anchor="middle">S3</text>
@@ -65,7 +65,7 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 <path class="telem-line" pathLength="1" d="M12 176 L42 168 L66 172 L92 128 L118 138 L146 96 L172 108 L200 74 L228 90 L256 56 L284 62 L312 40 L348 46"/>
 <circle class="telem-dot" cx="348" cy="46" r="5"/>
 <text class="hud" x="18" y="24">PIT WALL · THROTTLE TRACE</text>
-<g class="legend"><rect x="250" y="15" width="10" height="3" fill="#f5c518"/><text class="tag" x="264" y="20">THR</text><rect x="300" y="15" width="10" height="3" fill="#e8edf4"/><text class="tag" x="314" y="20">BRK</text></g>
+<g class="legend"><rect x="250" y="15" width="10" height="3" fill="#FF6200"/><text class="tag" x="264" y="20">THR</text><rect x="300" y="15" width="10" height="3" fill="#e8edf4"/><text class="tag" x="314" y="20">BRK</text></g>
 </svg></div>
 </div>
 </section>
