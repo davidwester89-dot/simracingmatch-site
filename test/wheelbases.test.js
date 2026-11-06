@@ -3,14 +3,15 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
-import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, LCP_DATE, WB_LOGOS, MATCH_DATE } from '../src/wheelbases.mjs';
+import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, LCP_DATE, WB_LOGOS, MATCH_DATE, MOZA_REF_DATE } from '../src/wheelbases.mjs';
 import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 
 const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/wheel-bases/how-much-torque/', '/wheel-bases/moza-vs-fanatec/'];
-// [datePublished, dateModified] per page: compare links to Moza vs Fanatec since MVF_DATE (body change, L7).
-// Since MATCH_DATE the torque page body links to the live match (L7); compare and belt only have template changes.
-const DATES = { '/wheel-bases/compare/': [WB_DATE, MVF_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, MATCH_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
+// [datePublished, dateModified] per page.
+// Compare: Moza partner ref updated on MOZA_REF_DATE (L7). Torque: live match link since MATCH_DATE.
+// Belt stays WB_DATE (template-only). Moza vs Fanatec links to the load-cell post since LCP_DATE.
+const DATES = { '/wheel-bases/compare/': [WB_DATE, MOZA_REF_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, MATCH_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
 
 test('compare order: price per Nm low to high, unknown prices last; no commission input', () => {
   const s = sortedBases();
@@ -49,7 +50,7 @@ test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push
     assert.equal(s.split('<p class="pnoot">').length - 1, sponsored.length ? 1 : 0, `${p}: disclosure count`);
   }
   const c = readFileSync('dist/wheel-bases/compare/index.html', 'utf8');
-  assert.ok(c.includes('href="https://eu.mozaracing.com/?ref=DAVIDWEST" rel="sponsored nofollow noopener"'));
+  assert.ok(c.includes('href="https://eu.mozaracing.com/?ref=simracingmatch" rel="sponsored nofollow noopener"'));
   assert.match(c, /Some links are partner links; this never affects the ranking\./);
   assert.ok(c.includes('href="https://sim-lab.eu/?ref=SINRACINGMATCH" rel="sponsored nofollow noopener" target="_blank" data-vendor="simlab"'), 'Sim-Lab partner button in brand stores');
   assert.ok(c.includes('href="https://pxnsimracing.sjv.io/7X6qgd" rel="sponsored nofollow noopener"'), 'PXN Impact partner button in brand stores');

@@ -15,6 +15,8 @@ export const MVF_CHECKED = '2026-11-02';
 export const LCP_DATE = '2026-11-05';
 /** Push date of the live setup match: pages whose match link text changed with it carry this as dateModified (L7). */
 export const MATCH_DATE = '2026-11-05';
+/** Push date of the Moza GoAffPro ref update on /wheel-bases/compare/ (L7). */
+export const MOZA_REF_DATE = '2026-11-06';
 /** Day we read every price and spec on the manufacturer pages. */
 export const WB_CHECKED = '2026-10-28';
 
@@ -136,7 +138,7 @@ export const wbCompare = page({
   keyword: 'direct drive wheel base comparison',
   description: 'Compare direct drive wheel bases from Moza, Fanatec, Simucube, Asetek, Logitech G and Thrustmaster: torque, platforms, EU price and price per Nm.',
   scripts: ['/js/wb-filter.js'],
-  updated: MVF_DATE,
+  updated: MOZA_REF_DATE,
   body: `<p class="lead">This table puts the direct drive wheel bases that six brands sell on their own EU stores side by side: torque, platforms, regular price and price per Nm. We read every figure on the maker’s product page on ${fmtDate(WB_CHECKED)}. The order is price per Nm, lowest first, and it never depends on commission.</p>
 <p>New to direct drive? Read <a href="/wheel-bases/direct-drive-vs-belt/">how direct drive differs from belt and gear drive</a> first. Not sure how strong a base you need? See <a href="/wheel-bases/how-much-torque/">how much torque you need for sim racing</a>. Choosing between two brands? Read <a href="/wheel-bases/moza-vs-fanatec/">Moza vs Fanatec</a>.</p>
 <h2>The comparison table</h2>
@@ -314,7 +316,7 @@ ${sources([
 });
 
 // Moza vs Fanatec (SEO briefing wk45): only the Moza and Fanatec rows of BASES (same values as /wheel-bases/compare/), re-read on
-// the brands' own product pages on MVF_CHECKED. No winner, no partner links (ALLOW_NAME keeps the Moza ref code to blog posts + compare).
+// the brands' own product pages on MVF_CHECKED. No winner, no partner links.
 const MF = ['Moza', 'Fanatec'];
 const mf = (brand) => BASES.filter((b) => b.brand === brand);
 const mfEur = (b) => eur(b.price);

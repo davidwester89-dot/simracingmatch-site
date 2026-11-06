@@ -384,7 +384,7 @@ export function hubAudit(outDir, cfg = {}) {
 // --- B. Naamgrep over ALLE geserveerde bestanden ---------------------------------------------------------------------------
 // Case-insensitive 'dave', 'wester', 'gmail'. Toegestaan (smal, per site): ALLOW_NAME = [{file: RegExp, match: RegExp, reden}];
 // match wordt getest op de treffer plus precies 1 teken ervoor en erna (dus 'Gmail' als productnaam, niet 'x@gmail.com');
-// optioneel ctx: RegExp op 80 tekens rond de treffer (exacte string, bv. de volledige Moza-URL met ?ref=DAVIDWEST).
+// optioneel ctx: RegExp op 80 tekens rond de treffer (exacte string, bv. een partner-URL met ?ref=simracingmatch).
 export const NAME_RE = /dave|wester|gmail|davidwest|david[\s_-]+west/gi; // + davidwest (zoals NAME_RE in sitecheck.py)
 export function nameGrep(outDir, allow = []) {
   const hits = [];

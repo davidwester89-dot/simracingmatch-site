@@ -7,10 +7,9 @@ export const CFG = {
   // Alleen ONTBREKENDE velden die de template van deze pagina niet heeft. Een aanwezig veld moet altijd kloppen.
   exempt: {},
 };
-// Moza-partnerlink: de refcode die Moza heeft uitgegeven bevat de naam (sitecheck.py meldt dit als INFO 'naam-in-refcode').
-// Alleen precies '=DAVIDWEST' als URL-parameterwaarde; elke andere vermelding blijft rood. Wijzigen kan alleen via Moza.
-// Moza-refcode ref=DAVIDWEST (Dave-besluit 21-10, SC-log). Exact: alleen in een Moza-href, alleen in blogposts en de vergelijkpagina.
-export const ALLOW_NAME = [{ file: /^(blog\/[\w-]+|wheel-bases\/compare)\/index\.html$/, match: /^=DAVIDWEST"$/, ctx: /href="https:\/\/eu\.mozaracing\.com\/[^"\s]*\?ref=DAVIDWEST"/, reden: 'Moza-refcode ref=DAVIDWEST (Dave-besluit)' }];
+// Naamgrep blijft rood op persoonsnamen. De Moza-ref is sinds 6-11-2026 ref=simracingmatch (geen persoonsnaam),
+// dus die hoort zonder uitzondering door. De vorige refcode stond hier als smalle uitzondering; die blijft niet staan.
+export const ALLOW_NAME = [];
 export const BEKEND_ORPHAN = []; // SC 30-10 besluit 2: geserveerd = publiek, geen allowlist; build-only modules uit de output (zie build.mjs)
 // Hub-audit: bestaande bevindingen op origin/main (30-10). Haal een regel weg zodra de hub is gefixt; dan bewaakt de test hem.
 export const BEKEND_HUB = [];

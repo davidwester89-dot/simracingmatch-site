@@ -1,8 +1,8 @@
 // Approved partner links. EMPTY until Partnermanager approves a programme for simracingmatch.com.
 // The match must NEVER import this file.
 export const PARTNERLINKS = {
-  // Moza Racing, own programme via GoAffPro (ref=DAVIDWEST), approved 21-10-2026.
-  moza: 'https://eu.mozaracing.com/?ref=DAVIDWEST',
+  // Moza Racing, own programme via GoAffPro (ref=simracingmatch), code updated 6-11-2026 (programme approved 21-10-2026).
+  moza: 'https://eu.mozaracing.com/?ref=simracingmatch',
   // PXN SIM Racing, Impact (sjv.io deep link, no ?ref=), approved 6-11-2026.
   pxn: 'https://pxnsimracing.sjv.io/7X6qgd',
   // Sim-Lab, own programme via GoAffPro (ref=SINRACINGMATCH, code as supplied), approved 28-10-2026.
