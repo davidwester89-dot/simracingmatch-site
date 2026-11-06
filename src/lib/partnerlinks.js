@@ -3,16 +3,20 @@
 export const PARTNERLINKS = {
   // Moza Racing, own programme via GoAffPro (ref=DAVIDWEST), approved 21-10-2026.
   moza: 'https://eu.mozaracing.com/?ref=DAVIDWEST',
+  // PXN SIM Racing, Impact (sjv.io deep link, no ?ref=), approved 6-11-2026.
+  pxn: 'https://pxnsimracing.sjv.io/7X6qgd',
   // Sim-Lab, own programme via GoAffPro (ref=SINRACINGMATCH, code as supplied), approved 28-10-2026.
   simlab: 'https://sim-lab.eu/?ref=SINRACINGMATCH',
 };
 
-/** Vendor key when href is an approved partner link (same host + same ref), else ''. */
+/** Vendor key when href is an approved partner link. Exact URL first (Impact sjv.io without ?ref=); else same host + same ref (GoAffPro). */
 export function partnerVendor(href) {
   let u; try { u = new URL(href); } catch { return ''; }
   for (const [vendor, p] of Object.entries(PARTNERLINKS)) {
+    if (href === p) return vendor;
     const q = new URL(p);
-    if (u.hostname === q.hostname && u.searchParams.get('ref') === q.searchParams.get('ref')) return vendor;
+    const ref = q.searchParams.get('ref');
+    if (ref != null && u.hostname === q.hostname && u.searchParams.get('ref') === ref) return vendor;
   }
   return '';
 }

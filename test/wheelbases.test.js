@@ -52,6 +52,8 @@ test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push
   assert.ok(c.includes('href="https://eu.mozaracing.com/?ref=DAVIDWEST" rel="sponsored nofollow noopener"'));
   assert.match(c, /Some links are partner links; this never affects the ranking\./);
   assert.ok(c.includes('href="https://sim-lab.eu/?ref=SINRACINGMATCH" rel="sponsored nofollow noopener" target="_blank" data-vendor="simlab"'), 'Sim-Lab partner button in brand stores');
+  assert.ok(c.includes('href="https://pxnsimracing.sjv.io/7X6qgd" rel="sponsored nofollow noopener"'), 'PXN Impact partner button in brand stores');
+  assert.ok(c.includes('data-vendor="pxn"'), 'PXN data-vendor on compare store buttons');
   assert.ok(c.includes('<li><a href="https://sim-lab.eu/products/dds-torquesync" rel="noopener">'), 'Sim-Lab source stays a neutral link');
   assert.doesNotMatch(c, /<li><a href="[^"]*\?ref=/, 'no partner link in the sources list');
   assert.doesNotMatch(c, /sale €|special price/i, 'no sale prices on the compare page (L4)');

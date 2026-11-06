@@ -64,12 +64,13 @@ export const sortedBases = () => [...BASES].sort((a, b) => {
   return x - y;
 });
 
-/** Store links for the button block, alphabetical. Partner links (Moza, Sim-Lab) only via PARTNERLINKS; order never depends on it. */
+/** Store links for the button block, alphabetical. Partner links (Moza, PXN, Sim-Lab) only via PARTNERLINKS; order never depends on it. */
 const STORES = [
   ['asetek', 'Asetek Racing', 'https://www.asetek.com/simsports/product-category/wheelbases/'],
   ['fanatec', 'Fanatec', 'https://www.fanatec.com/eu/en/c/wheel-bases'],
   ['logitech-g', 'Logitech G', 'https://www.logitechg.com/en-eu/shop/c/racing-wheels-pedals'],
   ['moza', 'Moza Racing', PARTNERLINKS.moza],
+  ['pxn', 'PXN', PARTNERLINKS.pxn],
   ['simlab', 'Sim-Lab', PARTNERLINKS.simlab],
   ['simucube', 'Simucube', 'https://simucube.com/'],
   ['thrustmaster', 'Thrustmaster', 'https://shop.thrustmaster.com/en_eu/products-steering-wheels/plateform.html'],

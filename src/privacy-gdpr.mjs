@@ -1,10 +1,10 @@
 // Extra GDPR blocks for /privacy/ (security & legal audit 20-10-2026, A.6 / F1).
 // Only established facts: cookie lifetime from consent.js (cookie_expires), GA4 retention from the property setting.
 // "Who is responsible?" is deliberately NOT here: that follows the business-registration decision.
-export const PRIVACY_UPDATED = '21 October 2026';
+export const PRIVACY_UPDATED = '6 November 2026';
 
 const NETWORKS = [
-  { re: /(^|\.)pxf\.io$|impact\.com$/, name: 'Impact', privacy: 'https://impact.com/privacy-policy/' },
+  { re: /(^|\.)sjv\.io$|(^|\.)pxf\.io$|impact\.com$/, name: 'Impact', privacy: 'https://impact.com/privacy-policy/' },
   { re: /(^|\.)mozaracing\.com$|(^|\.)sim-lab\.eu$/, name: 'GoAffPro', privacy: 'https://goaffpro.com/privacy' },
   { re: /(^|\.)jf79\.net$|ds1\.nl$|daisycon\./, name: 'Daisycon', privacy: 'https://daisycon.com/en/legal-information/privacy-policy/' },
 ];
