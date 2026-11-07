@@ -9,6 +9,35 @@ export const PARTNERLINKS = {
   simlab: 'https://sim-lab.eu/?ref=SINRACINGMATCH',
 };
 
+// EU product commercial exits for the five Moza wheel bases (portal Product Links preview, 7 Nov 2026).
+// Referral panel showed 5% and ref=eerlukwf. Same EU product paths as the editorial source URLs, plus this ref.
+// Does not replace PARTNERLINKS.moza and is not a global-portal approval.
+export const MOZA_EU_PRODUCT_EXITS = Object.freeze({
+  'R9 V3': 'https://eu.mozaracing.com/products/r9-wheelbase?ref=eerlukwf',
+  'R12 V2': 'https://eu.mozaracing.com/products/r12-wheelbase?ref=eerlukwf',
+  'R16 Ultra': 'https://eu.mozaracing.com/products/r16-ultra?ref=eerlukwf',
+  'R21 Ultra': 'https://eu.mozaracing.com/products/r21-ultra?ref=eerlukwf',
+  'R25 Ultra': 'https://eu.mozaracing.com/products/r25-ultra?ref=eerlukwf',
+});
+
+const MOZA_EU_EXIT_RE = /^https:\/\/eu\.mozaracing\.com\/products\/([a-z0-9-]+)\?ref=eerlukwf$/;
+
+/** Exact EU product exit for a comparison model, or '' when this model has none. */
+export function mozaEuProductExit(model, sourceUrl) {
+  const href = MOZA_EU_PRODUCT_EXITS[model] || '';
+  if (!href) return '';
+  if (!MOZA_EU_EXIT_RE.test(href)) throw new Error(`Bad Moza EU product exit for ${model}`);
+  if (sourceUrl != null && href.slice(0, href.indexOf('?')) !== sourceUrl) {
+    throw new Error(`Moza EU product exit is not the same EU page as the source for ${model}`);
+  }
+  return href;
+}
+
+export function mozaExitSlug(href) {
+  const m = String(href).match(MOZA_EU_EXIT_RE);
+  return m ? m[1] : '';
+}
+
 /** Vendor key when href is an approved partner link. Exact URL first (Impact sjv.io without ?ref=); else same host + same ref (GoAffPro). */
 export function partnerVendor(href) {
   let u; try { u = new URL(href); } catch { return ''; }
@@ -30,6 +59,12 @@ export function uitgaand(href, { partner = false, label = 'Visit shop', vendor =
 export function knop(href, pos, { partner = false, label = 'Visit shop', vendor = 'external', cls = 'btn' } = {}) {
   const o = uitgaand(href, { partner, label, vendor });
   return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${o.vendor}" data-pos="${pos}" data-cta="outbound"${partner ? ` data-partner-slot="${o.vendor}"` : ''}>${o.label}</a>`;
+}
+
+/** Comparison-table commercial exit: same rel, target and vendor_click hooks as knop(), without the button class. */
+export function productExitAnchor(href, pos, { vendor = 'moza', label = 'product page' } = {}) {
+  const o = uitgaand(href, { partner: true, label, vendor });
+  return `<a href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${o.vendor}" data-pos="${pos}" data-cta="outbound" data-partner-slot="${o.vendor}">${o.label}</a>`;
 }
 
 // Partner note: no label per button; exactly one short sentence right after each block (or paragraph/list) that

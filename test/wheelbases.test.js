@@ -3,15 +3,15 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
-import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, LCP_DATE, WB_LOGOS, MATCH_DATE, MOZA_REF_DATE } from '../src/wheelbases.mjs';
-import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
+import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, LCP_DATE, WB_LOGOS, MATCH_DATE, MOZA_EU_EXIT_DATE } from '../src/wheelbases.mjs';
+import { PARTNERLINKS, MOZA_EU_PRODUCT_EXITS } from '../src/lib/partnerlinks.js';
 
 const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/wheel-bases/how-much-torque/', '/wheel-bases/moza-vs-fanatec/'];
 // [datePublished, dateModified] per page.
-// Compare: Moza partner ref updated on MOZA_REF_DATE (L7). Torque: live match link since MATCH_DATE.
+// Compare: Moza EU product exits on MOZA_EU_EXIT_DATE (L7). Torque: live match link since MATCH_DATE.
 // Belt stays WB_DATE (template-only). Moza vs Fanatec links to the load-cell post since LCP_DATE.
-const DATES = { '/wheel-bases/compare/': [WB_DATE, MOZA_REF_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, MATCH_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
+const DATES = { '/wheel-bases/compare/': [WB_DATE, MOZA_EU_EXIT_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, MATCH_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
 
 test('compare order: price per Nm low to high, unknown prices last; no commission input', () => {
   const s = sortedBases();
@@ -46,8 +46,10 @@ test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push
     assert.doesNotMatch(s, /aggregateRating|ratingValue|"Review"/);
     assert.ok(sm.includes(`<loc>https://simracingmatch.com${p}</loc><lastmod>${mod}</lastmod>`), `${p}: sitemap`);
     const sponsored = [...s.matchAll(/<a\s[^>]*rel="sponsored nofollow noopener"[^>]*>/g)].map((m) => m[0].match(/href="([^"]+)"/)[1]);
-    for (const h of sponsored) assert.ok(Object.values(PARTNERLINKS).includes(h), `${p}: ${h}`);
-    assert.equal(s.split('<p class="pnoot">').length - 1, sponsored.length ? 1 : 0, `${p}: disclosure count`);
+    const allowed = new Set([...Object.values(PARTNERLINKS), ...Object.values(MOZA_EU_PRODUCT_EXITS)]);
+    for (const h of sponsored) assert.ok(allowed.has(h), `${p}: ${h}`);
+    const notes = p === '/wheel-bases/compare/' ? 2 : (sponsored.length ? 1 : 0);
+    assert.equal(s.split('<p class="pnoot">').length - 1, notes, `${p}: disclosure count`);
   }
   const c = readFileSync('dist/wheel-bases/compare/index.html', 'utf8');
   assert.ok(c.includes('href="https://eu.mozaracing.com/?ref=simracingmatch" rel="sponsored nofollow noopener"'));
@@ -118,7 +120,15 @@ test('Moza vs Fanatec (SEO wk45): only Moza and Fanatec rows with the compare va
   const rows = [...m.match(/<tbody>([\s\S]*?)<\/tbody>/)[1].matchAll(/<tr [^>]*>([\s\S]*?)<\/tr>/g)].map((x) => x[1]);
   const want = sortedBases().filter((b) => b.brand === 'Moza' || b.brand === 'Fanatec');
   assert.equal(rows.length, want.length);
-  rows.forEach((r, i) => assert.ok(c.includes(r), `row ${i + 1} (${want[i].model}) identical to the compare table`));
+  rows.forEach((r, i) => {
+    const b = want[i];
+    if (b.brand === 'Moza') {
+      assert.ok(r.includes(`href="${b.url}" rel="noopener">product page</a>`), `${b.model}: editorial source on Moza vs Fanatec`);
+      assert.ok(!c.includes(r), `${b.model}: compare commercial exit is not the editorial source cell`);
+    } else {
+      assert.ok(c.includes(r), `row ${i + 1} (${b.model}) identical to the compare table`);
+    }
+  });
   for (const h of ['/wheel-bases/compare/', '/wheel-bases/how-much-torque/', '/wheel-bases/direct-drive-vs-belt/', '/blog/ps5-direct-drive-wheels-2026/']) assert.ok(m.includes(`href="${h}"`), h);
   assert.ok(c.includes('href="/wheel-bases/moza-vs-fanatec/"'), 'compare → Moza vs Fanatec');
   assert.ok(readFileSync('dist/index.html', 'utf8').includes('href="/wheel-bases/moza-vs-fanatec/"'), 'home → Moza vs Fanatec');

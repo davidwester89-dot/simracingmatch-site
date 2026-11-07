@@ -1,10 +1,11 @@
 // Setup match on the home page. Without JS the five questions stay visible as text; nothing is hidden.
 import { matchBases, targetBand, MOUNT_NOTES } from './match-logic.js';
+import { quizHasPartnerExit, quizShopLink } from './match-exit.js';
 const form = document.getElementById('match-form');
 const out = document.getElementById('match-results');
 const dataEl = document.getElementById('match-data');
 if (form && out && dataEl) {
-  const { bases, logos, checked } = JSON.parse(dataEl.textContent);
+  const { bases, logos, checked, partnerNote } = JSON.parse(dataEl.textContent);
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const eur = (n) => '€' + n.toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const card = (b) => {
@@ -13,7 +14,7 @@ if (form && out && dataEl) {
 <strong>${esc(b.brand)} ${esc(b.model)}</strong>
 <span>${esc(b.torque)}</span><span>Platforms: ${b.platforms.join(', ')}${b.note ? ` <span class="muted">(${esc(b.note)})</span>` : ''}</span>
 <span>Regular price: ${eur(b.price)} · ${eur(Math.round(b.perNm * 100) / 100)} per Nm</span>
-<a class="btn ghost" href="${b.url}" rel="noopener" target="_blank">Manufacturer page</a></li>`;
+${quizShopLink(b)}</li>`;
   };
   form.hidden = false;
   form.addEventListener('submit', (e) => {
@@ -24,10 +25,12 @@ if (form && out && dataEl) {
     const res = matchBases(bases, a);
     const [lo, hi] = targetBand(a.experience, a.style);
     const top = res.slice(0, 3), rest = res.slice(3);
+    const note = quizHasPartnerExit(res) && partnerNote ? `<p class="pnoot">${esc(partnerNote)}</p>` : '';
     out.innerHTML = res.length
       ? `<h3>Your matches</h3><p class="muted">Aim for ${lo}–${hi} Nm based on your answers. ${res.length} wheel base${res.length > 1 ? 's' : ''} fit. Best fit first, then price per Nm. Base only: add a wheel, pedals and a mount. Prices checked on the manufacturers’ EU stores on ${esc(checked)}.</p>
 <p class="muted">Mount: ${esc(MOUNT_NOTES[a.space])} See <a href="/wheel-bases/how-much-torque/">what your mount must hold</a>.</p>
 <ol class="mlist">${top.map(card).join('')}</ol>${rest.length ? `<details><summary>Show the other ${rest.length}</summary><ol class="mlist">${rest.map(card).join('')}</ol></details>` : ''}
+${note}
 <p>Next: <a href="/blog/load-cell-pedals/">choose pedals</a> · <a href="/wheel-bases/how-much-torque/">what your mount must hold</a> · <a href="/wheel-bases/compare/">full comparison</a></p>`
       : `<h3>No exact match</h3><p>No wheel base in our <a href="/wheel-bases/compare/">comparison</a> fits all your answers. Try a higher budget or another platform. On console, check the platform notes in the table.</p>`;
     out.focus();

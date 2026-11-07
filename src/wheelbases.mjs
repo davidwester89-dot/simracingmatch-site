@@ -3,7 +3,7 @@
 // No estimates: a value we cannot read on the page stays 'unknown'. 'Price per Nm' is a plain sum (price / Nm), never a verdict.
 // Order: price per Nm, low to high. Never commission or partner status. Partner links only via src/lib/partnerlinks.js.
 import { SITE, esc, ORG, AUTHOR, fmtDate, MATCH_CTA, MATCH_LIVE } from './layout.mjs';
-import { PARTNERLINKS, knop } from './lib/partnerlinks.js';
+import { PARTNERLINKS, knop, mozaEuProductExit, mozaExitSlug, productExitAnchor } from './lib/partnerlinks.js';
 
 /** Expected push/go-live date: every date field (visible, JSON-LD, sitemap). */
 export const WB_DATE = '2026-10-30';
@@ -17,6 +17,8 @@ export const LCP_DATE = '2026-11-05';
 export const MATCH_DATE = '2026-11-05';
 /** Push date of the Moza GoAffPro ref update on /wheel-bases/compare/ (L7). */
 export const MOZA_REF_DATE = '2026-11-06';
+/** Push date of the EU product-exit tracking for the five Moza bases (quiz + /wheel-bases/compare/, L7). */
+export const MOZA_EU_EXIT_DATE = '2026-11-07';
 /** Day we read every price and spec on the manufacturer pages. */
 export const WB_CHECKED = '2026-10-28';
 
@@ -116,18 +118,23 @@ const brandLogo = (brand) => {
 };
 
 function compareTable(brands = null) {
+  // Full comparison sells a product exit per row. Moza vs Fanatec keeps the editorial source URL (no partner link).
+  const commercial = !brands;
   const rows = sortedBases().filter((b) => !brands || brands.includes(b.brand)).map((b) => {
     const pn = perNm(b);
     const priceCell = b.price == null ? `unknown <span class="muted">(${esc(b.shown)})</span>`
       : `${eur(b.price)}${b.exVat ? `<br><span class="muted">our sum: ${eur(b.exVat)} excl. VAT + 21% Dutch VAT</span>` : ''}`;
-    return `<tr data-platforms="${b.platforms.join(' ').toLowerCase()}"><td>${brandLogo(b.brand)}<strong>${esc(b.brand)}</strong> ${esc(b.model)}</td><td>${esc(b.torque)}</td><td>${b.platforms.join(', ')}${b.note ? ` <span class="muted">(${esc(b.note)})</span>` : ''}</td><td>${priceCell}</td><td>${pn == null ? 'unknown' : eur(Math.round(pn * 100) / 100)}</td><td>${a(b.url, 'product page')}</td></tr>`;
+    const exit = commercial ? mozaEuProductExit(b.model, b.url) : '';
+    const source = exit ? productExitAnchor(exit, `wb_compare_exit_${mozaExitSlug(exit)}`) : a(b.url, 'product page');
+    return `<tr data-platforms="${b.platforms.join(' ').toLowerCase()}"><td>${brandLogo(b.brand)}<strong>${esc(b.brand)}</strong> ${esc(b.model)}</td><td>${esc(b.torque)}</td><td>${b.platforms.join(', ')}${b.note ? ` <span class="muted">(${esc(b.note)})</span>` : ''}</td><td>${priceCell}</td><td>${pn == null ? 'unknown' : eur(Math.round(pn * 100) / 100)}</td><td>${source}</td></tr>`;
   }).join('\n');
-  return `<div class="wb-filter" hidden><p class="muted">Show bases for:</p><div class="actions"><button type="button" class="btn ghost" data-wb="all" aria-pressed="true">All platforms</button><button type="button" class="btn ghost" data-wb="pc" aria-pressed="false">PC</button><button type="button" class="btn ghost" data-wb="playstation" aria-pressed="false">PlayStation</button><button type="button" class="btn ghost" data-wb="xbox" aria-pressed="false">Xbox</button></div></div>
+  const table = `<div class="wb-filter" hidden><p class="muted">Show bases for:</p><div class="actions"><button type="button" class="btn ghost" data-wb="all" aria-pressed="true">All platforms</button><button type="button" class="btn ghost" data-wb="pc" aria-pressed="false">PC</button><button type="button" class="btn ghost" data-wb="playstation" aria-pressed="false">PlayStation</button><button type="button" class="btn ghost" data-wb="xbox" aria-pressed="false">Xbox</button></div></div>
 <div class="table-wrap wb-wrap"><table class="wb-table"><caption class="muted">Ordered by price per Nm, lowest first. Our sum: regular price ÷ Nm as the maker states it. Prices checked ${fmtDate(brands ? MVF_CHECKED : WB_CHECKED)}.</caption>
 <thead><tr><th scope="col">Wheel base</th><th scope="col">Torque (maker’s wording)</th><th scope="col">Platforms (maker)</th><th scope="col">Regular price, EU store</th><th scope="col">Price per Nm</th><th scope="col">Source</th></tr></thead>
 <tbody>
 ${rows}
 </tbody></table></div>`;
+  return commercial ? `<div class="out">${table}</div>` : table;
 }
 
 export const wbCompare = page({
@@ -138,7 +145,7 @@ export const wbCompare = page({
   keyword: 'direct drive wheel base comparison',
   description: 'Compare direct drive wheel bases from Moza, Fanatec, Simucube, Asetek, Logitech G and Thrustmaster: torque, platforms, EU price and price per Nm.',
   scripts: ['/js/wb-filter.js'],
-  updated: MOZA_REF_DATE,
+  updated: MOZA_EU_EXIT_DATE,
   body: `<p class="lead">This table puts the direct drive wheel bases that six brands sell on their own EU stores side by side: torque, platforms, regular price and price per Nm. We read every figure on the maker’s product page on ${fmtDate(WB_CHECKED)}. The order is price per Nm, lowest first, and it never depends on commission.</p>
 <p>New to direct drive? Read <a href="/wheel-bases/direct-drive-vs-belt/">how direct drive differs from belt and gear drive</a> first. Not sure how strong a base you need? See <a href="/wheel-bases/how-much-torque/">how much torque you need for sim racing</a>. Choosing between two brands? Read <a href="/wheel-bases/moza-vs-fanatec/">Moza vs Fanatec</a>.</p>
 <h2>The comparison table</h2>
