@@ -86,4 +86,5 @@ if (consent.enabled) {
     platform: e.detail && e.detail.platform,
     budget: e.detail && e.detail.budget,
   }));
+  document.addEventListener('sm:quiz-start', (e) => track('quiz_start', { page: location.pathname, cta_type: (e.detail && e.detail.cta_type) || 'match_form' }));
 }

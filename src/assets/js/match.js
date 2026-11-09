@@ -17,7 +17,15 @@ if (form && out && dataEl) {
 ${quizShopLink(b)}</li>`;
   };
   form.hidden = false;
+  let started = false;
+  const markStart = () => {
+    if (started) return;
+    started = true;
+    document.dispatchEvent(new CustomEvent('sm:quiz-start', { detail: { cta_type: 'match_form' } }));
+  };
+  form.addEventListener('change', markStart);
   form.addEventListener('submit', (e) => {
+    markStart();
     e.preventDefault();
     const f = new FormData(form);
     const a = Object.fromEntries(['budget', 'platform', 'space', 'experience', 'style'].map((k) => [k, f.get(k)]));
