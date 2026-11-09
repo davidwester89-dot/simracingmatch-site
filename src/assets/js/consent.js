@@ -76,7 +76,9 @@ if (consent.enabled) {
     if (t.matches('[data-consent-open]')) { e.preventDefault(); open(true); return; }
     if (t.dataset.vendor) track('vendor_click', { vendor: t.dataset.vendor, page: location.pathname, position: t.dataset.pos || '', cta_type: t.dataset.cta || 'outbound' });
     if (t.dataset.quiz === 'start' || t.dataset.cta === 'home_hero' || t.dataset.cta === 'match_teaser' || t.dataset.cta === 'nav_match') {
-      track('quiz_start', { page: location.pathname, cta_type: t.dataset.cta || 'quiz_start' });
+      if (track('quiz_start', { page: location.pathname, cta_type: t.dataset.cta || 'quiz_start' })) {
+        document.dispatchEvent(new CustomEvent('sm:quiz-started'));
+      }
     } else if (t.dataset.cta && (t.getAttribute('href') || '').includes(MATCH_HASH)) {
       track('match_cta', { page: location.pathname, cta_type: t.dataset.cta });
     }

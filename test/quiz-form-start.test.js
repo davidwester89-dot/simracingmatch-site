@@ -28,7 +28,9 @@ if (!process.env.QUIZ_SCENARIO) test('built match.js and consent.js carry quiz_s
   const markAt = match.indexOf('markStart();', submitAt);
   const completeAt = match.indexOf("new CustomEvent('sm:quiz'", submitAt);
   assert.ok(submitAt > 0 && markAt > submitAt && completeAt > markAt, 'markStart runs before sm:quiz on submit');
+  assert.match(match, /document\.addEventListener\('sm:quiz-started', \(\) => \{ started = true; \}, \{ once: true \}\)/);
   assert.match(consent, /document\.addEventListener\('sm:quiz-start', \(e\) => track\('quiz_start', \{ page: location\.pathname, cta_type: \(e\.detail && e\.detail\.cta_type\) \|\| 'match_form' \}\)\)/);
+  assert.match(consent, /if \(track\('quiz_start', \{ page: location\.pathname, cta_type: t\.dataset\.cta \|\| 'quiz_start' \}\)\) \{\s*document\.dispatchEvent\(new CustomEvent\('sm:quiz-started'\)\);/);
   assert.match(consent, /t\.dataset\.quiz === 'start' \|\| t\.dataset\.cta === 'home_hero' \|\| t\.dataset\.cta === 'match_teaser' \|\| t\.dataset\.cta === 'nav_match'/);
   assert.match(consent, /document\.addEventListener\('sm:quiz'/);
 });
@@ -39,7 +41,9 @@ if (!process.env.QUIZ_SCENARIO) test('consent granted or refused: form quiz_star
   const denied = run('consent-denied');
   const beforeConsent = run('before-consent-dropped');
   const cta = run('cta-unchanged');
-  const all = { change, submitOnly, denied, beforeConsent, cta };
+  const ctaForm = run('cta-then-form');
+  const ctaEarly = run('cta-before-consent');
+  const all = { change, submitOnly, denied, beforeConsent, cta, ctaForm, ctaEarly };
   writeFileSync('/tmp/srm-quiz-scenarios.json', JSON.stringify(all, null, 2));
 
   assert.deepEqual(change.events.map((e) => e.name), ['quiz_start', 'quiz_complete']);
@@ -72,6 +76,20 @@ if (!process.env.QUIZ_SCENARIO) test('consent granted or refused: form quiz_star
   assert.deepEqual(cta.events, [{ name: 'quiz_start', params: { page: '/', cta_type: 'home_hero' } }]);
   assert.equal(cta.match_form_starts, 0);
   assert.equal(cta.cta_clicks, 1);
+
+  assert.deepEqual(ctaForm.events.map((e) => e.name), ['quiz_start', 'quiz_complete']);
+  assert.equal(ctaForm.quiz_start_count, 1);
+  assert.equal(ctaForm.events[0].params.cta_type, 'home_hero');
+  assert.equal(ctaForm.events[0].params.page, '/');
+  assert.equal(ctaForm.match_form_starts, 0);
+  assert.equal(ctaForm.showed_matches, true);
+
+  assert.deepEqual(ctaEarly.events_before_accept, []);
+  assert.deepEqual(ctaEarly.events_after_accept, []);
+  assert.equal(ctaEarly.match_form_starts, 1);
+  assert.deepEqual(ctaEarly.events_after_submit.map((e) => e.name), ['quiz_start', 'quiz_complete']);
+  assert.equal(ctaEarly.events_after_submit[0].params.cta_type, 'match_form');
+  assert.equal(ctaEarly.showed_matches, true);
 });
 
 function run(name) {
@@ -96,13 +114,44 @@ function gaEvents(win) {
 }
 
 async function runScenario(name) {
-  const choice = name === 'consent-denied' ? 'denied' : (name === 'before-consent-dropped' ? null : 'granted');
+  const choice = name === 'consent-denied' ? 'denied' : (name === 'before-consent-dropped' || name === 'cta-before-consent' ? null : 'granted');
   const page = await boot(choice);
   if (name === 'cta-unchanged') {
     const steps = ['load /', 'consent granted', 'click hero CTA (no form field)'];
     page.hero.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
     const events = gaEvents(page.win);
     return { steps, events, match_form_starts: events.filter((e) => e.params.cta_type === 'match_form').length, cta_clicks: page.clicks };
+  }
+  if (name === 'cta-then-form') {
+    page.hero.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
+    page.form.scrollIntoView();
+    for (const [key, value] of Object.entries(ANSWERS)) select(page.form, key, value, true);
+    page.form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    const events = gaEvents(page.win);
+    return {
+      steps: ['load /', 'consent granted', 'click hero CTA', 'change fields', 'submit'],
+      events,
+      quiz_start_count: events.filter((e) => e.name === 'quiz_start').length,
+      match_form_starts: events.filter((e) => e.params.cta_type === 'match_form').length,
+      showed_matches: page.out.innerHTML.includes('Your matches'),
+    };
+  }
+  if (name === 'cta-before-consent') {
+    page.hero.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
+    const eventsBefore = gaEvents(page.win);
+    accept(page);
+    const eventsAfter = gaEvents(page.win);
+    for (const [key, value] of Object.entries(ANSWERS)) select(page.form, key, value, true);
+    page.form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    const eventsSubmit = gaEvents(page.win);
+    return {
+      steps: ['load /', 'no consent', 'click hero CTA', 'accept', 'change fields', 'submit'],
+      events_before_accept: eventsBefore,
+      events_after_accept: eventsAfter,
+      events_after_submit: eventsSubmit,
+      match_form_starts: eventsSubmit.filter((e) => e.name === 'quiz_start' && e.params.cta_type === 'match_form').length,
+      showed_matches: page.out.innerHTML.includes('Your matches'),
+    };
   }
   page.form.scrollIntoView();
   const emitChange = name !== 'submit-only';
@@ -289,9 +338,15 @@ function matches(node, selector) {
   });
 }
 
-function listen(target, type, fn) {
+function listen(target, type, fn, options) {
   const list = target._listeners.get(type) || [];
-  list.push(fn);
+  const once = options === true || !!(options && options.once);
+  const call = once ? (ev) => {
+    const cur = target._listeners.get(type) || [];
+    target._listeners.set(type, cur.filter((f) => f !== call));
+    fn(ev);
+  } : fn;
+  list.push(call);
   target._listeners.set(type, list);
 }
 
@@ -369,7 +424,7 @@ class El {
     while (current) { if (current === this) return true; current = current.parentNode; }
     return false;
   }
-  addEventListener(type, fn) { listen(this, type, fn); }
+  addEventListener(type, fn, options) { listen(this, type, fn, options); }
   dispatchEvent(ev) { return dispatch(this, ev); }
   focus() { if (this.ownerDocument) this.ownerDocument.activeElement = this; }
 }
@@ -389,7 +444,7 @@ class Doc {
   }
   createElement(tag) { return el(this, tag); }
   getElementById(id) { return descendants(this.body).find((node) => node.id === id) || null; }
-  addEventListener(type, fn) { listen(this, type, fn); }
+  addEventListener(type, fn, options) { listen(this, type, fn, options); }
   dispatchEvent(ev) { return dispatch(this, ev); }
   contains(node) { return node === this || this.body.contains(node) || this.head.contains(node); }
   querySelector(selector) { return this.body.querySelector(selector); }

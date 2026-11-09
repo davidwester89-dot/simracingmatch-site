@@ -24,6 +24,7 @@ ${quizShopLink(b)}</li>`;
     document.dispatchEvent(new CustomEvent('sm:quiz-start', { detail: { cta_type: 'match_form' } }));
   };
   form.addEventListener('change', markStart);
+  document.addEventListener('sm:quiz-started', () => { started = true; }, { once: true });
   form.addEventListener('submit', (e) => {
     markStart();
     e.preventDefault();
