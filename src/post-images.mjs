@@ -71,6 +71,17 @@ export const POST_IMAGES = {
     sections: {},
     noPhoto: ['What is a load cell pedal?', 'Are load cell pedals worth it?', 'Load cell pedal sets compared', 'Which pedals work with your wheel base and console?', 'Hydraulic and active pedals: the step after load cell', 'Which set fits you?'],
   },
+  'sim-lab-p1x-pro-vs-ultimate': {
+    hero: img({
+      file: 'expo-sim-racing-cockpits-row',
+      alt: 'Row of empty sim racing cockpits with bucket seats and pedal sets under blue light',
+      caption: 'A row of sim racing cockpits at a gaming event. They are not Sim-Lab P1X cockpits.',
+      author: 'Matheus Bertelli', licence: 'Pexels License', site: 'Pexels',
+      source: 'https://www.pexels.com/photo/28993113/',
+    }),
+    sections: {},
+    noPhoto: ['Quick comparison table', 'Frame and build', 'Mounting: front mount, wheel deck, pedal plate', 'Price (sim-lab.eu, euro)', 'Which bases and pedals fit', 'Which one fits you'],
+  },
   'simracing-expo-2026-announcements': {
     hero: img({
       file: 'expo-hero-sim-racing-pedals-blue-light',
