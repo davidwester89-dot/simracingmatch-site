@@ -90,10 +90,20 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   assert.match(k, /data-pos="test_pos"/);
   assert.match(k, /rel="sponsored nofollow noopener"/);
   assert.doesNotMatch(k, />\s*Partner link\s*</i);
-  for (const f of ['dist/blog/ps5-direct-drive-wheels-2026/index.html', 'dist/blog/simracing-expo-2026-announcements/index.html']) {
-    const h = readFileSync(f, 'utf8');
-    assert.match(h, /href="https:\/\/eu\.mozaracing\.com\/[^"]*ref=simracingmatch" rel="sponsored nofollow noopener" data-vendor="moza"/, f);
-    assert.doesNotMatch(h, /<span class="partner">\s*Partner link/i, f);
+  // Expo: Moza TGS-bron blijft partner (ref=simracingmatch + sponsored). PS5-post: die bronlink is neutraal (Dave 9-11).
+  {
+    const expo = readFileSync('dist/blog/simracing-expo-2026-announcements/index.html', 'utf8');
+    assert.match(expo, /href="https:\/\/eu\.mozaracing\.com\/[^"]*ref=simracingmatch" rel="sponsored nofollow noopener" data-vendor="moza"/);
+    assert.doesNotMatch(expo, /<span class="partner">\s*Partner link/i);
+  }
+  {
+    const ps5 = readFileSync('dist/blog/ps5-direct-drive-wheels-2026/index.html', 'utf8');
+    assert.equal((ps5.match(/ref=simracingmatch/g) || []).length, 0, 'PS5 page: no Moza partner ref');
+    assert.doesNotMatch(ps5, /rel="[^"]*\bsponsored\b/, 'PS5 page: no sponsored links');
+    assert.match(ps5, /href="https:\/\/eu\.mozaracing\.com\/blogs\/news\/moza-tgs-2026" rel="noopener">Moza Racing: PS5 racing wheels at TGS 2026<\/a>/);
+    assert.doesNotMatch(ps5, /moza-tgs-2026"[^>]*(data-vendor|data-cta)/);
+    assert.doesNotMatch(ps5, /<span class="partner">\s*Partner link/i);
+    assert.doesNotMatch(ps5, /<p class="pnoot">/, 'PS5 page: no partner note without partner links');
   }
 });
 
