@@ -3,7 +3,7 @@ slug: simracing-expo-2026-announcements
 title: "SimRacing Expo 2026: New Wheelbases and Wheels Announced"
 description: "Asetek DD10, PXN S16, Moza's first PS5 bases and Fanatec Project Obsidian: what was announced at SimRacing Expo Frankfurt 2026, with prices and dates."
 datePublished: 2026-10-19
-dateModified: 2026-11-06
+dateModified: 2026-11-11
 keyword: simracing expo 2026
 ---
 
@@ -98,6 +98,6 @@ The safest way to choose is to start from your own situation: budget, platform, 
 - [Asetek: Asetek Racing at SimRacing Expo: what you missed](https://www.asetek.com/simsports/blogs/asetek-racing-at-simracing-expo-what-you-missed/)
 - [Asetek: DD10 Wheelbase](https://www.asetek.com/simsports/landing/dd10-wheelbase/)
 - [PXN press release via Games Press: S16 at SimRacing Expo Frankfurt 2026](https://www.gamespress.com/PXN-Brings-S16-Direct-Drive-Wheel-Base-to-Europe-for-First-Hands-On-Se)
-- [Moza Racing: PS5 racing wheels at TGS 2026](https://eu.mozaracing.com/blogs/news/moza-tgs-2026?ref=simracingmatch)
+- [Moza Racing: PS5 racing wheels at TGS 2026](https://eu.mozaracing.com/blogs/news/moza-tgs-2026)
 - [Corsair Newsroom: Fanatec and Trak Racer at SimRacing Expo Frankfurt 2026](https://www.corsair.com/newsroom/press-release/fanatec-and-trak-racer-showcase-the-future-of-simulation-at-simracing-expo-frankfurt-2026)
 - [Fanatec: highlights at SimRacing Expo Frankfurt 2026](https://www.fanatec.com/us/en/explorer/products/racing-wheels-wheel-bases/fanatec-highlights-at-simracing-expo-frankfurt-2026/)

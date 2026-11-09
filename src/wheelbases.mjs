@@ -3,7 +3,7 @@
 // No estimates: a value we cannot read on the page stays 'unknown'. 'Price per Nm' is a plain sum (price / Nm), never a verdict.
 // Order: price per Nm, low to high. Never commission or partner status. Partner links only via src/lib/partnerlinks.js.
 import { SITE, esc, ORG, AUTHOR, fmtDate, MATCH_CTA, MATCH_LIVE } from './layout.mjs';
-import { PARTNERLINKS, knop, mozaEuProductExit, mozaExitSlug, productExitAnchor } from './lib/partnerlinks.js';
+import { PARTNERLINKS, knop, mozaEuProductExit, productExitAnchor } from './lib/partnerlinks.js';
 
 /** Expected push/go-live date: every date field (visible, JSON-LD, sitemap). */
 export const WB_DATE = '2026-10-30';
@@ -17,10 +17,10 @@ export const LCP_DATE = '2026-11-05';
 export const MATCH_DATE = '2026-11-05';
 /** Push date of the Moza GoAffPro ref update on /wheel-bases/compare/ (L7). */
 export const MOZA_REF_DATE = '2026-11-06';
-/** L7 date of the Moza EU product exits on /wheel-bases/compare/ (8 Nov 2026). The exit date itself. */
-export const MOZA_EU_EXIT_DATE = '2026-11-08';
-/** L7 push date of / for client-side /js/match.js (in-page quiz_start). */
-export const HOME_DATE = '2026-11-09';
+/** L7 push date of neutral Moza links on /wheel-bases/compare/. */
+export const MOZA_EU_EXIT_DATE = '2026-11-11';
+/** L7 push date of / for neutral quiz exits and removal of the quiz partner note. */
+export const HOME_DATE = '2026-11-11';
 /** Day we read every price and spec on the manufacturer pages. */
 export const WB_CHECKED = '2026-10-28';
 
@@ -70,12 +70,12 @@ export const sortedBases = () => [...BASES].sort((a, b) => {
   return x - y;
 });
 
-/** Store links for the button block, alphabetical. Partner links (Moza, PXN, Sim-Lab) only via PARTNERLINKS; order never depends on it. */
+/** Store links for the button block, alphabetical. Partner links (PXN, Sim-Lab) only via PARTNERLINKS; order never depends on it. */
 const STORES = [
   ['asetek', 'Asetek Racing', 'https://www.asetek.com/simsports/product-category/wheelbases/'],
   ['fanatec', 'Fanatec', 'https://www.fanatec.com/eu/en/c/wheel-bases'],
   ['logitech-g', 'Logitech G', 'https://www.logitechg.com/en-eu/shop/c/racing-wheels-pedals'],
-  ['moza', 'Moza Racing', PARTNERLINKS.moza],
+  ['moza', 'Moza Racing', 'https://eu.mozaracing.com/'],
   ['pxn', 'PXN', PARTNERLINKS.pxn],
   ['simlab', 'Sim-Lab', PARTNERLINKS.simlab],
   ['simucube', 'Simucube', 'https://simucube.com/'],
@@ -120,14 +120,14 @@ const brandLogo = (brand) => {
 };
 
 function compareTable(brands = null) {
-  // Full comparison sells a product exit per row. Moza vs Fanatec keeps the editorial source URL (no partner link).
+  // Full comparison keeps the EU manufacturer exits. All Moza links are neutral; ranking is unchanged.
   const commercial = !brands;
   const rows = sortedBases().filter((b) => !brands || brands.includes(b.brand)).map((b) => {
     const pn = perNm(b);
     const priceCell = b.price == null ? `unknown <span class="muted">(${esc(b.shown)})</span>`
       : `${eur(b.price)}${b.exVat ? `<br><span class="muted">our sum: ${eur(b.exVat)} excl. VAT + 21% Dutch VAT</span>` : ''}`;
     const exit = commercial ? mozaEuProductExit(b.model, b.url) : '';
-    const source = exit ? productExitAnchor(exit, `wb_compare_exit_${mozaExitSlug(exit)}`) : a(b.url, 'product page');
+    const source = exit ? productExitAnchor(exit) : a(b.url, 'product page');
     return `<tr data-platforms="${b.platforms.join(' ').toLowerCase()}"><td>${brandLogo(b.brand)}<strong>${esc(b.brand)}</strong> ${esc(b.model)}</td><td>${esc(b.torque)}</td><td>${b.platforms.join(', ')}${b.note ? ` <span class="muted">(${esc(b.note)})</span>` : ''}</td><td>${priceCell}</td><td>${pn == null ? 'unknown' : eur(Math.round(pn * 100) / 100)}</td><td>${source}</td></tr>`;
   }).join('\n');
   const table = `<div class="wb-filter" hidden><p class="muted">Show bases for:</p><div class="actions"><button type="button" class="btn ghost" data-wb="all" aria-pressed="true">All platforms</button><button type="button" class="btn ghost" data-wb="pc" aria-pressed="false">PC</button><button type="button" class="btn ghost" data-wb="playstation" aria-pressed="false">PlayStation</button><button type="button" class="btn ghost" data-wb="xbox" aria-pressed="false">Xbox</button></div></div>
@@ -184,7 +184,7 @@ ${compareTable()}
 </ul>
 <h2>Brand stores</h2>
 <p>The brand stores below are listed in alphabetical order. That order says nothing about the table.</p>
-<div class="out actions">${STORES.map(([v, n, h], i) => knop(h, `wb_compare_${i + 1}`, { partner: Object.values(PARTNERLINKS).includes(h), label: n, vendor: v, cls: 'btn ghost' })).join('')}</div>
+<div class="out actions">${STORES.map(([v, n, h], i) => knop(h, `wb_compare_${i + 1}`, { partner: Object.values(PARTNERLINKS).includes(h), label: n, vendor: v, cls: 'btn ghost', track: v !== 'moza' })).join('')}</div>
 ${cluster('/wheel-bases/compare/')}
 ${sources(sortedBases().map((b) => [`${b.brand}: ${b.model}`, b.url]).concat([
   ['Simucube FAQ (platforms)', 'https://simucube.com/pages/faq'],

@@ -1,33 +1,32 @@
 // Approved partner links. EMPTY until Partnermanager approves a programme for simracingmatch.com.
 // The match must NEVER import this file.
 export const PARTNERLINKS = {
-  // Moza Racing, own programme via GoAffPro (ref=simracingmatch), code updated 6-11-2026 (programme approved 21-10-2026).
-  moza: 'https://eu.mozaracing.com/?ref=simracingmatch',
-  // PXN SIM Racing, Impact (sjv.io deep link, no ?ref=), approved 6-11-2026.
-  pxn: 'https://pxnsimracing.sjv.io/7X6qgd',
+  // Moza is not a partner: its manufacturer links stay neutral (11 Nov 2026).
+  // Keep the existing GoAffPro → Impact disclosure order on /privacy/; no content or date change there.
   // Sim-Lab, own programme via GoAffPro (ref=SINRACINGMATCH, code as supplied), approved 28-10-2026.
   simlab: 'https://sim-lab.eu/?ref=SINRACINGMATCH',
+  // PXN SIM Racing, Impact (sjv.io deep link, no ?ref=), approved 6-11-2026.
+  pxn: 'https://pxnsimracing.sjv.io/7X6qgd',
 };
 
-// EU product commercial exits for the five Moza wheel bases (portal Product Links preview, 7 Nov 2026).
-// Referral panel showed 5% and ref=eerlukwf. Same EU product paths as the editorial source URLs, plus this ref.
-// Does not replace PARTNERLINKS.moza and is not a global-portal approval.
+// Neutral manufacturer exits for the five Moza wheel bases. Same EU pages as the sources.
+// No referral parameters, sponsored rel or partner tracking (11 Nov 2026).
 export const MOZA_EU_PRODUCT_EXITS = Object.freeze({
-  'R9 V3': 'https://eu.mozaracing.com/products/r9-wheelbase?ref=eerlukwf',
-  'R12 V2': 'https://eu.mozaracing.com/products/r12-wheelbase?ref=eerlukwf',
-  'R16 Ultra': 'https://eu.mozaracing.com/products/r16-ultra?ref=eerlukwf',
-  'R21 Ultra': 'https://eu.mozaracing.com/products/r21-ultra?ref=eerlukwf',
-  'R25 Ultra': 'https://eu.mozaracing.com/products/r25-ultra?ref=eerlukwf',
+  'R9 V3': 'https://eu.mozaracing.com/products/r9-wheelbase',
+  'R12 V2': 'https://eu.mozaracing.com/products/r12-wheelbase',
+  'R16 Ultra': 'https://eu.mozaracing.com/products/r16-ultra',
+  'R21 Ultra': 'https://eu.mozaracing.com/products/r21-ultra',
+  'R25 Ultra': 'https://eu.mozaracing.com/products/r25-ultra',
 });
 
-const MOZA_EU_EXIT_RE = /^https:\/\/eu\.mozaracing\.com\/products\/([a-z0-9-]+)\?ref=eerlukwf$/;
+const MOZA_EU_EXIT_RE = /^https:\/\/eu\.mozaracing\.com\/products\/([a-z0-9-]+)$/;
 
 /** Exact EU product exit for a comparison model, or '' when this model has none. */
 export function mozaEuProductExit(model, sourceUrl) {
   const href = MOZA_EU_PRODUCT_EXITS[model] || '';
   if (!href) return '';
   if (!MOZA_EU_EXIT_RE.test(href)) throw new Error(`Bad Moza EU product exit for ${model}`);
-  if (sourceUrl != null && href.slice(0, href.indexOf('?')) !== sourceUrl) {
+  if (sourceUrl != null && href !== sourceUrl) {
     throw new Error(`Moza EU product exit is not the same EU page as the source for ${model}`);
   }
   return href;
@@ -55,16 +54,15 @@ export function uitgaand(href, { partner = false, label = 'Visit shop', vendor =
   return { href, rel: 'noopener', partner: false, label, vendor };
 }
 
-/** Outbound button. Partner links get rel sponsored nofollow (no visible label) + data-vendor/data-pos for vendor_click. */
-export function knop(href, pos, { partner = false, label = 'Visit shop', vendor = 'external', cls = 'btn' } = {}) {
+/** Outbound button. Partner links get sponsored rel; track=false leaves a neutral link without click hooks. */
+export function knop(href, pos, { partner = false, label = 'Visit shop', vendor = 'external', cls = 'btn', track = true } = {}) {
   const o = uitgaand(href, { partner, label, vendor });
-  return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${o.vendor}" data-pos="${pos}" data-cta="outbound"${partner ? ` data-partner-slot="${o.vendor}"` : ''}>${o.label}</a>`;
+  return `<a class="${cls}" href="${o.href}" rel="${o.rel}" target="_blank"${track ? ` data-vendor="${o.vendor}" data-pos="${pos}" data-cta="outbound"` : ''}${partner ? ` data-partner-slot="${o.vendor}"` : ''}>${o.label}</a>`;
 }
 
-/** Comparison-table commercial exit: same rel, target and vendor_click hooks as knop(), without the button class. */
-export function productExitAnchor(href, pos, { vendor = 'moza', label = 'product page' } = {}) {
-  const o = uitgaand(href, { partner: true, label, vendor });
-  return `<a href="${o.href}" rel="${o.rel}" target="_blank" data-vendor="${o.vendor}" data-pos="${pos}" data-cta="outbound" data-partner-slot="${o.vendor}">${o.label}</a>`;
+/** Neutral comparison-table manufacturer exit; no partner status or click hooks. */
+export function productExitAnchor(href) {
+  return `<a href="${href}" rel="noopener" target="_blank">product page</a>`;
 }
 
 // Partner note: no label per button; exactly one short sentence right after each block (or paragraph/list) that

@@ -84,16 +84,17 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
       assert.ok(existsSync(t), `${f}: broken ${path}`);
     }
   }
-  assert.deepEqual(Object.keys(PARTNERLINKS), ['moza', 'pxn', 'simlab']);
-  const k = knop('https://example.com/', 'test_pos', { partner: true, vendor: 'moza', label: 'Moza' });
-  assert.match(k, /data-vendor="moza"/);
+  assert.deepEqual(Object.keys(PARTNERLINKS), ['simlab', 'pxn']);
+  const k = knop('https://example.com/', 'test_pos', { partner: true, vendor: 'simlab', label: 'Sim-Lab' });
+  assert.match(k, /data-vendor="simlab"/);
   assert.match(k, /data-pos="test_pos"/);
   assert.match(k, /rel="sponsored nofollow noopener"/);
   assert.doesNotMatch(k, />\s*Partner link\s*</i);
-  // Expo: Moza TGS-bron blijft partner (ref=simracingmatch + sponsored). PS5-post: die bronlink is neutraal (Dave 9-11).
+  // Expo and PS5: Moza TGS sources are ordinary manufacturer links, never partners.
   {
     const expo = readFileSync('dist/blog/simracing-expo-2026-announcements/index.html', 'utf8');
-    assert.match(expo, /href="https:\/\/eu\.mozaracing\.com\/[^"]*ref=simracingmatch" rel="sponsored nofollow noopener" data-vendor="moza"/);
+    assert.match(expo, /href="https:\/\/eu\.mozaracing\.com\/blogs\/news\/moza-tgs-2026" rel="noopener">/);
+    assert.doesNotMatch(expo, /ref=simracingmatch|sponsored|<p class="pnoot">/);
     assert.doesNotMatch(expo, /<span class="partner">\s*Partner link/i);
   }
   {

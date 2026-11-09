@@ -1,15 +1,15 @@
-// Wheel base cluster (28-10): order by price per Nm, Moza partner link only, dates = push date, SEO limits.
+// Wheel base cluster (28-10): order by price per Nm, Moza neutral and PXN/Sim-Lab partners, dates = push date, SEO limits.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, LCP_DATE, WB_LOGOS, MATCH_DATE, MOZA_EU_EXIT_DATE } from '../src/wheelbases.mjs';
-import { PARTNERLINKS, MOZA_EU_PRODUCT_EXITS } from '../src/lib/partnerlinks.js';
+import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 
 const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/wheel-bases/how-much-torque/', '/wheel-bases/moza-vs-fanatec/'];
 // [datePublished, dateModified] per page.
-// Compare: Moza EU product exits on MOZA_EU_EXIT_DATE (L7). Torque: live match link since MATCH_DATE.
+// Compare: neutral Moza EU product exits on MOZA_EU_EXIT_DATE (L7). Torque: live match link since MATCH_DATE.
 // Belt stays WB_DATE (template-only). Moza vs Fanatec links to the load-cell post since LCP_DATE.
 const DATES = { '/wheel-bases/compare/': [WB_DATE, MOZA_EU_EXIT_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, MATCH_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
 
@@ -27,7 +27,7 @@ test('compare order: price per Nm low to high, unknown prices last; no commissio
   }
 });
 
-test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push date, partner link only Moza with one disclosure', () => {
+test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push date, only PXN/Sim-Lab partners, one store disclosure and no Moza tracking', () => {
   execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', THEME: 'A' } });
   const sm = readFileSync('dist/sitemap.xml', 'utf8');
   for (const p of PAGES) {
@@ -46,13 +46,14 @@ test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push
     assert.doesNotMatch(s, /aggregateRating|ratingValue|"Review"/);
     assert.ok(sm.includes(`<loc>https://simracingmatch.com${p}</loc><lastmod>${mod}</lastmod>`), `${p}: sitemap`);
     const sponsored = [...s.matchAll(/<a\s[^>]*rel="sponsored nofollow noopener"[^>]*>/g)].map((m) => m[0].match(/href="([^"]+)"/)[1]);
-    const allowed = new Set([...Object.values(PARTNERLINKS), ...Object.values(MOZA_EU_PRODUCT_EXITS)]);
+    const allowed = new Set(Object.values(PARTNERLINKS));
     for (const h of sponsored) assert.ok(allowed.has(h), `${p}: ${h}`);
-    const notes = p === '/wheel-bases/compare/' ? 2 : (sponsored.length ? 1 : 0);
+    const notes = sponsored.length ? 1 : 0;
     assert.equal(s.split('<p class="pnoot">').length - 1, notes, `${p}: disclosure count`);
   }
   const c = readFileSync('dist/wheel-bases/compare/index.html', 'utf8');
-  assert.ok(c.includes('href="https://eu.mozaracing.com/?ref=simracingmatch" rel="sponsored nofollow noopener"'));
+  assert.ok(c.includes('href="https://eu.mozaracing.com/" rel="noopener" target="_blank">Moza Racing</a>'));
+  assert.doesNotMatch(c, /ref=simracingmatch|eerlukwf|data-vendor="moza"/);
   assert.match(c, /Some links are partner links; this never affects the ranking\./);
   assert.ok(c.includes('href="https://sim-lab.eu/?ref=SINRACINGMATCH" rel="sponsored nofollow noopener" target="_blank" data-vendor="simlab"'), 'Sim-Lab partner button in brand stores');
   assert.ok(c.includes('href="https://pxnsimracing.sjv.io/7X6qgd" rel="sponsored nofollow noopener"'), 'PXN Impact partner button in brand stores');

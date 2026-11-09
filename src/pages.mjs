@@ -1,15 +1,14 @@
 import { SITE, esc, ORG, GA_ID, ICONS, SVG, fmtDate, MATCH_LIVE, MATCH_CTA } from './layout.mjs';
 import { PRIVACY_UPDATED, cookieTable, partnerNetwork, legalBasis, transfers, retention, rights } from './privacy-gdpr.mjs';
 import { CONSENT_KEY } from './lib/consent.js';
-import { PARTNERLINKS, PARTNER_NOOT, mozaEuProductExit } from './lib/partnerlinks.js';
+import { PARTNERLINKS, mozaEuProductExit } from './lib/partnerlinks.js';
 import { loadPosts, blogIndexPage, blogPostPages } from './blog.mjs';
 import { wheelBasePages, MVF_DATE, BASES, WB_LOGOS, WB_CHECKED, MATCH_DATE, HOME_DATE } from './wheelbases.mjs';
 export { MATCH_DATE };
-/** Quiz data. `url` stays the editorial manufacturer page. `exit` is the commercial href only; match-logic.js never reads it. */
+/** Quiz data. `url` stays the editorial manufacturer page. `exit` is a neutral manufacturer href only; match-logic.js never reads it. */
 export const matchJson = () => JSON.stringify({
   checked: fmtDate(WB_CHECKED),
   logos: WB_LOGOS,
-  partnerNote: PARTNER_NOOT,
   bases: BASES.map(({ brand, model, nm, torque, platforms, note, price, url }) => {
     const row = { brand, model, nm, torque, platforms, note, price, url };
     const exit = mozaEuProductExit(model, url);
@@ -39,7 +38,7 @@ export const home = {
   lastmod: HOME_DATE,
   scripts: ['/js/match.js'],
   description: 'Match a sim racing wheel, pedals and rig to your budget, platform and space. Manufacturer data only. Partner links disclosed — they never change the order.',
-  schema: [faqSchema(homeFaq)],
+  schema: [{ '@context': 'https://schema.org', '@type': 'WebPage', url: SITE.domain + '/', dateModified: HOME_DATE }, faqSchema(homeFaq)],
   // hreflangNl left empty until /nl/ exists
   hreflangNl: '',
   body: `<section class="hero">
