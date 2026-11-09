@@ -3,7 +3,7 @@ import { PRIVACY_UPDATED, cookieTable, partnerNetwork, legalBasis, transfers, re
 import { CONSENT_KEY } from './lib/consent.js';
 import { PARTNERLINKS, PARTNER_NOOT, mozaEuProductExit } from './lib/partnerlinks.js';
 import { loadPosts, blogIndexPage, blogPostPages } from './blog.mjs';
-import { wheelBasePages, MVF_DATE, BASES, WB_LOGOS, WB_CHECKED, MATCH_DATE, MOZA_EU_EXIT_DATE } from './wheelbases.mjs';
+import { wheelBasePages, MVF_DATE, BASES, WB_LOGOS, WB_CHECKED, MATCH_DATE, HOME_DATE } from './wheelbases.mjs';
 export { MATCH_DATE };
 /** Quiz data. `url` stays the editorial manufacturer page. `exit` is the commercial href only; match-logic.js never reads it. */
 export const matchJson = () => JSON.stringify({
@@ -36,7 +36,7 @@ export const home = {
   ogTitle: 'SimracingMatch: find the setup that fits you',
   h1: 'Find the sim racing setup that fits you',
   og: 'home',
-  lastmod: MOZA_EU_EXIT_DATE,
+  lastmod: HOME_DATE,
   scripts: ['/js/match.js'],
   description: 'Match a sim racing wheel, pedals and rig to your budget, platform and space. Manufacturer data only. Partner links disclosed — they never change the order.',
   schema: [faqSchema(homeFaq)],
@@ -100,7 +100,7 @@ ${MATCH_LIVE ? `<a class="btn lg" href="/#setup-match" data-cta="home_hero" data
 <li><a href="/wheel-bases/how-much-torque/" data-cta="home_wb">How much torque do you need?</a><span class="muted"> What makers advise, and what your mount must hold.</span></li>
 <li><a href="/wheel-bases/moza-vs-fanatec/" data-cta="home_wb">Moza vs Fanatec</a><span class="muted"> Both brands’ direct drive bases: torque, price and platforms.</span></li>
 </ul>
-<p class="muted">Updated <time datetime="${MOZA_EU_EXIT_DATE}">${fmtDate(MOZA_EU_EXIT_DATE)}</time></p>
+<p class="muted">Updated <time datetime="${HOME_DATE}">${fmtDate(HOME_DATE)}</time></p>
 
 <section id="setup-match" class="band">
 <h2>The setup match: 5 questions</h2>

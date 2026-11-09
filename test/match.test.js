@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { matchBases, targetBand } from '../src/assets/js/match-logic.js';
-import { BASES, MOZA_EU_EXIT_DATE } from '../src/wheelbases.mjs';
+import { BASES, HOME_DATE } from '../src/wheelbases.mjs';
 import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
 
 test('filters on platform and budget only (mount = note); best fit first, then price per Nm', () => {
@@ -42,5 +42,5 @@ test('match logic and data never use partner links', () => {
   assert.match(home, /<form id="match-form"/);
   assert.match(home, /<script type="module" src="\/js\/match.js"><\/script>/);
   assert.ok(!/coming soon/i.test(home));
-  assert.match(readFileSync('dist/sitemap.xml', 'utf8'), new RegExp(`<loc>https://simracingmatch\\.com/</loc><lastmod>${MOZA_EU_EXIT_DATE}</lastmod>`));
+  assert.match(readFileSync('dist/sitemap.xml', 'utf8'), new RegExp(`<loc>https://simracingmatch\\.com/</loc><lastmod>${HOME_DATE}</lastmod>`));
 });

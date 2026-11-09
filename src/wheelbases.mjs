@@ -17,8 +17,10 @@ export const LCP_DATE = '2026-11-05';
 export const MATCH_DATE = '2026-11-05';
 /** Push date of the Moza GoAffPro ref update on /wheel-bases/compare/ (L7). */
 export const MOZA_REF_DATE = '2026-11-06';
-/** Planned L7 publication date for home and /wheel-bases/compare/ (8 Nov 2026, Europe/Amsterdam). Target date only; not a claim the pages are live. */
+/** L7 date of the Moza EU product exits on /wheel-bases/compare/ (8 Nov 2026). The exit date itself. */
 export const MOZA_EU_EXIT_DATE = '2026-11-08';
+/** L7 push date of / for client-side /js/match.js (in-page quiz_start). */
+export const HOME_DATE = '2026-11-09';
 /** Day we read every price and spec on the manufacturer pages. */
 export const WB_CHECKED = '2026-10-28';
 
