@@ -47,7 +47,7 @@ On 9 November, Sim-Lab's store listed these regular prices for the Netherlands, 
 - **P1X Pro:** €789.00 without monitor mount, €979.00 with the Integrated Vario™ Single, €1,089.00 with the Integrated Vario™ Triple.
 - **P1X Ultimate:** €899.00 without monitor mount, €1,088.00 with the Integrated Vario™ Single, €1,198.00 with the Integrated Vario™ Triple.
 
-So the Ultimate costs €110 more as a bare cockpit and €109 more with either monitor mount. Both can also be ordered with a seat. Those seat bundles showed a lower price without an end date, so we leave them out. The store also noted that "shipping times are longer than usual", with an estimated "10 working days".
+So the Ultimate costs €110 more as a bare cockpit and €109 more with either monitor mount. Both can also be ordered with a seat. Those seat bundles showed a lower price without an end date, so we leave them out. Check the delivery time on Sim-Lab's product page before you order.
 
 ## Which bases and pedals fit
 
