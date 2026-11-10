@@ -281,7 +281,7 @@ export const wbTorque = page({
 <p>The car you drive matters more than the game. Fanatec notes that extra torque helps “especially when driving older cars without power steering or rally vehicles. However, modern race cars, like those in GT3 or Formula racing, often have power steering, meaning high torque levels are not necessary for realism.”</p>
 <ul>
 <li><strong>GT and formula:</strong> modern cars with power steering. Here Fanatec’s general advice applies: 8 Nm “can also be more than sufficient”, and 10–15 Nm is “the sweet spot” for most players.</li>
-<li><strong>Rally, drift and classic cars:</strong> cars without power steering or with fast, heavy wheel movements are where extra headroom helps, according to Fanatec.</li>
+<li><strong>Rally, drift and classic cars:</strong> cars without power steering or with fast, heavy wheel movements are where extra headroom helps.</li>
 <li><strong>Casual console racing:</strong> belt and gear wheels around 2–3 Nm, as Fanatec describes them, are enough to start. See <a href="/wheel-bases/direct-drive-vs-belt/">direct drive vs belt</a> for the difference.</li>
 </ul>
 <h2>Torque per budget</h2>
@@ -295,7 +295,7 @@ export const wbTorque = page({
 <h2>What your mount has to hold</h2>
 <p>The stronger the base, the more force goes into whatever it is bolted to. If the desk or rig flexes, you lose detail and the setup can move. The makers say so plainly:</p>
 <ul>
-<li><strong>Desk clamp:</strong> the usual choice at lower torque. Fanatec’s CSL DD page lists the CSL DD Table Clamp and the ClubSport DD Table Clamp as compatible mounts. Asetek includes a table clamp with the Initium, according to its wheelbase comparison page. Asetek lists no included table clamp for the DD10 or the Forte.</li>
+<li><strong>Desk clamp:</strong> the usual choice at lower torque. Fanatec’s CSL DD page lists the CSL DD Table Clamp and the ClubSport DD Table Clamp as compatible mounts. Asetek includes a table clamp with the Initium. Asetek lists no included table clamp for the DD10 or the Forte.</li>
 <li><strong>Wheel stand or cockpit:</strong> Moza asks buyers of the R16 Ultra to “confirm that the mounting solution can securely support a 16 N·m direct drive wheelbase”.</li>
 <li><strong>Rigid cockpit for the strongest bases:</strong> for its 25 Nm Podium bases Fanatec says “it is particularly important to have a very strong sim cockpit, not just because of the torque, but also the physical weight (approx 10 KG).”</li>
 </ul>

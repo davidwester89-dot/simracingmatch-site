@@ -11,7 +11,7 @@ const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/
 // [datePublished, dateModified] per page.
 // Compare: Moza EU product exits on MOZA_EU_EXIT_DATE (L7). Torque: live match link since MATCH_DATE.
 // Belt stays WB_DATE (template-only). Moza vs Fanatec links to the load-cell post since LCP_DATE.
-const DATES = { '/wheel-bases/compare/': [WB_DATE, MOZA_EU_EXIT_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, MATCH_DATE], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
+const DATES = { '/wheel-bases/compare/': [WB_DATE, MOZA_EU_EXIT_DATE], '/wheel-bases/direct-drive-vs-belt/': [WB_DATE, WB_DATE], '/wheel-bases/how-much-torque/': [WB_DATE, '2026-11-13'], '/wheel-bases/moza-vs-fanatec/': [MVF_DATE, LCP_DATE] };
 
 test('compare order: price per Nm low to high, unknown prices last; no commission input', () => {
   const s = sortedBases();
