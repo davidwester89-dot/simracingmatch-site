@@ -36,7 +36,7 @@ What is **not yet announced**: prices, torque figures and a release date. Moza a
 
 ## Thrustmaster T-GT III: €699.99, sales from 3 December
 
-Thrustmaster announced the **T-GT III**, an officially licensed Gran Turismo 7 wheel for PS5 and PS4. According to Thrustmaster's announcement page (checked 19 October 2026):
+Thrustmaster announced the **T-GT III**, an officially licensed Gran Turismo 7 wheel for PS5 and PS4. Thrustmaster T-GT III specifications (checked 19 October 2026):
 
 - **Motor:** Direct Axial Drive, with 5 Nm of constant torque and an overshoot capacity of up to 10 Nm
 - **Pedals:** the first Thrustmaster Gran Turismo bundle with a [load-cell pedal set](/blog/load-cell-pedals/) included
@@ -48,7 +48,7 @@ Thrustmaster says it will keep updating the T-GT III through software and firmwa
 
 ## Fanatec: bundle prices changed on 1 October
 
-On 1 October 2026, Fanatec changed how its Ready2Race and cockpit bundles are priced. Every bundle now costs **10% less than buying its parts separately**. Fanatec also added the CSL DD Table Clamp to every bundle built around the CSL DD or the Gran Turismo DD Pro. Fanatec says some bundle prices went down and others went up, in the US, Canada, EU, UK and Australia.
+Fanatec’s 1 October 2026 announcement describes changes to how its Ready2Race and cockpit bundles are priced. Every bundle now costs **10% less than buying its parts separately**. Fanatec also added the CSL DD Table Clamp to every bundle built around the CSL DD or the Gran Turismo DD Pro. Some Fanatec bundle prices went down and others went up, in the US, Canada, EU, UK and Australia.
 
 For PS5, the relevant bundle is the **Gran Turismo DD Pro (5 Nm)**: wheelbase, steering wheel designed by Polyphony Digital, two-pedal set and table clamp. It is listed at **€649.95** on Fanatec's EU store (checked 19 October 2026).
 
@@ -58,7 +58,7 @@ These bases are on sale now and are listed by their makers as PlayStation-compat
 
 - **Fanatec Gran Turismo DD Pro Wheel Base (8 Nm):** officially licensed for PS5 and PS4, also works on PC. Includes the Boost Kit 180 for 8 Nm peak torque. €499.95 for the base alone.
 - **Fanatec ClubSport DD+ (18 Nm):** officially licensed for PS5 and PS4, also works on PC. 18 Nm holding torque. €799.95 for the base alone.
-- **Logitech G RS50 System (8 Nm):** RS50 base, wheel hub and round wheel for PlayStation and PC. Logitech says pairing the PlayStation base with the RS Wheel Hub for Xbox also gives you Xbox. Listed at £519.99 to £599.99 on Logitech G's UK store, depending on the version.
+- **Logitech G RS50 System (8 Nm):** RS50 base, wheel hub and round wheel for PlayStation and PC. Pairing the Logitech PlayStation base with the RS Wheel Hub for Xbox also gives you Xbox. Listed at £519.99 to £599.99 on Logitech G's UK store, depending on the version.
 
 Remember that a base alone needs a steering wheel and pedals. A bundle is often the easier start.
 

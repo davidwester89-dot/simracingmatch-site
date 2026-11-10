@@ -1,3 +1,4 @@
+import { nuchterDatum } from './src/nuchter-datums.mjs';
 import { mkdirSync, writeFileSync, cpSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { layout, SITE, BASE, PREVIEW } from './src/layout.mjs';
@@ -11,7 +12,7 @@ if (THEME !== 'A' && THEME !== 'B') throw new Error(`THEME must be A or B, got $
 rmSync(OUT, { recursive: true, force: true });
 const write = (p, s) => { mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, s); };
 
-const pages = allPages();
+const pages = allPages().map(nuchterDatum);
 for (const p of pages) {
   let html = partnerNoten(layout(p));
   // Theme class on <html> for CSS variants

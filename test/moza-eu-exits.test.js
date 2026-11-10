@@ -1,3 +1,4 @@
+import { revisieDatum } from './nuchter-datums-helper.mjs';
 // Moza neutralisation, push 11 Nov 2026. Manufacturer URLs and ranking stay the same;
 // no referrals, sponsored rel, partner-click hooks or unearned partner notes.
 import { test } from 'node:test';
@@ -138,8 +139,8 @@ test('neutralisation dates: visible, dateModified and sitemap lastmod all equal 
   const sitemap = readFileSync('dist/sitemap.xml', 'utf8');
   for (const path of ['/', '/wheel-bases/compare/', '/blog/simracing-expo-2026-announcements/']) {
     const s = readFileSync(`dist${path}index.html`, 'utf8');
-    assert.match(s, /(?:Updated\s+|<time datetime="2026-11-11">)11 November 2026/);
-    assert.match(s, /"dateModified":"2026-11-11"/);
-    assert.ok(sitemap.includes(`<loc>https://simracingmatch.com${path}</loc><lastmod>2026-11-11</lastmod>`), path);
+    assert.match(s, new RegExp(`(?:Updated\\s+|<time datetime="${revisieDatum(path, '2026-11-11')}">)${revisieDatum(path, '2026-11-11').endsWith('18') ? '18' : '11'} November 2026`));
+    assert.match(s, new RegExp(`"dateModified":"${revisieDatum(path, '2026-11-11')}"`));
+    assert.ok(sitemap.includes(`<loc>https://simracingmatch.com${path}</loc><lastmod>${revisieDatum(path, '2026-11-11')}</lastmod>`), path);
   }
 });
