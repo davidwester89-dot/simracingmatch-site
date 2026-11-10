@@ -3,7 +3,7 @@ slug: simracing-expo-2026-announcements
 title: "SimRacing Expo 2026: New Wheelbases and Wheels Announced"
 description: "Asetek DD10, PXN S16, Moza's first PS5 bases and Fanatec Project Obsidian: what was announced at SimRacing Expo Frankfurt 2026, with prices and dates."
 datePublished: 2026-10-19
-dateModified: 2026-11-06
+dateModified: 2026-11-13
 keyword: simracing expo 2026
 ---
 
@@ -25,7 +25,7 @@ Asetek confirmed that the DD10 wheelbase launched on **27 October 2026 at 11:00 
 
 ### 10 Nm, upgradeable to 14 Nm with the Boost Kit
 
-According to Asetek's DD10 product page (checked 19 October 2026):
+Asetek DD10 specifications (checked 19 October 2026):
 
 - **Torque:** 10 Nm, or 14 Nm with the Asetek Racing Wheelbase Boost Kit, which is sold separately
 - **Power supply:** 96 W
@@ -37,7 +37,7 @@ Wondering whether 10 Nm is enough? See [how much torque you need for sim racing]
 
 ### Xbox only with an Xbox-compatible Asetek wheel
 
-The DD10 supports PC. For Xbox, Asetek says you need an Xbox-compatible Asetek Racing steering wheel. The base alone does not make your setup Xbox-ready, so check the wheel before you buy. Asetek does not list PlayStation support for the DD10.
+The DD10 supports PC. For Xbox, you need an Xbox-compatible Asetek Racing steering wheel. The base alone does not make your setup Xbox-ready, so check the wheel before you buy. Asetek does not list PlayStation support for the DD10.
 
 ## Asetek GT Nova wheel (March 2027, €299.99)
 
