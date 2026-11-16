@@ -82,6 +82,17 @@ export const POST_IMAGES = {
     sections: {},
     noPhoto: ['Quick comparison table', 'Frame and build', 'Mounting: front mount, wheel deck, pedal plate', 'Price (sim-lab.eu, euro)', 'Which bases and pedals fit', 'Which one fits you'],
   },
+  'sim-racing-cockpit-guide': {
+    hero: img({
+      file: 'expo-sim-racing-cockpits-row',
+      alt: 'Row of empty sim racing cockpits with bucket seats and pedal sets under blue light',
+      caption: 'A row of sim racing cockpits at a gaming event. They are not the Sim-Lab cockpits named in this guide.',
+      author: 'Matheus Bertelli', licence: 'Pexels License', site: 'Pexels',
+      source: 'https://www.pexels.com/photo/28993113/',
+    }),
+    sections: {},
+    noPhoto: ['Profile rig, tube frame or wheel stand', 'Rigidity and direct drive torque', 'Seat, monitor mount and pedal plate', 'Space and foldable options', 'Price ranges (brand pages only)', 'Which rig fits you'],
+  },
   'simracing-expo-2026-announcements': {
     hero: img({
       file: 'expo-hero-sim-racing-pedals-blue-light',
