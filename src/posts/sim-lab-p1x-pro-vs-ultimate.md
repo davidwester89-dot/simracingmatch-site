@@ -3,7 +3,7 @@ slug: sim-lab-p1x-pro-vs-ultimate
 title: "Sim-Lab P1X Pro vs Ultimate: which cockpit fits?"
 description: "Sim-Lab P1X Pro or P1X Ultimate? Frame, mounting options, price and which wheel bases and pedals fit, using only Sim-Lab's own product pages."
 datePublished: 2026-11-11
-dateModified: 2026-11-11
+dateModified: 2026-11-19
 updatedLine: true
 keyword: sim lab p1x pro vs ultimate
 ---
@@ -67,6 +67,8 @@ Using only the facts above:
 - **Choose the P1X Pro** if you want the lower price for the same footprint, mounts and compatibility. It is €110 cheaper as a bare cockpit.
 - **Choose the P1X Ultimate** if you plan to add a dashboard, button box or other accessories. Its fully slotted profiles and straight uprights are what Sim-Lab changed to make that easier.
 - **Either way,** pick the mount by wheel base: front mount for Simucube or a Fanatec DD with front holes, the Fanatec DD mount for Fanatec, the wheel deck for nearly everything else.
+
+This page compares two P1X models. For frame types, rigidity, seat and monitor mount, and how Sim-Lab's GT1 range compares, see the [sim racing cockpit guide](/blog/sim-racing-cockpit-guide/).
 
 Sim-Lab's store is in the brand stores list on our [wheel base comparison](/wheel-bases/compare/). Not sure which wheel base and pedals to put in it? Our match on the [home page](/) asks five questions.
 
