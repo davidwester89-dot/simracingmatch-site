@@ -75,7 +75,19 @@ export function promoHits(html) {
 test('L4: no sale, special or temporary promo price on ANY built page (all wheel-base pages, posts, home)', () => {
   execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '', GO_LIVE: '1', THEME: 'A' } });
   const walk = (d) => readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(`${d}/${e.name}`) : e.name.endsWith('.html') ? [`${d}/${e.name}`] : []));
-  const fout = walk('dist').flatMap((f) => promoHits(readFileSync(f, 'utf8')).map((z) => `${f}: ${z}`));
+  // L4 = geen actie zonder einddatum. Uitzondering alleen voor een expliciet genoemde actiepagina die de einddatum zichtbaar noemt
+  // (Pimax Black Friday 2026, Dave 16-11: actie t/m 5-12-2026). Na de einddatum moet de post weg of worden herschreven (SC).
+  const MET_EINDDATUM = { 'dist/blog/pimax-black-friday-2026/index.html': { eind: '2026-12-05', tekst: '5 December 2026' } };
+  const fout = walk('dist').flatMap((f) => {
+    const html = readFileSync(f, 'utf8');
+    const uitz = MET_EINDDATUM[f];
+    if (uitz) {
+      assert.ok(html.includes(uitz.tekst), `${f}: einddatum ${uitz.tekst} zichtbaar`);
+      const dag = process.env.BUILD_DATE || new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Amsterdam' }).format(new Date());
+      if (dag <= uitz.eind) return [];
+    }
+    return promoHits(html).map((z) => `${f}: ${z}`);
+  });
   assert.deepEqual(fout, []);
   // self-test on the exact SC mutations (M2, M3) and allowed wording
   assert.equal(promoHits('<p>The T300 RS GT has a special price of €349.99 this week.</p>').length, 1);
