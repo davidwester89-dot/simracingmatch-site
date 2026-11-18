@@ -108,3 +108,11 @@ test('Asetek B: negatieve tests (plek en L7-unwrap)', () => {
   assert.equal(bodyFingerprint(h, CFG), bodyFingerprint(zonderB(h), CFG));
   assert.notEqual(bodyFingerprint(h.replace(eerste, `Extra ${eerste}`), CFG), bodyFingerprint(h, CFG));
 });
+
+test('Asetek B: reflink valt onder een bekend affiliate-netwerk (GoAffPro, PM 18-11); privacytekst gebruikt die al', async () => {
+  const { networksOf } = await import('../src/privacy-gdpr.mjs');
+  const { PARTNERLINKS } = await import('../src/lib/partnerlinks.js');
+  assert.deepEqual(networksOf(Object.values(B_PARTNERLINKS)).map((n) => n.name), ['GoAffPro']);
+  const al = networksOf(Object.values(PARTNERLINKS)).map((n) => n.name);
+  for (const n of networksOf(Object.values(B_PARTNERLINKS))) assert.ok(al.includes(n.name), `${n.name} ontbreekt in /privacy/`);
+});
