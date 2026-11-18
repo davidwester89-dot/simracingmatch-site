@@ -3,7 +3,7 @@
 // No estimates: a value we cannot read on the page stays 'unknown'. 'Price per Nm' is a plain sum (price / Nm), never a verdict.
 // Order: price per Nm, low to high. Never commission or partner status. Partner links only via src/lib/partnerlinks.js.
 import { SITE, esc, ORG, AUTHOR, fmtDate, MATCH_CTA, MATCH_LIVE } from './layout.mjs';
-import { PARTNERLINKS, knop, mozaEuProductExit, productExitAnchor } from './lib/partnerlinks.js';
+import { PARTNERLINKS, knop, mozaEuProductExit, productExitAnchor, bTekstlink } from './lib/partnerlinks.js';
 
 /** Expected push/go-live date: every date field (visible, JSON-LD, sitemap). */
 export const WB_DATE = '2026-10-30';
@@ -157,14 +157,14 @@ ${compareTable()}
 <li><strong>Price per Nm is our sum, not a score.</strong> It is the regular price divided by the torque figure in the second column. A low number means you pay less for each newton metre. It says nothing about feel, detail, software or build quality.</li>
 <li><strong>Torque figures are not all measured the same way.</strong> Makers use different words: “peak”, “holding”, “sustained”, “constant” or “max”. Moza says the 21 Nm of its R21 Ultra “refers to sustained torque, not a short-term peak”. Fanatec rates its ClubSport bases by holding torque and lists the Podium DD at 25 Nm holding torque with 33 Nm peak overshoot. Thrustmaster gives the T818 as 10 N·m of constant torque. So two bases with the same number can still feel different.</li>
 <li><strong>Regular price.</strong> We list the store’s regular price. Some stores showed a temporary sale price on ${fmtDate(WB_CHECKED)} without an end date; we leave those out, because they can end at any time. Price per Nm uses the regular price.</li>
-<li><strong>VAT.</strong> Most stores show one EU price with VAT. Simucube and Asetek adjust the price to your country, so for both we use the price excl. VAT plus 21% Dutch VAT. The amount at checkout may differ per country.</li>
+<li><strong>VAT.</strong> Most stores show one EU price with VAT. Simucube and ${bTekstlink('asetek')} adjust the price to your country, so for both we use the price excl. VAT plus 21% Dutch VAT. The amount at checkout may differ per country.</li>
 <li><strong>A base alone does not drive.</strong> Every price here is for the base only. You still need a steering wheel, pedals and a way to mount it. Simucube 3 bases also need a Simucube Link Hub, which is sold separately.</li>
 </ul>
 <h2>Platform: check this before price</h2>
 <p>A cheap price per Nm is no use if the base does not work on your console. The makers are clear about it:</p>
 <ul>
 <li><strong>PlayStation:</strong> in this table only the Fanatec Gran Turismo DD Pro and ClubSport DD+, the PS/PC versions of the Logitech G RS50 Base and PRO DD11, and the Thrustmaster T598 Servo Base are listed for PlayStation. Fanatec states that the CSL DD “is not compatible with any PlayStation® console and cannot be upgraded to achieve compatibility”. Moza says PlayStation is “not officially supported” on the R16 Ultra.</li>
-<li><strong>Xbox:</strong> several bases work on Xbox only with the right steering wheel. Fanatec says the CSL DD “becomes compatible with XBOX One® and XBOX Series X|S when used with any Fanatec XBOX-licensed Steering Wheel”. Moza says the R16 Ultra “can be used on Xbox when paired with the officially licensed MOZA ESX Steering Wheel”. Asetek says the DD10 is Xbox-ready “when paired with an Asetek Racing Xbox-compatible steering wheel”. Logitech G says Xbox compatibility “can be added by attaching a wheel that is compatible with Xbox, such as the RS Wheel Hub for Xbox”.</li>
+<li><strong>Xbox:</strong> several bases work on Xbox only with the right steering wheel. Fanatec says the CSL DD “becomes compatible with XBOX One® and XBOX Series X|S when used with any Fanatec XBOX-licensed Steering Wheel”. Moza says the R16 Ultra “can be used on Xbox when paired with the officially licensed MOZA ESX Steering Wheel”. ${bTekstlink('asetek')} says the DD10 is Xbox-ready “when paired with an Asetek Racing Xbox-compatible steering wheel”. Logitech G says Xbox compatibility “can be added by attaching a wheel that is compatible with Xbox, such as the RS Wheel Hub for Xbox”.</li>
 <li><strong>PC only:</strong> Simucube’s FAQ says: “Our products are compatible with PC only.” The other bases marked only PC in the table are listed for PC only on their product pages.</li>
 </ul>
 <p>Racing on PS5? Our news article on <a href="/blog/ps5-direct-drive-wheels-2026/">Moza’s first PS5 direct drive wheels and the Thrustmaster T-GT III</a> covers what is announced but not yet in this table.</p>
@@ -276,7 +276,7 @@ export const wbTorque = page({
 <li>“For most players, the sweet spot for force feedback lies between 10-15Nm, as this range provides a great balance between immersion and control. However, 8Nm can also be more than sufficient”.</li>
 <li>“At 8 Nm, the feedback is notably stronger. […] For many sim racers, 8 Nm is all they need for a great experience.”</li>
 </ul>
-<p>Asetek Racing answers the same question for its 18 Nm Forte: “Few run a base anywhere near maximum, so 18 Nm already sits above the forces you drive with day to day.” And Moza writes about the R16 Ultra: “You do not have to use the full 16 N·m output.”</p>
+<p>${bTekstlink('asetek', 'Asetek Racing')} answers the same question for its 18 Nm Forte: “Few run a base anywhere near maximum, so 18 Nm already sits above the forces you drive with day to day.” And Moza writes about the R16 Ultra: “You do not have to use the full 16 N·m output.”</p>
 <h2>Torque per discipline: GT, formula, rally and drift</h2>
 <p>The car you drive matters more than the game. Fanatec notes that extra torque helps “especially when driving older cars without power steering or rally vehicles. However, modern race cars, like those in GT3 or Formula racing, often have power steering, meaning high torque levels are not necessary for realism.”</p>
 <ul>
@@ -295,7 +295,7 @@ export const wbTorque = page({
 <h2>What your mount has to hold</h2>
 <p>The stronger the base, the more force goes into whatever it is bolted to. If the desk or rig flexes, you lose detail and the setup can move. The makers say so plainly:</p>
 <ul>
-<li><strong>Desk clamp:</strong> the usual choice at lower torque. Fanatec’s CSL DD page lists the CSL DD Table Clamp and the ClubSport DD Table Clamp as compatible mounts. Asetek includes a table clamp with the Initium. Asetek lists no included table clamp for the DD10 or the Forte.</li>
+<li><strong>Desk clamp:</strong> the usual choice at lower torque. Fanatec’s CSL DD page lists the CSL DD Table Clamp and the ClubSport DD Table Clamp as compatible mounts. ${bTekstlink('asetek')} includes a table clamp with the Initium. Asetek lists no included table clamp for the DD10 or the Forte.</li>
 <li><strong>Wheel stand or cockpit:</strong> Moza asks buyers of the R16 Ultra to “confirm that the mounting solution can securely support a 16 N·m direct drive wheelbase”.</li>
 <li><strong>Rigid cockpit for the strongest bases:</strong> for its 25 Nm Podium bases Fanatec says “it is particularly important to have a very strong sim cockpit, not just because of the torque, but also the physical weight (approx 10 KG).”</li>
 </ul>
@@ -343,7 +343,7 @@ export const wbMozaFanatec = page({
   body: `<p class="lead">Moza and Fanatec both sell direct drive wheel bases on their own EU stores. This page puts the ${mf('Moza').length} Moza and ${mf('Fanatec').length} Fanatec bases from our <a href="/wheel-bases/compare/">wheel base comparison</a> side by side: torque in the maker’s own wording, platforms, regular price and price per Nm. Every figure comes from the brand’s product page. We do not pick a winner; which base fits depends on your platform, budget and the gear you already own.</p>
 <h2>Quick comparison table</h2>
 ${compareTable(MF)}
-<p>Every price is for the base only. You still need a steering wheel, pedals and a way to mount it. The full table with Simucube, Asetek Racing, Logitech G and Thrustmaster is on the <a href="/wheel-bases/compare/">comparison page</a>.</p>
+<p>Every price is for the base only. You still need a steering wheel, pedals and a way to mount it. The full table with Simucube, ${bTekstlink('asetek', 'Asetek Racing')}, Logitech G and Thrustmaster is on the <a href="/wheel-bases/compare/">comparison page</a>.</p>
 <h2>Torque and price per Nm</h2>
 <ul>
 <li><strong>Range.</strong> Moza’s bases run from 9 Nm (R9 V3, ${mfEur(byModel('R9 V3'))}) to 25 Nm (R25 Ultra, ${mfEur(byModel('R25 Ultra'))}). Fanatec’s run from 5 Nm (CSL DD, ${mfEur(byModel('CSL DD (5 Nm)'))}) to 25 Nm (Podium DD, ${mfEur(byModel('Podium DD (25 Nm)'))}).</li>

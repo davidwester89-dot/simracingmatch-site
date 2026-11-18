@@ -8,6 +8,10 @@ export const CFG = {
   hubs: [{ hub: '/gidsen/', children: /^\/[^/]+\/$/ }],
   // Alleen ONTBREKENDE velden die de template van deze pagina niet heeft. Een aanwezig veld moet altijd kloppen.
   exempt: {},
+  // B-tekstlink (Asetek, 18-11; src/lib/partnerlinks.js bTekstlink): een partnerlink op een bestaand woord telt niet als bodywijziging.
+  // Alleen <a> met rel="sponsored nofollow noopener" + data-pos="mid" + zichtbaar label ' (partner link)', zonder geneste tags, wordt
+  // terug het woord. Zonder label geen unwrap; alle tekst buiten de link telt mee. Geen datumlift. Vraagt SC-OK.
+  stripCta: [[/<a\b(?=[^>]*\srel="sponsored nofollow noopener")(?=[^>]*\sdata-pos="mid")[^>]*>([^<]*?) \(partner link\)<\/a>/g, '$1']],
 };
 // Naamgrep blijft rood op persoonsnamen. De Moza-ref is sinds 6-11-2026 ref=simracingmatch (geen persoonsnaam),
 // dus die hoort zonder uitzondering door. De vorige refcode stond hier als smalle uitzondering; die blijft niet staan.

@@ -129,8 +129,10 @@ export function stripPageDates(s) {
   return out + s.slice(pos);
 }
 // cfg.stripBlocks: [RegExp] op de ruwe html van <main>, voor automatisch gegenereerde teaserlijsten (alleen met SC-OK).
+// cfg.stripCta: [[RegExp, vervanging]] op de ruwe html van <main>: B-tekstlinks terug naar het bestaande woord (alleen met SC-OK).
 export function bodyFingerprint(html, cfg = {}) {
-  let b = (cfg.stripBlocks || []).reduce((t, re) => t.replace(re, ' ‹teaser› '), mainHtml(html))
+  const main = (cfg.stripCta || []).reduce((t, [re, rep]) => t.replace(new RegExp(re.source, re.flags), rep), mainHtml(html));
+  let b = (cfg.stripBlocks || []).reduce((t, re) => t.replace(re, ' ‹teaser› '), main)
     .replace(/<!--[\s\S]*?-->/g, ' ')
     .replace(/<(script|style|noscript|template)\b[\s\S]*?<\/\1>/gi, ' ')
     .replace(/<time\b[^>]*>[\s\S]*?<\/time>/gi, ' ‹datum› ')
