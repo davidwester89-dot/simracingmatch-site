@@ -13,7 +13,7 @@ export const PARTNERLINKS = {
 // Kept apart from PARTNERLINKS: no new store button, no change to the privacy network list. The visible label inside the
 // anchor is the disclosure, so a block with only B links gets no extra partner note (no new text, no date lift).
 // Asetek SimSports, GoAffPro, reflink as supplied (Partnermanager, overzicht.md 18-11).
-export const B_PARTNERLINKS = Object.freeze({ asetek: 'https://www.asetek.com/simsports/?aff=DAVIDWEST' });
+export const B_PARTNERLINKS = Object.freeze({ asetek: 'https://www.asetek.com/simsports/?aff=SIMRACINGMATCH' });
 export const B_NAAM = Object.freeze({ asetek: 'Asetek' });
 export const B_LABEL = ' (partner link)';
 /** Exactly the B links: rel sponsored + data-pos="mid" + visible label, no nested tags. Same rule as scripts/l7.config.mjs stripCta. */
