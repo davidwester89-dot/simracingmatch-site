@@ -12,7 +12,7 @@ import { CFG } from '../scripts/l7.config.mjs';
 import { bodyFingerprint } from '../scripts/l7check.mjs';
 import { secties, plekFouten } from './b-plek.mjs';
 
-const PRE_B = 'ff0fe6f'; // origin/main vóór Asetek-B (18-11)
+const PRE_B = 'c88ca08'; // basis vóór Asetek-B: geplande blogpush 19-11 (ff0fe6f→19d2725→c88ca08); was ff0fe6f
 const REF = 'https://www.asetek.com/simsports/?aff=SIMRACINGMATCH';
 let gebouwd = false;
 const build = () => { if (!gebouwd) { execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '' } }); gebouwd = true; } };
@@ -115,4 +115,15 @@ test('Asetek B: reflink valt onder een bekend affiliate-netwerk (GoAffPro, PM 18
   assert.deepEqual(networksOf(Object.values(B_PARTNERLINKS)).map((n) => n.name), ['GoAffPro']);
   const al = networksOf(Object.values(PARTNERLINKS)).map((n) => n.name);
   for (const n of networksOf(Object.values(B_PARTNERLINKS))) assert.ok(al.includes(n.name), `${n.name} ontbreekt in /privacy/`);
+});
+
+test('Asetek B: exact 7 links op 3 bestaande pagina\'s, nergens anders (ook niet op de cockpit-blog uit c88ca08)', () => {
+  build();
+  const VERWACHT = { 'blog/simracing-expo-2026-announcements/index.html': 3, 'wheel-bases/compare/index.html': 2, 'wheel-bases/how-much-torque/index.html': 2 };
+  const echt = {};
+  for (const f of walk('dist')) {
+    const n = (readFileSync(f, 'utf8').match(/asetek\.com\/simsports\/\?aff=|data-vendor="asetek"[^>]*data-pos="mid"/g) || []).length;
+    if (n) echt[relative('dist', f)] = (readFileSync(f, 'utf8').match(/data-pos="mid"/g) || []).length;
+  }
+  assert.deepEqual(echt, VERWACHT);
 });
