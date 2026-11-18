@@ -343,7 +343,7 @@ export const wbMozaFanatec = page({
   body: `<p class="lead">Moza and Fanatec both sell direct drive wheel bases on their own EU stores. This page puts the ${mf('Moza').length} Moza and ${mf('Fanatec').length} Fanatec bases from our <a href="/wheel-bases/compare/">wheel base comparison</a> side by side: torque in the maker’s own wording, platforms, regular price and price per Nm. Every figure comes from the brand’s product page. We do not pick a winner; which base fits depends on your platform, budget and the gear you already own.</p>
 <h2>Quick comparison table</h2>
 ${compareTable(MF)}
-<p>Every price is for the base only. You still need a steering wheel, pedals and a way to mount it. The full table with Simucube, ${bTekstlink('asetek', 'Asetek Racing')}, Logitech G and Thrustmaster is on the <a href="/wheel-bases/compare/">comparison page</a>.</p>
+<p>Every price is for the base only. You still need a steering wheel, pedals and a way to mount it. The full table with Simucube, Asetek Racing, Logitech G and Thrustmaster is on the <a href="/wheel-bases/compare/">comparison page</a>.</p>
 <h2>Torque and price per Nm</h2>
 <ul>
 <li><strong>Range.</strong> Moza’s bases run from 9 Nm (R9 V3, ${mfEur(byModel('R9 V3'))}) to 25 Nm (R25 Ultra, ${mfEur(byModel('R25 Ultra'))}). Fanatec’s run from 5 Nm (CSL DD, ${mfEur(byModel('CSL DD (5 Nm)'))}) to 25 Nm (Podium DD, ${mfEur(byModel('Podium DD (25 Nm)'))}).</li>

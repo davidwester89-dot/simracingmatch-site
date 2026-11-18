@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { execSync } from 'node:child_process';
-import { partnerBlokken, partnerNoten, metNoot, NOOT_HTML, PARTNER_NOOT } from '../src/lib/partnerlinks.js';
+import { partnerBlokken, partnerNoten, metNoot, NOOT_HTML, PARTNER_NOOT, B_RE, B_LABEL } from '../src/lib/partnerlinks.js';
 
 // Partnerzin i.p.v. label per knop: precies één zin per blok met partnerlinks; rel sponsored nofollow noopener blijft.
 const A = '<a class="btn" href="https://example.com/a" rel="sponsored nofollow noopener" data-vendor="x">Naar A</a>';
@@ -32,8 +32,12 @@ test('build: geen label per knop, precies 1 zin per partnerblok, rel sponsored n
   for (const f of html('dist')) {
     const s = readFileSync(f, 'utf8');
     assert.doesNotMatch(s, /<span class="(partner|plabel)">\s*partner ?link/i, `${f}: label per knop`);
-    const ls = [...s.matchAll(/<a\s[^>]*rel="[^"]*sponsored[^"]*"[^>]*>/g)];
-    for (const m of ls) assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: rel`);
+    const alle = [...s.matchAll(/<a\s[^>]*rel="[^"]*sponsored[^"]*"[^>]*>/g)];
+    for (const m of alle) assert.match(m[0], /rel="sponsored nofollow noopener"/, `${f}: rel`);
+    // B-tekstlinks (18-11, GB2): het zichtbare label in de link is de vermelding; geen blok en geen extra zin (geen nieuwe tekst).
+    const bIdx = new Set([...s.matchAll(new RegExp(B_RE.source, B_RE.flags))].map((m) => m.index));
+    for (const m of alle.filter((x) => /\sdata-pos="mid"/.test(x[0]))) assert.ok(bIdx.has(m.index), `${f}: data-pos="mid" zonder label${B_LABEL}`);
+    const ls = alle.filter((m) => !bIdx.has(m.index));
     const bl = partnerBlokken(s, { kaal: true }).filter((b) => b.partner);
     for (const m of ls) assert.ok(bl.some((b) => m.index > b.start && m.index < b.end), `${f}: partnerlink buiten een blok`);
     for (const b of bl) {

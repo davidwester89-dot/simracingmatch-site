@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { PARTNERLINKS, knop } from '../src/lib/partnerlinks.js';
+import { PARTNERLINKS, knop, zonderB } from '../src/lib/partnerlinks.js';
 import { hreflangTags } from '../src/layout.mjs';
 
 const walk = (d) => readdirSync(d).flatMap((f) => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : [p]; });
@@ -94,7 +94,9 @@ test('build (production theme A): pages, sitemap, CNAME, English, tracking hooks
   {
     const expo = readFileSync('dist/blog/simracing-expo-2026-announcements/index.html', 'utf8');
     assert.match(expo, /href="https:\/\/eu\.mozaracing\.com\/blogs\/news\/moza-tgs-2026" rel="noopener">/);
-    assert.doesNotMatch(expo, /ref=simracingmatch|sponsored|<p class="pnoot">/);
+    // Moza blijft neutraal; de enige sponsored links zijn de Asetek-B-tekstlinks (18-11), die zonder blokzin.
+    assert.doesNotMatch(expo, /ref=simracingmatch|<p class="pnoot">/);
+    assert.doesNotMatch(zonderB(expo), /sponsored/);
     assert.doesNotMatch(expo, /<span class="partner">\s*Partner link/i);
   }
   {

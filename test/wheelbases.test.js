@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { BASES, sortedBases, perNm, WB_DATE, MVF_DATE, LCP_DATE, WB_LOGOS, MATCH_DATE, MOZA_EU_EXIT_DATE } from '../src/wheelbases.mjs';
-import { PARTNERLINKS } from '../src/lib/partnerlinks.js';
+import { PARTNERLINKS, B_PARTNERLINKS, zonderB } from '../src/lib/partnerlinks.js';
 
 const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const PAGES = ['/wheel-bases/compare/', '/wheel-bases/direct-drive-vs-belt/', '/wheel-bases/how-much-torque/', '/wheel-bases/moza-vs-fanatec/'];
@@ -45,7 +45,10 @@ test('cluster pages: title <60, meta 120-155, one og:image, Article dates = push
     assert.ok(s.includes(`<time datetime="${mod}">`), `${p}: visible date`);
     assert.doesNotMatch(s, /aggregateRating|ratingValue|"Review"/);
     assert.ok(sm.includes(`<loc>https://simracingmatch.com${p}</loc><lastmod>${mod}</lastmod>`), `${p}: sitemap`);
-    const sponsored = [...s.matchAll(/<a\s[^>]*rel="sponsored nofollow noopener"[^>]*>/g)].map((m) => m[0].match(/href="([^"]+)"/)[1]);
+    const hrefs = (x) => [...x.matchAll(/<a\s[^>]*rel="sponsored nofollow noopener"[^>]*>/g)].map((m) => m[0].match(/href="([^"]+)"/)[1]);
+    // B-tekstlinks (Asetek, 18-11) dragen hun eigen label en tellen niet als winkelblok; de rest blijft PXN/Sim-Lab met één zin.
+    for (const h of hrefs(s)) assert.ok(new Set([...Object.values(PARTNERLINKS), ...Object.values(B_PARTNERLINKS)]).has(h), `${p}: ${h}`);
+    const sponsored = hrefs(zonderB(s));
     const allowed = new Set(Object.values(PARTNERLINKS));
     for (const h of sponsored) assert.ok(allowed.has(h), `${p}: ${h}`);
     const notes = sponsored.length ? 1 : 0;
