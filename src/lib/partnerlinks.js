@@ -9,6 +9,25 @@ export const PARTNERLINKS = {
   pxn: 'https://pxnsimracing.sjv.io/7X6qgd',
 };
 
+// B: in-text partner links on an existing brand word (GB2 18-11-2026, MM-OK via Partnermanager; rules as SEO decision E-CTA-1 B).
+// Kept apart from PARTNERLINKS: no new store button, no change to the privacy network list. The visible label inside the
+// anchor is the disclosure, so a block with only B links gets no extra partner note (no new text, no date lift).
+// Asetek SimSports, GoAffPro, reflink as supplied (Partnermanager, overzicht.md 18-11).
+export const B_PARTNERLINKS = Object.freeze({ asetek: 'https://www.asetek.com/simsports/?aff=DAVIDWEST' });
+export const B_NAAM = Object.freeze({ asetek: 'Asetek' });
+export const B_LABEL = ' (partner link)';
+/** Exactly the B links: rel sponsored + data-pos="mid" + visible label, no nested tags. Same rule as scripts/l7.config.mjs stripCta. */
+export const B_RE = /<a\b(?=[^>]*\srel="sponsored nofollow noopener")(?=[^>]*\sdata-pos="mid")[^>]*>([^<]*?) \(partner link\)<\/a>/g;
+/** html with every B link reduced to its existing word (markup and label removed). */
+export const zonderB = (html) => html.replace(new RegExp(B_RE.source, B_RE.flags), '$1');
+/** In-text partner link on an existing word. tekst = the word that is already there (default: brand name). */
+export function bTekstlink(vendor, tekst) {
+  const href = B_PARTNERLINKS[vendor];
+  if (!href) throw new Error(`bTekstlink: no B partner link for ${vendor}`);
+  const t = tekst || B_NAAM[vendor];
+  return `<a href="${href}" rel="sponsored nofollow noopener" target="_blank" data-vendor="${vendor}" data-cta="outbound" data-pos="mid">${t}${B_LABEL}</a>`;
+}
+
 // Neutral manufacturer exits for the five Moza wheel bases. Same EU pages as the sources.
 // No referral parameters, sponsored rel or partner tracking (11 Nov 2026).
 export const MOZA_EU_PRODUCT_EXITS = Object.freeze({
@@ -73,7 +92,7 @@ export const NOOT_HTML = `<p class="pnoot">${PARTNER_NOOT}</p>`;
 export const FOOTER_NOOT = 'Some links are partner links, which may earn us a commission; this never affects the ranking.';
 const SPONSORED = /<a\s[^>]*rel="[^"]*\bsponsored\b/;
 /** Eén blok als string: de zin erachter als er een partnerlink in staat. */
-export const metNoot = (html) => (SPONSORED.test(html) ? html + NOOT_HTML : html);
+export const metNoot = (html) => (SPONSORED.test(zonderB(html)) ? html + NOOT_HTML : html);
 /** Blokken (op class) met knoppen of links naar aanbieders. Het buitenste blok telt; binnen een blok komt geen tweede zin. */
 export const BLOKKEN = ['out', 'pc-cta'];
 /** Begin en eind van elk blok in html (buitenste eerst), en of er een partnerlink in staat. kaal = ook <p>, <ul>, <ol> zonder class. */
@@ -87,7 +106,7 @@ export function partnerBlokken(html, { blokken = BLOKKEN, kaal = true } = {}) {
     let d = 0, eind = -1, x;
     while ((x = t.exec(html))) { if (x[0][1] === '/') { if (--d === 0) { eind = x.index + x[0].length; break; } } else d++; }
     if (eind < 0) continue;
-    res.push({ start: m.index, end: eind, partner: SPONSORED.test(html.slice(m.index, eind)) });
+    res.push({ start: m.index, end: eind, partner: SPONSORED.test(zonderB(html.slice(m.index, eind))) }); // B links carry their own label
     re.lastIndex = eind;
   }
   return res;

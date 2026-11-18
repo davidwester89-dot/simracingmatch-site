@@ -15,13 +15,13 @@ This round-up sticks to what the manufacturers themselves have confirmed. Every 
 
 The headline themes were clear:
 
-- **More direct drive for less money.** Asetek put a firm price and date on its DD10 wheelbase.
+- **More direct drive for less money.** {{tekstlink:asetek}} put a firm price and date on its DD10 wheelbase.
 - **Direct drive comes to more consoles.** Moza showed its first wheelbases licensed for PlayStation 5.
 - **Wheels with big screens.** Fanatec gave an early look at a steering wheel with a 5-inch colour display.
 
 ## Asetek DD10: €499 direct drive, launching 27 October
 
-Asetek confirmed that the DD10 wheelbase launched on **27 October 2026 at 11:00 CET**. The price is **€499 including 19% VAT**, as stated in Asetek's expo recap (15 October 2026). Asetek's [DD10 page](https://www.asetek.com/simsports/landing/dd10-wheelbase/) lists €419.33 excluding VAT (checked 28 October 2026); with 21% Dutch VAT that is €507.39, the price in our [wheel base comparison](/wheel-bases/compare/).
+{{tekstlink:asetek}} confirmed that the DD10 wheelbase launched on **27 October 2026 at 11:00 CET**. The price is **€499 including 19% VAT**, as stated in Asetek's expo recap (15 October 2026). Asetek's [DD10 page](https://www.asetek.com/simsports/landing/dd10-wheelbase/) lists €419.33 excluding VAT (checked 28 October 2026); with 21% Dutch VAT that is €507.39, the price in our [wheel base comparison](/wheel-bases/compare/).
 
 ### 10 Nm, upgradeable to 14 Nm with the Boost Kit
 
@@ -41,7 +41,7 @@ The DD10 supports PC. For Xbox, you need an Xbox-compatible Asetek Racing steeri
 
 ## Asetek GT Nova wheel (March 2027, €299.99)
 
-Asetek also revealed **GT Nova**, a new GT-style steering wheel. It launches in **March 2027** at **€299.99 including 19% VAT** (Asetek, 15 October 2026).
+{{tekstlink:asetek}} also revealed **GT Nova**, a new GT-style steering wheel. It launches in **March 2027** at **€299.99 including 19% VAT** (Asetek, 15 October 2026).
 
 Its features, as Asetek describes them:
 

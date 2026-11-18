@@ -1,5 +1,5 @@
 import { esc, MATCH_LIVE } from './layout.mjs';
-import { partnerVendor } from './lib/partnerlinks.js';
+import { partnerVendor, bTekstlink } from './lib/partnerlinks.js';
 
 const MATCH_HASH = '/#setup-match';
 
@@ -27,7 +27,8 @@ export function renderMarkdown(md, { afterH2, matchLive = MATCH_LIVE } = {}) {
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(LINK_RE, (m, t, h) => link(t, h));
+    .replace(LINK_RE, (m, t, h) => link(t, h))
+    .replace(/\{\{tekstlink:([a-z]+)(?:\|([^}]+))?\}\}/g, (m, v, t) => bTekstlink(v, t)); // B: existing word, see partnerlinks.js
 
   while (i < lines.length) {
     const line = lines[i];
