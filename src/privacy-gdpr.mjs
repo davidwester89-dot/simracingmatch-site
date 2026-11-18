@@ -5,7 +5,7 @@ export const PRIVACY_UPDATED = '6 November 2026';
 
 const NETWORKS = [
   { re: /(^|\.)sjv\.io$|(^|\.)pxf\.io$|impact\.com$/, name: 'Impact', privacy: 'https://impact.com/privacy-policy/' },
-  { re: /(^|\.)mozaracing\.com$|(^|\.)sim-lab\.eu$/, name: 'GoAffPro', privacy: 'https://goaffpro.com/privacy' },
+  { re: /(^|\.)mozaracing\.com$|(^|\.)sim-lab\.eu$|(^|\.)asetek\.com$/, name: 'GoAffPro', privacy: 'https://goaffpro.com/privacy' },
   { re: /(^|\.)jf79\.net$|ds1\.nl$|daisycon\./, name: 'Daisycon', privacy: 'https://daisycon.com/en/legal-information/privacy-policy/' },
 ];
 export const NETWORK_PRIVACY = NETWORKS.map((n) => n.privacy);
