@@ -15,11 +15,7 @@ export const CFG = {
 };
 // Naamgrep blijft rood op persoonsnamen. De Moza-ref is sinds 6-11-2026 ref=simracingmatch (geen persoonsnaam),
 // dus die hoort zonder uitzondering door. De vorige refcode stond hier als smalle uitzondering; die blijft niet staan.
-export const ALLOW_NAME = [
-  // Asetek-reflink (GoAffPro, aff-code zoals geleverd door Partnermanager 18-11; GB2-opdracht). Alleen exact deze URL in html. Vraagt SC-OK;
-  // een neutrale aff-code (zoals Moza ref=simracingmatch) maakt deze uitzondering overbodig.
-  { file: /\.html$/, match: /^=DAVIDWEST"$/, ctx: /href="https:\/\/www\.asetek\.com\/simsports\/\?aff=DAVIDWEST" rel="sponsored nofollow noopener"/, reden: 'Asetek-reflink (B), SC-OK nodig' },
-];
+export const ALLOW_NAME = [];
 export const BEKEND_ORPHAN = []; // SC 30-10 besluit 2: geserveerd = publiek, geen allowlist; build-only modules uit de output (zie build.mjs)
 // Hub-audit: bestaande bevindingen op origin/main (30-10). Haal een regel weg zodra de hub is gefixt; dan bewaakt de test hem.
 export const BEKEND_HUB = [];

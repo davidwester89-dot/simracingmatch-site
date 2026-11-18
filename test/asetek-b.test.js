@@ -13,7 +13,7 @@ import { bodyFingerprint } from '../scripts/l7check.mjs';
 import { secties, plekFouten } from './b-plek.mjs';
 
 const PRE_B = 'ff0fe6f'; // origin/main vóór Asetek-B (18-11)
-const REF = 'https://www.asetek.com/simsports/?aff=DAVIDWEST';
+const REF = 'https://www.asetek.com/simsports/?aff=SIMRACINGMATCH';
 let gebouwd = false;
 const build = () => { if (!gebouwd) { execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '' } }); gebouwd = true; } };
 const walk = (d) => readdirSync(d).flatMap((f) => { const q = join(d, f); return statSync(q).isDirectory() ? walk(q) : [q]; });
