@@ -3,7 +3,7 @@ slug: load-cell-pedals
 title: "Load cell pedals 2026: worth it? Sets and prices compared"
 description: "Which load cell pedals fit your wheel base, console and budget? Sets from Fanatec, Logitech G, Moza and more: brake force, PS5/Xbox/PC and price."
 datePublished: 2026-11-05
-dateModified: 2026-11-06
+dateModified: 2026-11-23
 updatedLine: true
 keyword: load cell pedals
 ---
@@ -22,7 +22,7 @@ What the manufacturers promise is consistency. Sim-Lab explains: "you learn to b
 
 Two practical points before you buy:
 
-- **Mounting.** A brake that wants real force pushes the pedals away from you. Logitech G's setup guide for the PRO Racing Pedals says that for pedals on the floor, "30kg is likely the maximum, unless the pedals are secured". Plan a cockpit, a wheel stand or at least a wall brace.
+- **Mounting.** A brake that wants real force pushes the pedals away from you. Logitech G's setup guide for the PRO Racing Pedals says that for pedals on the floor, "30kg is likely the maximum, unless the pedals are secured". Plan [a cockpit](/blog/sim-lab-p1x-pro-vs-ultimate/), a wheel stand or at least a wall brace.
 - **The feel is adjustable.** Every set below lets you change the brake feel, with software, elastomers or springs. Fanatec's CSL and ClubSport sets, the Logitech G PRO Racing Pedals and Thrustmaster's Raceline LC sets also let you set the force needed for full braking.
 
 No manufacturer publishes a lap time gain you can check, so we don't give one.

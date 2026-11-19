@@ -45,8 +45,9 @@ export function loadPosts() {
 }
 
 export function blogIndexPage(posts) {
-  // Hub date (rule D): the newest dateModified of its posts, in the visible Updated line and the sitemap lastmod.
-  const newest = posts.map((p) => p.dateModified).sort().at(-1);
+  // Hub date: follows the hub's own body only (bodyOnlyHubs, l7.config). The cards show datePublished, so the newest
+  // datePublished sets the visible Updated line and the sitemap lastmod; a later update of a post does not lift /blog/ (techronde 19-11).
+  const newest = posts.map((p) => p.datePublished).sort().at(-1);
   const updated = newest ? `<p class="muted">Updated <time datetime="${newest}">${fmtDate(newest)}</time></p>` : '';
   const list = posts.length
     ? `<ul class="blog-list">${posts.map((p) => `<li><a class="card" href="/blog/${p.slug}/"><p class="meta"><time datetime="${p.datePublished}">${fmtDate(p.datePublished)}</time> · ${readMin(p.body)} min read</p><h2>${esc(p.title)}</h2><p class="muted">${esc(p.description)}</p><span class="more">Read article <span aria-hidden="true">→</span></span></a></li>`).join('')}</ul>`
