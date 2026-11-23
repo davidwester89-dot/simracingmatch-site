@@ -11,10 +11,11 @@ test('techronde 19-11: één inlink naar de P1X-vergelijking in een bestaande zi
   assert.equal((h.match(/href="\/blog\/sim-lab-p1x-pro-vs-ultimate\/"/g) || []).length, 1);
 });
 // /blog/ volgt alleen de nieuwste publicatiedatum: vanaf wk48 (setup-cost, 26-11) 2026-11-26, nooit door deze update.
-test('techronde 19-11: load-cell-pedals draagt 2026-11-25; /blog/ tilt niet mee (volgt nieuwste post)', () => {
-  assert.match(h, /"datePublished":"2026-11-05","dateModified":"2026-11-25"/);
-  assert.match(h, /Updated <time datetime="2026-11-25">25 November 2026<\/time>/);
-  assert.ok(sm.includes('<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-25</lastmod>'));
+// Wk48 (26-11): eigen bodywijziging (Forte-prijs + inlink setup-cost) tilt load-cell-pedals terecht naar 2026-11-26.
+test('techronde 19-11: load-cell-pedals draagt 2026-11-26 (wk48-lift); /blog/ tilt niet mee (volgt nieuwste post)', () => {
+  assert.match(h, /"datePublished":"2026-11-05","dateModified":"2026-11-26"/);
+  assert.match(h, /Updated <time datetime="2026-11-26">26 November 2026<\/time>/);
+  assert.ok(sm.includes('<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-26</lastmod>'));
   assert.ok(sm.includes('<loc>https://simracingmatch.com/blog/</loc><lastmod>2026-11-26</lastmod>'));
   assert.match(readFileSync('dist/blog/index.html', 'utf8'), /Updated <time datetime="2026-11-26">/);
 });

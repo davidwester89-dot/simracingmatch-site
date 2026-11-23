@@ -59,6 +59,8 @@ export function blogIndexPage(posts) {
     crumb: 'Blog',
     og: 'home',
     lastmod: newest,
+    // L7 (SEO 23-11): every lastmod lift also as JSON-LD dateModified; hub dateModified = lastmod = visible Updated line.
+    schema: newest ? [{ '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Blog', url: `${SITE.domain}/blog/`, dateModified: newest, publisher: ORG, inLanguage: 'en' }] : [],
     description: 'Guides and explainers from SimracingMatch Editorial: sim racing setups, wheel bases and pedals — manufacturer data only, no invented scores.',
     hreflangNl: '',
     // Keep index out of sitemap until there is at least one post (thin otherwise).

@@ -17,12 +17,17 @@ const REF = 'https://www.asetek.com/simsports/?aff=SIMRACINGMATCH';
 // Techronde 19-11 (na B, push 25-11): inlink 'a cockpit' op load-cell-pedals + datum 25-11. Exact terugdraaien vóór de byte-vergelijking;
 // de wijziging zelf wordt vastgepind in test/tech-1911.test.js.
 const NA_B = {
+  // Wk48 (push 26-11, SEO 23-11): Asetek Forte-pedalen € 495,10 → € 487,05 (402,52 × 1,21) + inlink naar setup-cost; datum 26-11.
+  // Ook exact terugdraaien; vastgepind in test/wk48-forte-loadcell.test.js.
   'dist/blog/load-cell-pedals/index.html': (s) => s
     .replace('Plan <a href="/blog/sim-lab-p1x-pro-vs-ultimate/">a cockpit</a>, a wheel stand', 'Plan a cockpit, a wheel stand')
-    .replace('<meta property="article:modified_time" content="2026-11-25">', '<meta property="article:modified_time" content="2026-11-06">')
-    .replace('"dateModified":"2026-11-25"', '"dateModified":"2026-11-06"')
-    .replace('Updated <time datetime="2026-11-25">25 November 2026</time>', 'Updated <time datetime="2026-11-06">6 November 2026</time>'),
-  'dist/sitemap.xml': (s) => s.replace('<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-25</lastmod>', '<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-06</lastmod>'),
+    .replace('By budget, using the prices above (for a full rig with base, wheel and cockpit, see <a href="/blog/sim-racing-setup-cost/">what a sim racing setup costs</a>):', 'By budget, using the prices above:')
+    .replace('€487.05 incl. VAT (€402.52 excl. VAT)', '€495.10 incl. VAT (€402.52 excl. VAT)')
+    .replace('Asetek Forte (€487.05)', 'Asetek Forte (€495.10)')
+    .replace('<meta property="article:modified_time" content="2026-11-26">', '<meta property="article:modified_time" content="2026-11-06">')
+    .replace('"dateModified":"2026-11-26"', '"dateModified":"2026-11-06"')
+    .replace('Updated <time datetime="2026-11-26">26 November 2026</time>', 'Updated <time datetime="2026-11-06">6 November 2026</time>'),
+  'dist/sitemap.xml': (s) => s.replace('<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-26</lastmod>', '<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-06</lastmod>'),
 };
 // Wk48 (na B, push 26-11): nieuwe post /blog/sim-racing-setup-cost/ (geen B-link). Kaart, hubdatum en sitemapregel exact terugdraaien;
 // de post zelf is een nieuw bestand buiten de B-vergelijking en wordt vastgepind in test/wk48-setup-cost.test.js.
@@ -30,6 +35,7 @@ const WK48 = 'dist/blog/sim-racing-setup-cost/index.html';
 const NA_WK48 = {
   'dist/blog/index.html': (s) => s
     .replace(/<li><a class="card" href="\/blog\/sim-racing-setup-cost\/">[\s\S]*?<\/a><\/li>/, '')
+    .replace(/\n?<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"CollectionPage"[^<]*<\/script>/, '')
     .replace('Updated <time datetime="2026-11-26">26 November 2026</time>', 'Updated <time datetime="2026-11-19">19 November 2026</time>'),
   'dist/sitemap.xml': (s) => s
     .replace('<url><loc>https://simracingmatch.com/blog/sim-racing-setup-cost/</loc><lastmod>2026-11-26</lastmod></url>\n', '')
