@@ -24,7 +24,18 @@ const NA_B = {
     .replace('Updated <time datetime="2026-11-25">25 November 2026</time>', 'Updated <time datetime="2026-11-06">6 November 2026</time>'),
   'dist/sitemap.xml': (s) => s.replace('<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-25</lastmod>', '<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-06</lastmod>'),
 };
-const naB = (f, s) => (NA_B[f] ? NA_B[f](s) : s);
+// Wk48 (na B, push 26-11): nieuwe post /blog/sim-racing-setup-cost/ (geen B-link). Kaart, hubdatum en sitemapregel exact terugdraaien;
+// de post zelf is een nieuw bestand buiten de B-vergelijking en wordt vastgepind in test/wk48-setup-cost.test.js.
+const WK48 = 'dist/blog/sim-racing-setup-cost/index.html';
+const NA_WK48 = {
+  'dist/blog/index.html': (s) => s
+    .replace(/<li><a class="card" href="\/blog\/sim-racing-setup-cost\/">[\s\S]*?<\/a><\/li>/, '')
+    .replace('Updated <time datetime="2026-11-26">26 November 2026</time>', 'Updated <time datetime="2026-11-19">19 November 2026</time>'),
+  'dist/sitemap.xml': (s) => s
+    .replace('<url><loc>https://simracingmatch.com/blog/sim-racing-setup-cost/</loc><lastmod>2026-11-26</lastmod></url>\n', '')
+    .replace('<loc>https://simracingmatch.com/blog/</loc><lastmod>2026-11-26</lastmod>', '<loc>https://simracingmatch.com/blog/</loc><lastmod>2026-11-19</lastmod>'),
+};
+const naB = (f, s) => { const n = NA_WK48[f] ? NA_WK48[f](s) : s; return NA_B[f] ? NA_B[f](n) : n; };
 let gebouwd = false;
 const build = () => { if (!gebouwd) { execSync('node build.mjs', { stdio: 'ignore', env: { ...process.env, BASE: '', PREVIEW: '' } }); gebouwd = true; } };
 const walk = (d) => readdirSync(d).flatMap((f) => { const q = join(d, f); return statSync(q).isDirectory() ? walk(q) : [q]; });
@@ -78,6 +89,7 @@ test('Asetek B: alleen bestaande woorden; build byte-gelijk aan de stand vóór 
   const b = basis(); if (!b) { t.skip(`${PRE_B} niet in deze clone`); return; }
   let metB = 0;
   for (const f of walk('dist')) {
+    if (f === WK48) continue;
     const o = join(b, 'dist', relative('dist', f));
     assert.ok(existsSync(o), `nieuw bestand ${f}`);
     const x = readFileSync(f), y = readFileSync(o);
