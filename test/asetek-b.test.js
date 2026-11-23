@@ -14,15 +14,15 @@ import { secties, plekFouten } from './b-plek.mjs';
 
 const PRE_B = 'c88ca08'; // basis vóór Asetek-B: geplande blogpush 19-11 (ff0fe6f→19d2725→c88ca08); was ff0fe6f
 const REF = 'https://www.asetek.com/simsports/?aff=SIMRACINGMATCH';
-// Techronde 19-11 (na B, push 23-11): inlink 'a cockpit' op load-cell-pedals + datum 23-11. Exact terugdraaien vóór de byte-vergelijking;
+// Techronde 19-11 (na B, push 25-11): inlink 'a cockpit' op load-cell-pedals + datum 25-11. Exact terugdraaien vóór de byte-vergelijking;
 // de wijziging zelf wordt vastgepind in test/tech-1911.test.js.
 const NA_B = {
   'dist/blog/load-cell-pedals/index.html': (s) => s
     .replace('Plan <a href="/blog/sim-lab-p1x-pro-vs-ultimate/">a cockpit</a>, a wheel stand', 'Plan a cockpit, a wheel stand')
-    .replace('<meta property="article:modified_time" content="2026-11-23">', '<meta property="article:modified_time" content="2026-11-06">')
-    .replace('"dateModified":"2026-11-23"', '"dateModified":"2026-11-06"')
-    .replace('Updated <time datetime="2026-11-23">23 November 2026</time>', 'Updated <time datetime="2026-11-06">6 November 2026</time>'),
-  'dist/sitemap.xml': (s) => s.replace('<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-23</lastmod>', '<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-06</lastmod>'),
+    .replace('<meta property="article:modified_time" content="2026-11-25">', '<meta property="article:modified_time" content="2026-11-06">')
+    .replace('"dateModified":"2026-11-25"', '"dateModified":"2026-11-06"')
+    .replace('Updated <time datetime="2026-11-25">25 November 2026</time>', 'Updated <time datetime="2026-11-06">6 November 2026</time>'),
+  'dist/sitemap.xml': (s) => s.replace('<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-25</lastmod>', '<loc>https://simracingmatch.com/blog/load-cell-pedals/</loc><lastmod>2026-11-06</lastmod>'),
 };
 const naB = (f, s) => (NA_B[f] ? NA_B[f](s) : s);
 let gebouwd = false;
